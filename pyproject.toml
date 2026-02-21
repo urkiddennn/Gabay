@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gabay"
+version = "0.1.1"
+description = "A self-hosted, Telegram-first AI assistant for productivity."
+authors = [
+    { name = "Gabay Team", email = "hello@example.com" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["telegram", "assistant", "ai", "productivity", "self-hosted"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Communications :: Chat",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "jinja2>=3.1.0",
+    "python-multipart>=0.0.6",
+    "python-telegram-bot>=20.0",
+    "telethon>=1.30.0",
+    "celery>=5.3.0",
+    "redis>=5.0.0",
+    "groq>=0.5.0",
+    "google-api-python-client>=2.0.0",
+    "google-auth-httplib2>=0.1.0",
+    "google-auth-oauthlib>=1.0.0",
+    "notion-client>=2.2.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "click>=8.0.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/gabay"
+Documentation = "https://github.com/yourusername/gabay#readme"
+Repository = "https://github.com/yourusername/gabay.git"
+Issues = "https://github.com/yourusername/gabay/issues"
+
+[project.scripts]
+gabay = "gabay.cli:cli"
+
+[tool.setuptools.packages.find]
+include = ["gabay", "gabay.*"]
+
+[tool.setuptools.package-data]
+gabay = ["core/templates/*.html"]

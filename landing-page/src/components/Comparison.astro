@@ -1,0 +1,127 @@
+---
+// Comparison Component
+const comparisonData = [
+    {
+        feature: "Telegram Integration",
+        gabay: true,
+        openClaw: false,
+        nanoClaw: "Limited",
+    },
+    {
+        feature: "Workspace Depth",
+        gabay: "Full (Drive, Gmail, Cal)",
+        openClaw: "Connector based",
+        nanoClaw: "OAuth only",
+    },
+    {
+        feature: "Privacy Model",
+        gabay: "In-memory / OAuth2",
+        openClaw: "Token based",
+        nanoClaw: "Local storage",
+    },
+    {
+        feature: "Deployment",
+        gabay: "Docker / Asynchronous",
+        openClaw: "Manual Script",
+        nanoClaw: "Containerized",
+    },
+    {
+        feature: "Speed (LLM)",
+        gabay: "Groq (Ultra-fast)",
+        openClaw: "OpenAI Standard",
+        nanoClaw: "Llama Local",
+    },
+];
+
+const CheckIcon = `<svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>`;
+const CrossIcon = `<svg class="w-5 h-5 text-red-500/50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>`;
+---
+
+<section id="comparison" class="w-full max-w-[1000px] mx-auto px-6 py-24">
+    <div class="text-center mb-16">
+        <h2
+            class="text-3xl md:text-5xl font-bold text-text-main mb-6 uppercase tracking-tight"
+        >
+            THE BEST <span class="text-blue-500">ALTERNATIVE</span>
+        </h2>
+        <p
+            class="text-text-muted text-lg max-w-2xl mx-auto leading-relaxed font-medium"
+        >
+            How Gabay stacks up against Personal Assistant tools like OpenClaw
+            and NanoClaw.
+        </p>
+    </div>
+
+    <div
+        class="overflow-hidden rounded-xl border border-border-main bg-bg-surface"
+    >
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-bg-page/50 border-b border-border-main">
+                        <th
+                            class="p-6 text-sm font-semibold text-text-muted uppercase tracking-wider"
+                            >Feature</th
+                        >
+                        <th
+                            class="p-6 text-sm font-bold text-blue-500 uppercase tracking-wider bg-blue-500/5"
+                            >Gabay</th
+                        >
+                        <th
+                            class="p-6 text-sm font-semibold text-text-muted uppercase tracking-wider"
+                            >OpenClaw</th
+                        >
+                        <th
+                            class="p-6 text-sm font-semibold text-text-muted uppercase tracking-wider"
+                            >NanoClaw</th
+                        >
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-border-main">
+                    {
+                        comparisonData.map((item) => (
+                            <tr class="hover:bg-bg-page/30 transition-colors">
+                                <td class="p-6 text-sm font-medium text-text-main">
+                                    {item.feature}
+                                </td>
+                                <td class="p-6 text-sm font-bold text-text-main bg-blue-500/5">
+                                    {typeof item.gabay === "boolean" ? (
+                                        item.gabay ? (
+                                            <Fragment set:html={CheckIcon} />
+                                        ) : (
+                                            <Fragment set:html={CrossIcon} />
+                                        )
+                                    ) : (
+                                        item.gabay
+                                    )}
+                                </td>
+                                <td class="p-6 text-sm text-text-muted">
+                                    {typeof item.openClaw === "boolean" ? (
+                                        item.openClaw ? (
+                                            <Fragment set:html={CheckIcon} />
+                                        ) : (
+                                            <Fragment set:html={CrossIcon} />
+                                        )
+                                    ) : (
+                                        item.openClaw
+                                    )}
+                                </td>
+                                <td class="p-6 text-sm text-text-muted">
+                                    {typeof item.nanoClaw === "boolean" ? (
+                                        item.nanoClaw ? (
+                                            <Fragment set:html={CheckIcon} />
+                                        ) : (
+                                            <Fragment set:html={CrossIcon} />
+                                        )
+                                    ) : (
+                                        item.nanoClaw
+                                    )}
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

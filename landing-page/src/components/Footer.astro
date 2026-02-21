@@ -1,0 +1,47 @@
+---
+// Footer Component
+---
+
+<footer
+    class="w-full bg-bg-page border-t border-border-main py-12 px-8 mt-12 transition-colors duration-300"
+>
+    <div
+        class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6"
+    >
+        <div class="flex items-center gap-3">
+            <img
+                src="/logo.png"
+                alt="Gabay Logo"
+                class="h-6 w-6 object-contain"
+            />
+            <span class="text-text-main text-xl font-bold tracking-tight">
+                <span class="text-blue-500">Ga</span>bay
+            </span>
+        </div>
+
+        <div
+            class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-text-muted"
+        >
+            <a href="#features" class="hover:text-text-main transition-colors"
+                >Features</a
+            >
+            <a href="#comparison" class="hover:text-text-main transition-colors"
+                >Comparison</a
+            >
+            <a href="#faq" class="hover:text-text-main transition-colors">FAQ</a
+            >
+            <a href="/docs" class="hover:text-text-main transition-colors"
+                >Documentation</a
+            >
+            <a
+                href="#demo"
+                class="hover:text-text-main transition-colors font-bold text-blue-500"
+                >Request Demo</a
+            >
+        </div>
+
+        <p class="text-text-muted text-sm md:text-right">
+            © {new Date().getFullYear()} Gabay. All rights reserved.
+        </p>
+    </div>
+</footer>

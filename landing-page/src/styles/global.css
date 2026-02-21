@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+    --color-bg-page: var(--bg-page);
+    --color-bg-surface: var(--bg-surface);
+    --color-text-main: var(--text-main);
+    --color-text-muted: var(--text-muted);
+    --color-border-main: var(--border-main);
+}
+
+@layer base {
+    :root {
+        --bg-page: #f8fafc;
+        --bg-surface: #ffffff;
+        --bg-nav: #ffffff;
+        --text-main: #0f172a;
+        --text-muted: #475569;
+        --border-main: rgba(0, 0, 0, 0.1);
+    }
+
+    .dark {
+        --bg-page: #111115;
+        --bg-surface: #1A1A24;
+        --bg-nav: #111115;
+        --text-main: #f1f5f9;
+        --text-muted: #94a3b8;
+        --border-main: rgba(255, 255, 255, 0.1);
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    }
+
+    body {
+        background-color: var(--bg-page);
+        color: var(--text-main);
+        transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        font-family: 'Inter', sans-serif;
+    }
+}

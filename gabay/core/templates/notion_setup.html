@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabay | Notion Setup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg: #111115;
+            --surface: #1A1A24;
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--text-main);
+            color: var(--bg);
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .guide {
+            background: #0f0f13;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-top: 24px;
+            font-size: 13px;
+        }
+
+        .guide b {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+        }
+
+        .guide ol {
+            padding-left: 18px;
+            color: var(--text-muted);
+        }
+
+        .guide li {
+            margin-bottom: 8px;
+        }
+
+        .guide a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Notion Integration</h1>
+        <p class="subtitle">Connect your Notion Workspace to Gabay Search.</p>
+
+        <form action="/setup/notion" method="POST">
+            <div class="form-group">
+                <label for="notion_api_key">Internal Integration Token</label>
+                <input type="password" id="notion_api_key" name="notion_api_key" value="{{ notion_api_key }}"
+                    placeholder="secret_xxxxxxxxxxxxxxxxxxxxxxxx" required>
+            </div>
+
+            <div class="form-group">
+                <label for="notion_database_id">Database ID</label>
+                <input type="text" id="notion_database_id" name="notion_database_id" value="{{ notion_database_id }}"
+                    placeholder="e.g. 1a2b3c4d5e6f..." required>
+            </div>
+
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+
+            <button type="submit">Connect Notion</button>
+        </form>
+
+        <div class="guide">
+            <b>How to connect:</b>
+            <ol>
+                <li>Go to <a href="https://www.notion.so/my-integrations" target="_blank">notion.so/my-integrations</a>.
+                </li>
+                <li>Create an <b>Internal Integration</b> and copy the <b>Token</b>.</li>
+                <li>Open your Notion Database as a full page.</li>
+                <li>The <b>Database ID</b> is the part of the URL after your workspace name and before the `?v=`.</li>
+                <li><b>Crucial:</b> Click "..." on your Database page -> "Add connections" -> Select your Integration.
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>

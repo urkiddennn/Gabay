@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabay | SMTP Setup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg: #111115;
+            --surface: #1A1A24;
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--text-main);
+            color: var(--bg);
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .guide-box {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .guide-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .guide-steps li {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .step-num {
+            color: var(--text-main);
+            font-weight: 700;
+            opacity: 0.5;
+        }
+
+        .guide-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .guide-link:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: monospace;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>SMTP Settings</h1>
+        <p class="subtitle">Configure your email provider (e.g., Gmail App Passwords).</p>
+
+        <form action="/setup/smtp" method="POST">
+            <div class="form-group">
+                <label for="smtp_host">SMTP Host</label>
+                <input type="text" id="smtp_host" name="smtp_host" value="{{ smtp_host or 'smtp.gmail.com' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="smtp_port">SMTP Port</label>
+                <input type="number" id="smtp_port" name="smtp_port" value="{{ smtp_port or 587 }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="smtp_user">Username / Email</label>
+                <input type="email" id="smtp_user" name="smtp_user" value="{{ smtp_user }}"
+                    placeholder="your-email@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="smtp_password">Password / App Password</label>
+                <input type="password" id="smtp_password" name="smtp_password" value="{{ smtp_password }}"
+                    placeholder="••••••••••••••••" required>
+            </div>
+
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+
+            <button type="submit">Save SMTP Configuration</button>
+        </form>
+
+        <div class="footer">
+            Using Gmail? Make sure to follow the guide below.
+        </div>
+
+        <div class="guide-box">
+            <div class="guide-title">
+                <span>📖 How to Connect (Gmail)</span>
+            </div>
+            <ul class="guide-steps">
+                <li>
+                    <span class="step-num">1.</span>
+                    <span>Enable <b>2-Step Verification</b> in your Google Account security settings.</span>
+                </li>
+                <li>
+                    <span class="step-num">2.</span>
+                    <span>Go to <a href="https://myaccount.google.com/apppasswords" target="_blank"
+                            class="guide-link">App Passwords</a>.</span>
+                </li>
+                <li>
+                    <span class="step-num">3.</span>
+                    <span>Select <b>"Mail"</b> and <b>"Other (Custom Name)"</b>, then type "Gabay".</span>
+                </li>
+                <li>
+                    <span class="step-num">4.</span>
+                    <span>Copy the 16-character code and paste it into the <b>Password</b> field above.</span>
+                </li>
+                <li>
+                    <span class="step-num">5.</span>
+                    <span>Use <code>smtp.gmail.com</code> and port <code>587</code> for standard delivery.</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

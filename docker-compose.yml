@@ -1,0 +1,69 @@
+services:
+  gabay-core:
+    build:
+      context: .
+      dockerfile: Dockerfile.core
+    container_name: gabay-core
+    ports:
+      - "8000:8000" # For local web view / auth callbacks
+    volumes:
+      - ./data:/app/data
+      - ./gabay:/app/gabay
+    env_file:
+      - .env
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - REDIS_URL=redis://redis:6379/0
+      - LOG_LEVEL=INFO
+      - TZ=${TZ:-UTC}
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  gabay-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: gabay-worker
+    volumes:
+      - ./data:/app/data
+      - ./gabay:/app/gabay
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - LOG_LEVEL=INFO
+      - TZ=${TZ:-UTC}
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: gabay-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  gabay-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: gabay-beat
+    volumes:
+      - ./data:/app/data
+      - ./gabay:/app/gabay
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - LOG_LEVEL=INFO
+    command: [ "gabay", "beat" ]
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+volumes:
+  redis_data:

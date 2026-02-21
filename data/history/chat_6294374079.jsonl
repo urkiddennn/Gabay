@@ -1,0 +1,353 @@
+{"role": "user", "content": "Can you summarize my emails?"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Here is your raw briefing (LLM not configured):\n\nEmails:\nMarketing Email from Adobe\nProject update from John\n\nNotifications:\nYou have a new friend request on Facebook\nSomeone liked your Instagram post"}
+{"role": "user", "content": "hello"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: hello"}
+{"role": "user", "content": "please give me the recent emails i have"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: please give me the recent emails i have"}
+{"role": "user", "content": "please give me the recent emails i have"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: please give me the recent emails i have"}
+{"role": "user", "content": "Can you summarize my emails?"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Error generating summary. Here is the raw data:\n\nEmails:\nMarketing Email from Adobe\nProject update from John\n\nNotifications:\nYou have a new friend request on Facebook\nSomeone liked your Instagram post"}
+{"role": "user", "content": "summarixe my emails"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: summarixe my emails"}
+{"role": "user", "content": "summarize my emails"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Error generating summary. Here is the raw data:\n\nEmails:\nMarketing Email from Adobe\nProject update from John\n\nNotifications:\nYou have a new friend request on Facebook\nSomeone liked your Instagram post"}
+{"role": "user", "content": "summarize my emails"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Daily Briefing \u2013 today\u2019s quick catch-up \ud83c\udf1e\n\nNeed-to-know  \n\u2022 Project update from John \u2013 skim this first; it may contain deadlines or next-step requests.\n\nNice-to-know  \n\u2022 Adobe marketing email \u2013 new features or offers, no action needed.  \n\u2022 Facebook friend request & Instagram like \u2013 social pings, handle when you have a minute.\n\nHave a focused day!"}
+{"role": "user", "content": "Hello?"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: Hello?"}
+{"role": "user", "content": "Summarize my email"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: Summarize my email"}
+{"role": "user", "content": "Hello"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: Hello"}
+{"role": "user", "content": "hello"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: hello"}
+{"role": "user", "content": "can you email rbanguiz.did@gmail.com that the test is working"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: can you email rbanguiz.did@gmail.com that the test is working"}
+{"role": "user", "content": "hello?"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: hello?"}
+{"role": "user", "content": "Can you summarize my emails?"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Daily Briefing  \nGood morning! Here\u2019s what needs your attention today:\n\n\u2022 Project update from John \u2013 waiting for your review (treat as urgent if you haven\u2019t seen it yet).  \n\u2022 Adobe marketing email \u2013 nothing urgent, just the usual product news.\n\nSocial stuff (non-urgent):  \n\u2022 New Facebook friend request.  \n\u2022 Someone liked your Instagram post.\n\nHave a focused, productive day!"}
+{"role": "user", "content": "Can you summarize my emails?"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Good morning! Here\u2019s your quick Daily Briefing:\n\nUrgent / Work  \n- Project update from John \u2013 no red-flag wording, but skim it soon in case it affects today\u2019s tasks.\n\nFYI  \n- Adobe marketing email \u2013 just a promo, safe to archive.  \n- Facebook & Instagram pings \u2013 friend request and a like; nothing urgent.\n\nHave a productive day!"}
+{"role": "user", "content": "How about in face books only"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: How about in face books only"}
+{"role": "user", "content": "Facebook"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'Facebook'..."}
+{"role": "assistant", "content": "Search results for **'Facebook'**:\n\n\ud83d\udcc2 **Google Drive:**\n- [Facebook_report.pdf](https://drive.google.com/file/d/mock1)\n\n\ud83d\udcdd **Notion:**\n- [Facebook Meeting Notes](https://notion.so/mock_page_2)"}
+{"role": "user", "content": "No stop"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: No stop"}
+{"role": "user", "content": "send an email to \n\nrbanguiz.did@gmail.com\n like this is a test"}
+{"role": "assistant", "content": "Drafting an email to rbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "Successfully dispatched email to rbanguiz.did@gmail.com with subject 'Message from Gabay Assistant'!"}
+{"role": "user", "content": "Can you summarize my emails?"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Daily Briefing \u2013 today in a nutshell  \n- Facebook: new friend request waiting (check if you know them).  \n- Instagram: someone liked your post (nice!).  \n\nNothing urgent\u2014enjoy the tiny dopamine hits when you have a moment."}
+{"role": "user", "content": "s\\end an email to \n\nrbanguiz.did@gmail.com\n saying the bot is finally alive!"}
+{"role": "assistant", "content": "Drafting an email to rbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "SMTP credentials are not configured in the .env file. Please add SMTP_HOST, SMTP_USER, and SMTP_PASSWORD."}
+{"role": "user", "content": "send an email to \n\nrbanguiz.did@gmail.com\n saying the bot is finally alive!"}
+{"role": "assistant", "content": "Drafting an email to rbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "SMTP credentials are not configured in the .env file. Please add SMTP_HOST, SMTP_USER, and SMTP_PASSWORD."}
+{"role": "user", "content": "whats the weather today?"}
+{"role": "assistant", "content": "I'm just a chat bot locally right now. You said: whats the weather today?"}
+{"role": "user", "content": "send an email to \n\nrbanguiz.did@gmail.com\n saying the bot is finally alive!"}
+{"role": "assistant", "content": "Drafting an email to rbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to rbanguiz.did@gmail.com!"}
+{"role": "user", "content": "Whats the weather today?"}
+{"role": "assistant", "content": "I\u2019m an AI assistant without live sensors, so I can\u2019t give you real-time conditions. For today\u2019s weather, check a local app/site or search \u201ccurrent weather\u201d in your browser."}
+{"role": "user", "content": "What's the weather like?"}
+{"role": "assistant", "content": "I\u2019m an AI assistant without live sensors, so I can\u2019t give you real-time conditions."}
+{"role": "user", "content": "How many kilometers is 100 miles?"}
+{"role": "assistant", "content": "100 miles is about **161 kilometers**."}
+{"role": "user", "content": "What is a good way to check the weather in davao city?"}
+{"role": "assistant", "content": "Here are the quickest, most reliable ways to get an up-to-date forecast for Davao City:\n\n1. Type \u201cweather Davao City\u201d in the Google search bar (or any major search engine).  \n2. Open the built-in Weather app on your phone and search for \u201cDavao City, Philippines.\u201d  \n3. Use trusted sites/apps:  \n   \u2013 AccuWeather (accuweather.com)  \n   \u2013 Weather.com (weather.com)  \n   \u2013 Windy (windy.com) for radar & wind maps  \n4. Follow PAGASA\u2019s official Facebook or Twitter pages; they post hourly updates and color-coded rainfall advisories for Mindanao.  \n5. For typhoon season alerts, bookmark the PAGASA typhoon page (bagong.pagasa.dost.gov.ph/tropical-cyclone-bulletin).  \n\nPick whichever is easiest for you\u2014Google or your phone\u2019s weather app usually loads in under a second."}
+{"role": "user", "content": "whats th eweather here in davao city?"}
+{"role": "assistant", "content": "\ud83c\udf26\ufe0f Current Weather: Davao City: \ud83c\udf26   +24\u00b0C"}
+{"role": "user", "content": "send email to splmaguinda@gmail.com that I Lovee her so much, add also simple love letter to her."}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "send email to splmaguinda@gmail.com and rbanguiz.did@gmail.com that the meeting is already starting"}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com, rbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com, rbanguiz.did@gmail.com!"}
+{"role": "user", "content": "send email to splmaguinda@gmail.com that \"Goodluck for the webinar, and make sure to eat\". Add image link of cute cat or show and image. add emojisss to show mor ecare and love"}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "what the weather today?"}
+{"role": "assistant", "content": "\ud83c\udf26\ufe0f Current Weather: Cagayan de Oro, Philippines: \ud83c\udf26   +23\u00b0C"}
+{"role": "user", "content": "@Rizmabzz20 send message your welcome"}
+{"role": "assistant", "content": "I don't have a chat ID for 'rizmabzz20' yet. You can save it by typing '/savecontact rizmabzz20 [ID]'."}
+{"role": "user", "content": "send a message that I love her"}
+{"role": "assistant", "content": "I don't have a chat ID for 'her' yet. You can save it by typing '/savecontact her [ID]'."}
+{"role": "user", "content": "send message to sellessi that I love her"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi!"}
+{"role": "user", "content": "send message to sellessi that I love her"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi!"}
+{"role": "user", "content": "send message to @Sellessi that I love her"}
+{"role": "assistant", "content": "I don't have a chat ID for '@sellessi' yet. You can save it by typing '/savecontact @sellessi [ID]'."}
+{"role": "user", "content": "send message to sellessi that I love her"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi!"}
+{"role": "user", "content": "send sellessi a message I love her"}
+{"role": "assistant", "content": "I encountered an error while trying to send that Telegram message."}
+{"role": "user", "content": "send message sellessi i love her"}
+{"role": "assistant", "content": "I encountered an error while trying to send that Telegram message."}
+{"role": "user", "content": "send sellissi a message that I love her"}
+{"role": "assistant", "content": "I don't have a chat ID for 'sellissi' yet. You can save it by typing '/savecontact sellissi [ID]'."}
+{"role": "user", "content": "send sellessi a message that I love her"}
+{"role": "assistant", "content": "I tried to send the message to Sellessi, but Telegram rejected it. Make sure they have 'Started' the bot!"}
+{"role": "user", "content": "Tell Sellessi I'm testing the new bot system"}
+{"role": "user", "content": "Tell Sellessi I'm testing the new bot system"}
+{"role": "assistant", "content": "I couldn't send the message to 'sellessi'. Please make sure my API keys are correct and I am logged in."}
+{"role": "user", "content": "send message to sellessi that i love her"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi via Userbot!"}
+{"role": "user", "content": "send message to Mindanao without kyla \"very cold in davao\""}
+{"role": "assistant", "content": "I couldn't send the message to 'mindanao without kyla'. Please make sure my API keys are correct and I am logged in."}
+{"role": "user", "content": "send message to Mindanao without Kyla about tugnaw sa davao"}
+{"role": "assistant", "content": "I couldn't send the message to 'mindanao without kyla'. Please make sure my API keys are correct and I am logged in."}
+{"role": "user", "content": "how about send message to sellessi tugnaw sa davao"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi via Userbot!"}
+{"role": "user", "content": "what's the weather tosay?"}
+{"role": "assistant", "content": "\ud83c\udf26\ufe0f Current Weather: Cagayan de Oro, Philippines: \ud83c\udf26   +23\u00b0C"}
+{"role": "user", "content": "Tell Sellessi I love her"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi via Userbot!"}
+{"role": "user", "content": "send a message to sellessi I love you"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi via Userbot!"}
+{"role": "user", "content": "is there a file on my gdrive about programming?"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'programming'..."}
+{"role": "assistant", "content": "Search results for **'programming'**:\n\n\ud83d\udcc2 **Google Drive:**\n- [programming_report.pdf](https://drive.google.com/file/d/mock1)\n\n\ud83d\udcdd **Notion:**\n- [programming Meeting Notes](https://notion.so/mock_page_2)"}
+{"role": "user", "content": "send message email to rbanguiz.did@gmail.com that you did well"}
+{"role": "assistant", "content": "Drafting an email to rbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to rbanguiz.did@gmail.com!"}
+{"role": "user", "content": "is tthere a programming folder on my gdrive?"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'programming'..."}
+{"role": "assistant", "content": "Search results for **'programming'**:\n\n\ud83d\udcc2 **Google Drive:**\n- [programming_report.pdf](https://drive.google.com/file/d/mock1)\n\n\ud83d\udcdd **Notion:**\n- [programming Meeting Notes](https://notion.so/mock_page_2)"}
+{"role": "user", "content": "summarize the new messages on my email"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Good morning, Richard!  \nHere\u2019s your quick Daily Briefing:\n\n\u2022 Facebook sent a handful of \u201cyou-have-more-friends-than-you-think\u201d reminders\u2014no action needed unless you\u2019d like to peek at the suggestions.  \n\u2022 New friend request waiting on Facebook (worth a look).  \n\u2022 Someone just liked your latest Instagram post\u2014always nice to get a thumbs-up!\n\nNothing urgent flagged\u2014enjoy the rest of your day!"}
+{"role": "user", "content": "create a task on my notion name my love of my life diosel maguinda"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: https://notion.so/mock_page_url"}
+{"role": "user", "content": "make a task on my notion for this day like attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Failed to save: name 'settings' is not defined"}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Notion API key not configured."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Notion API key not configured."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Notion API key not configured."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "add task to Notion, about taking attendance\\"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "add task to Notion, about taking attendance"}
+{"role": "assistant", "content": "Please reply directly to a file/document with the /save command to save it."}
+{"role": "assistant", "content": "Note saved to Notion database: Error appending to Notion: Could not find database with ID: 30d0f469-ce28-8049-86c7-ce253a02e72e. Make sure the relevant pages and databases are shared with your integration."}
+{"role": "user", "content": "Send sellessi a message hello Loveeyyyyy"}
+{"role": "assistant", "content": "Successfully sent message to Sellessi via Userbot!"}
+{"role": "user", "content": "Summarize the email I have this day"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Daily Briefing \u2013 quick check-in for Richard  \n\u2022 Facebook sent five \u201cyou-have-more-friends\u201d promos\u2014no action needed, just marketing.  \n\u2022 One new Facebook friend request waiting (tap to accept/decline).  \n\u2022 Someone liked your latest Instagram post\u2014feel-good vibes!  \n\nNothing urgent today\u2014enjoy the buzz at your own pace."}
+{"role": "user", "content": "summarize my emails today"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Daily Briefing \u2013 quick & friendly  \nGood morning, Richard!  \n\nToday\u2019s snapshot  \n- Facebook sent a handful of \u201cyou-have-more-friends\u201d invites\u2014nothing urgent, just their usual nudge to connect.  \n- One new Facebook friend request is waiting for you.  \n- Someone gave your latest Instagram post a like. \ud83c\udf89  \n\nThat\u2019s it\u2014no deadlines or fires to put out. Have a smooth day!"}
+{"role": "user", "content": "give summarise of todays emails i have"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "user", "content": "send message to splmaguinda@gmail.com that \"I lovee you please don't think that I dont loveee you loveyyyy nakoooo\ud83e\udd7a\ud83e\udd7a\ud83e\udd7a\""}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "summarize my emails today"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "**Daily Briefing \u2013 [today\u2019s date]**  \nGood morning! Here\u2019s what needs a quick look:\n\n- **Facebook** \u2013 New friend request waiting (check if you know them).  \n- **Instagram** \u2013 Someone liked your latest post (no action needed, just a smile).  \n\nNothing urgent\u2014enjoy the tiny dopamine hit and carry on with your day!"}
+{"role": "user", "content": "summarize my emails today"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Daily Briefing \u2013 quick look at your socials:\n- Facebook: new friend request waiting, plus a nudge that you may know more people than you thought.\n- Instagram: someone just liked your latest post.\n\nNothing urgent\u2014just friendly pings. Enjoy the scroll!"}
+{"role": "user", "content": "summarize my emails today"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Daily Briefing \u2013 quick catch-up  \n\u2022 Facebook: \u201cYou have more friends than you think\u201d (basically a nudge to add people you may know).  \n\u2022 One new Facebook friend request waiting \u2013 tap to accept/decline.  \n\u2022 One new like on your latest Instagram post.  \n\nNothing urgent\u2014just social love waiting for you when you\u2019re ready."}
+{"role": "user", "content": "summarize my emails today"}
+{"role": "assistant", "content": "Fetching your daily briefing from Gmail and Meta..."}
+{"role": "assistant", "content": "Good morning, Richard!  \nHere\u2019s your quick Daily Briefing:\n\n\ud83d\udd12 SECURITY: Google flagged a security alert\u2014check it now.  \n\ud83d\udc54 LINKEDIN: Aaminah Ishaq & others posted; also consider connecting with Arnette Marie Lapinig (Corporate Payables Assistant).  \n\ud83d\udcf1 SOCIAL: New Facebook friend request + someone liked your IG post.  \n\ud83d\udcb0 MAYA: \u201cBest of Smart\u201d promo now live.  \n\ud83c\udfae GDEVELOP: New tools dropped\u2014your game idea just got easier.\n\nThat\u2019s it\u2014have a productive day!"}
+{"role": "user", "content": "can you check my gdrive if my evacuease file still there"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'evacuease'..."}
+{"role": "assistant", "content": "Search results for **'evacuease'**:\n\n\ud83d\udcc2 **Google Drive:**\n- [EvacuEase_Manuscript.docx](https://docs.google.com/document/d/18Wt1gZoNn993oiZdEUq9j1xmwrjpo0on/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)\n- [Thesis Presentation Outline: EvacuEase](https://docs.google.com/document/d/1xms-TOZbygNth4KFxZ1jbPUQ6XZVwexNO5ZeqskrlCQ/edit?usp=drivesdk)\n- [EvacuEase.pptx](https://docs.google.com/presentation/d/1_g7hQDd7tzMGuRtke1Xa3iEH5ez25S8Z/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)\n- [2. EvacuEase](https://drive.google.com/drive/folders/12UgVMO0I2cZeZ3sqT68f0mcjNThUZsOY)\n- [RICHARDBANGUIZ.pdf](https://drive.google.com/file/d/1J8Skcq5ygQE1KivILuW6_fC8fsYGgVSf/view?usp=drivesdk)"}
+{"role": "user", "content": "can you send the link of the evacuease manuscript to splmaguinda@gmail.com"}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "no link send"}
+{"role": "assistant", "content": "I\u2019m sorry about that. I don\u2019t actually have the ability to send e-mails or share links from your Google Drive. The best way to get the EvacuEase manuscript link to splmaguinda@gmail.com is:\n\n1. Open Google Drive and find \u201cEvacuEase_Manuscript.docx.\u201d\n2. Right-click \u2192 \u201cGet link\u201d \u2192 set it to \u201cAnyone with the link \u2192 Viewer (or Editor).\u201d\n3. Copy the link.\n4. Paste it into a quick e-mail to splmaguinda@gmail.com and hit send.\n\nLet me know if you\u2019d like help drafting the message text!"}
+{"role": "user", "content": "how many images on my gdrive?"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'images gdrive'..."}
+{"role": "assistant", "content": "No results found for **'images gdrive'**.\n\n\ud83d\udca1 **Tip:** Make sure your accounts are connected in the [Admin Dashboard](http://localhost:8000/admin?user_id=6294374079)."}
+{"role": "user", "content": "how many images on my gdrive?"}
+{"role": "assistant", "content": "Reading from gdrive..."}
+{"role": "assistant", "content": "I couldn't find anything new to read from your connected accounts."}
+{"role": "user", "content": "is there a evacuease file on my gdrive?"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'evacuease'..."}
+{"role": "assistant", "content": "No results found for **'evacuease'**.\n\n\ud83d\udca1 **Tip:** Make sure your accounts are connected in the [Admin Dashboard](http://localhost:8000/admin?user_id=6294374079)."}
+{"role": "user", "content": "is there a evacuease file on my gdrive?"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'evacuease'..."}
+{"role": "assistant", "content": "Search results for **'evacuease'**:\n\n\ud83d\udcc2 **Google Drive:**\n- [EvacuEase_Manuscript.docx](https://docs.google.com/document/d/18Wt1gZoNn993oiZdEUq9j1xmwrjpo0on/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)\n- [Thesis Presentation Outline: EvacuEase](https://docs.google.com/document/d/1xms-TOZbygNth4KFxZ1jbPUQ6XZVwexNO5ZeqskrlCQ/edit?usp=drivesdk)\n- [EvacuEase.pptx](https://docs.google.com/presentation/d/1_g7hQDd7tzMGuRtke1Xa3iEH5ez25S8Z/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)\n- [2. EvacuEase](https://drive.google.com/drive/folders/12UgVMO0I2cZeZ3sqT68f0mcjNThUZsOY)\n- [RICHARDBANGUIZ.pdf](https://drive.google.com/file/d/1J8Skcq5ygQE1KivILuW6_fC8fsYGgVSf/view?usp=drivesdk)"}
+{"role": "user", "content": "can you send the link of the evacuease manuscript to splmaguinda@gmail.com"}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "can you send the link of the evacuease manuscript to splmaguinda@gmail.com and rbanguiz.did@gmail.com"}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "can you send the link of the evacuease manuscript torbanguiz.did@gmail.com"}
+{"role": "assistant", "content": "Drafting an email to torbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to torbanguiz.did@gmail.com!"}
+{"role": "user", "content": "can you send the link of the evacuease manuscript to  rbanguiz.did@gmail.com"}
+{"role": "assistant", "content": "Drafting an email to rbanguiz.did@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to rbanguiz.did@gmail.com!"}
+{"role": "user", "content": "check if theres an holiday this month"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "\ud83d\udcc5 **Today's Schedule:**\nYou have no events scheduled for today."}
+{"role": "user", "content": "how about this month?"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "\ud83d\udcc5 **Today's Schedule:**\nYou have no events scheduled for today."}
+{"role": "user", "content": "send splmaguinda@gmail.com and email that \"I love you\""}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "Are there any events on my calendar this month?"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "\ud83d\udcc5 **Here is your Schedule:**\nYou have no events scheduled for this timeframe."}
+{"role": "user", "content": "Add an event for lunch tomorrow at noon called 'Pizza Party'"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "Event created: https://www.google.com/calendar/event?eid=ZGk4cGI2cm4wMWdsaDlzdXVlOXVvMXVtZGsgcmljaGFyZGJhbmd1aXpAbQ"}
+{"role": "user", "content": "can you give me my resume on gdrive"}
+{"role": "assistant", "content": "Reading from gdrive..."}
+{"role": "assistant", "content": "I couldn't find anything new to read from your connected accounts."}
+{"role": "user", "content": "can you give me my resume on gdrive"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'resume'..."}
+{"role": "assistant", "content": "Search results for **'resume'**:\n\n\ud83d\udcc2 **Google Drive:**\n- [Lilet T. Banguiz Updated Resume.docx](https://docs.google.com/document/d/1oeT07WN0Hf3EmcROwsQzLUVUY6ETznep/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)\n- [Black & White Professional Designer Simple Resume (1).docx](https://docs.google.com/document/d/1NrjuFh2hYFQWNMsUFX0c9hrlMOkpGMmZ/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)\n- [BUSINESS-CORRESPOND-LESSON-3-ASSIGNMENT.docx](https://docs.google.com/document/d/1NcoyLdQEVaBrEsIIaLJ65sK3LgicjhBN/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)\n- [snk.py](https://drive.google.com/file/d/1-xsmoj_oyCWTe7qKbzuf1pulgBGdsQHU/view?usp=drivesdk)\n- [Untitled](https://docs.google.com/document/d/1flgu52FDxSvpetsEvbWJqSHng-3UVvUS/edit?usp=drivesdk&ouid=100282601905625257233&rtpof=true&sd=true)"}
+{"role": "user", "content": "can you send I love message with sweet and totally random message email to splmaguinda@gmail.com everysingle day."}
+{"role": "assistant", "content": "Drafting an email to splmaguinda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaguinda@gmail.com!"}
+{"role": "user", "content": "Summarize the evacuease document in my Drive"}
+{"role": "assistant", "content": "Reading 'evacuease' to answer your question..."}
+{"role": "assistant", "content": "The file 'EvacuEase_Manuscript.docx' is a 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', which I cannot read currently. I work best with text files and Google Docs."}
+{"role": "user", "content": "Summarize the evacuease document in my Drive"}
+{"role": "assistant", "content": "Reading 'evacuease' to answer your question..."}
+{"role": "assistant", "content": "I encountered an error trying to read that document: Error code: 413 - {'error': {'message': 'Request too large for model `moonshotai/kimi-k2-instruct-0905` in organization `org_01khwkbmzafgca3t8t5v0cf4ay` service tier `on_demand` on tokens per minute (TPM): Limit 10000, Requested 19289, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"}
+{"role": "user", "content": "can you check the Lilet Banguiz docs and tell me what it can be improve?"}
+{"role": "assistant", "content": "I\u2019m not able to view the files in your Drive directly, so I can\u2019t read the \u201cLilet\u202fBanguiz\u201d documents myself. If you copy\u2011paste the text (or share the key sections) here, I can review it and give you concrete suggestions for improvement\u2014whether that\u2019s structure, clarity, tone, formatting, completeness, or anything else you\u2019re looking to polish. Just let me know what you\u2019d like me to focus on!"}
+{"role": "user", "content": "go to gdrive can you check the Lilet Banguiz docs and tell me what it can be improve?"}
+{"role": "assistant", "content": "Reading 'Lilet Banguiz docs' to answer your question..."}
+{"role": "assistant", "content": "\ud83d\udcc4 **Regarding 'RB.docx':**\n\n**Feedback & Suggestions for Improving the Document \u201cRB.docx\u201d**\n\nBelow are several areas where the document can be strengthened. Each point is tied to something that appears in the current text.\n\n| Area | What\u2019s in the Current Draft | Suggested Improvement |\n|------|----------------------------|-----------------------|\n| **Spelling & Grammar** | \u2013 \u201cmMemos\u201d, \u201cmessege\u201d, \u201cconnot\u201d, \u201cinted\u201d, \u201cprinciple\u201d (should be *principles*), \u201cactuall\u201d, \u201cwooman\u201d, \u201cMa\u2019am/sir.\u201d, \u201cMa\u2019am/sir,I\u201d (missing space), \u201cNorth  Estern\u201d (extra space, misspelling), \u201cDRESS TO STORY\u201d (likely *Dress to Impress*), \u201cBANGUIZ,RICHARD T.\u201d (no space after the comma) | \u2022 Run a spell\u2011check and proofread for typographical errors. <br>\u2022 Ensure proper capitalization (e.g., *North Eastern Mindanao State University*). <br>\u2022 Use consistent punctuation and spacing (e.g., \u201cMa\u2019am/Sir,\u201d \u201cMa\u2019am/Sir, I\u201d). |\n| **Consistency of Terminology** | \u2013 \u201cbusiness correspondence\u201d vs. \u201cbusiness correspondence\u201d (sometimes capitalized, sometimes not). <br>\u2013 \u201cInternal Correspondence\u201d, \u201cExternal Correspondence\u201d, etc., are listed with mixed case. | \u2022 Adopt a single style (e.g., Title Case for headings, sentence case for body text) and apply it throughout. |\n| **Formatting & Layout** | \u2013 The table in **Task\u202f1** is written as plain text, making it hard to read. <br>\u2013 Dates are written as \u201cMarch,12/2022\u201d (comma misplaced). <br>\u2013 Signature blocks are mis\u2011aligned. | \u2022 Use actual table structures (rows/columns) for the \u201csample of each type of business correspondence\u201d. <br>\u2022 Write dates in a standard format (e.g., **12\u202fMarch\u202f2022**). <br>\u2022 Align signatures and \u201cAPPROVED BY\u201d label using a table or proper indentation. |\n| **Clarity of Instructions** | \u2013 The prompt for **Task\u202f2** says \u201cMake a written communication for the conduct of an interview.\u201d The sample letter contains several unclear phrases (\u201cIt would be greatly appreciated if I allows you\u2026\u201d, \u201cprinciple of your business\u201d). | \u2022 Rewrite the sample email with clear, polite language: <br>```text\\nSubject: Request to Interview Your Business for a College Project\\n\\nDear [Name/Title],\\n\\nI am a student at North Eastern Mindanao State University, currently working on a course project. I would like to request permission to interview you regarding the principles and operations of your business, *Dress to Story*.\\n\\nThe interview would take approximately 20\u201130 minutes and can be conducted at a time convenient for you, either in person or via video call.\\n\\nThank you for considering my request.\\n\\nSincerely,\\nRichard T. Bangui\\n[Student ID / Contact Information]\\n``` |\n| **Logical Flow** | \u2013 The document jumps from \u201cEXPLORE\u201d questions to \u201cEXPERIENCE\u201d tasks without clear transitions. <br>\u2013 The \u201cSuppose you want to ask something to your professor\u2026\u201d scenario repeats the same answer (email) without expanding on alternatives. | \u2022 Add brief headings or transitional sentences (e.g., \u201c**Scenario 1: Group Project Communication**\u201d, \u201c**Scenario 2: Contacting a Professor**\u201d). <br>\u2022 Provide a short rationale or alternative methods (e.g., learning management system, phone call) to show deeper thinking. |\n| **Citation / Source Credibility** | \u2013 The \u201cExternal Correspondence\u201d example mentions \u201cWebsite content and blogging\u201d but does not cite any source. | \u2022 If the information is taken from a textbook or website, add a citation (e.g., *Adapted from \u201cBusiness Communication\u201d by Smith, 2020*). |\n| **Completeness of Tasks** | \u2013 **Task\u202f4** asks for \u201cany mode of verification or documentation \u2026 either video or image,\u201d but no example is provided. | \u2022 Insert a placeholder (e.g., *[Insert screenshot of interview video thumbnail]* or *[Link to recorded interview]*). |\n| **Professional Tone** | \u2013 Some sentences sound informal (\u201cNo,well,as we all know\u2026\u201d) and contain run\u2011on structures. | \u2022 Use a formal academic tone: \u201cGiven the ongoing pandemic and the geographic dispersion of group members, I will contact them via email and social\u2011media messaging platforms.\u201d |\n| **Use of Bullets/Numbering** | \u2013 Lists are presented as plain text separated by commas, making them hard to scan. | \u2022 Convert lists to bullet points or numbered lists for readability. Example: <br>```markdown\\n- Emails\\n- Memos\\n- Written communication\\n- Telephonic conversation\\n- Face\u2011to\u2011face communication\\n``` |\n| **Document Title & Header** | \u2013 The title \u201cRB.docx\u201d is not descriptive of the content. | \u2022 Rename the file to something like **\u201cBusiness Correspondence \u2013 Lesson\u202f1\u201d** and add a header/footer with the course name and date. |\n\n---\n\n### Quick Revised Excerpt (Illustrative)\n\n```markdown\n## Lesson\u202f1 \u2013 Explore\n\n**Question:** Which of the following is/are *not* considered business correspondence?  \n- Emails  \n- Memos  \n- Written communication  \n- Telephonic conversation  \n- Face\u2011to\u2011face communication  \n\n**Answer:** Telephonic conversation and face\u2011to\u2011face communication are not business correspondence because correspondence refers specifically to *written* communication between parties.\n\n---\n\n## Lesson\u202f1 \u2013 Experience\n\n### Task\u202f1: Sample of Each Type of Business Correspondence\n\n| Type of Business Correspondence | Sample |\n|--------------------------------|--------|\n| **Internal Correspondence** | Promotion letters, formal request for approval, memorandum |\n| **External Correspondence** | Website content, blogging, SEO articles |\n| **Routine Correspondence** | Order confirmations, invitation letters, inquiry replies |\n| **Sales Correspondence** | Discount letters, invoices, sales proposals, purchase orders |\n| **Personalized Correspondence** | Appreciation notes, recommendation letters, request letters |\n| **Circular** | Announcements of shareholder meetings, protocol updates |\n\n### Task\u202f2: Interview Request Email (Sample)\n\n```\nSubject: Request to Interview *Dress to Story* for Academic Project\n\nDear [Manager\u2019s Name],\n\nI am a student at North Eastern Mindanao State University, currently undertaking a course project on business communication. I would like to request permission to interview you about the principles guiding *Dress to Story* and how business correspondence influences your operations.\n\nThe interview would take approximately 20\u201330 minutes and can be scheduled at your convenience, either in person or via video call.\n\nThank you for considering my request.\n\nSincerely,\n\nRichard T. Bangui  \nStudent, 1CSC/CITE Department  \n[Contact Information]\n```\n\n*Approved by:*  \n**Lilet Bangui** (Signature)\n\n---\n\n*Further tasks (interview, documentation, etc.) should follow the same clear formatting.*\n```\n\n---\n\n**Bottom Line:** By correcting language errors, improving formatting, adding clear headings, and providing more polished sample texts, the document will be easier to read, more professional, and better aligned with academic standards."}
+{"role": "user", "content": "can you check the Lilet Banguiz docs and tell me what it can be improve?"}
+{"role": "assistant", "content": "Reading 'Lilet Banguiz docs' to answer your question..."}
+{"role": "assistant", "content": "\ud83d\udcc4 **Regarding 'RB.docx':**\n\n**Possible Improvements for the Lilet\u202fBanguiz Documentation**\n\n| Area | What the document currently has | Suggested improvement | Reason / Benefit |\n|------|--------------------------------|-----------------------|------------------|\n| **Spelling & Grammar** | *\u201cinted to ask\u201d, \u201cprinciple of your business\u201d, \u201cthe actuall interviewing\u201d, \u201cwhom you interview with\u201d* | Correct the typos: \u201cintended to ask\u201d, \u201cprinciples of your business\u201d, \u201cthe actual interview\u201d, \u201cwho you interview\u201d | Improves professionalism and readability. |\n| **Punctuation & Capitalisation** | Inconsistent use of commas, periods, and capital letters (e.g., \u201cMa\u2019am/sir.\u201d, \u201cGood day,Ma\u2019am/sir,I am \u2026\u201d) | Add spaces after commas, use proper sentence caps, end sentences with periods. Example: \u201cGood day, Ma\u2019am/Sir. I am a student \u2026\u201d | Makes the text flow naturally and avoids visual clutter. |\n| **Date Format** | \u201cMarch,12/2022\u201d | Use a standard format such as \u201c12\u202fMarch\u202f2022\u201d or \u201c03/12/2022\u201d. | Reduces ambiguity and follows business\u2011letter conventions. |\n| **Salutation & Closing** | \u201cMa\u2019am/sir.\u201d and \u201cSincerely;\u201d | Use a consistent salutation (e.g., \u201cDear Sir/Madam,\u201d) and a proper closing (\u201cSincerely,\u201d). | Aligns with formal business\u2011letter etiquette. |\n| **Signature Block** | Mixed name order and missing titles (e.g., \u201cBANGUIZ,RICHARD T.\u201d, \u201cBANGUIZ,LILET T.\u201d) | Separate the requester\u2019s signature from the approver\u2019s, include full names, titles, and contact info. Example: <br>```\\nRichard T. Banguiz\\nStudent, 1CSC/CITE Dept.\\nNorth Eastern Mindanao State University\\n``` | Clarifies who is sending the request and who approves it. |\n| **Formatting & Alignment** | Random line breaks, inconsistent indentation, \u201c---\u201d separators, and mis\u2011aligned tables. | Use a clean, left\u2011aligned layout; keep tables with proper borders; avoid unnecessary horizontal lines. | Improves visual appeal and makes the document easier to scan. |\n| **Clarity of Instructions** | \u201cMake a written communication for the conduct of an interview.\u201d followed by a draft that still contains errors. | Provide a step\u2011by\u2011step template (subject line, greeting, purpose, request, gratitude, signature). | Helps the writer produce a polished request on the first try. |\n| **Completeness** | Section 4 (\u201cPostCopy and Paste here any mode of verification \u2026\u201d) is empty. | Add the actual verification material (e.g., a link to a video, a screenshot, or a note that it will be attached). | Demonstrates that the interview was conducted and provides evidence. |\n| **Consistency of Names** | The document alternates between \u201cBANGUIZ, LILET\u201d and \u201cBANGUIZ, RICHARD T.\u201d without indicating roles. | Clearly label each person\u2019s role (e.g., \u201cRequester: Richard T. Banguiz\u201d, \u201cApprover: Lilet Banguiz\u201d). | Prevents confusion about who is responsible for each part. |\n| **Use of Bullets/Numbering** | Long paragraphs without breaks. | Break the request into bullet points or numbered steps (e.g., 1. Introduction, 2. Purpose, 3. Request, 4. Closing). | Enhances readability and ensures no information is omitted. |\n| **Reference to Attachments** | No mention of any attached interview guide or consent form. | Add a line such as \u201cPlease find attached the interview questionnaire and consent form.\u201d | Shows preparedness and professionalism. |\n| **Overall Tone** | Slightly informal (\u201cGood day, Ma\u2019am/sir\u201d) and occasional first\u2011person \u201cI\u201d. | Keep a formal tone throughout, using \u201cWe\u201d if representing a student group, or \u201cI\u201d consistently with a polite opening. | Aligns with the formal nature of business correspondence. |\n\n---\n\n### Quick Revised Sample (for illustration)\n\n```\n12 March 2022\n\nRichard T. Banguiz\nStudent, 1CSC/CITE Department\nNorth Eastern Mindanao State University\nemail: richard.banguiz@nesu.edu\n\nTo: Ms. Lilet Banguiz\n[Title/Position]\nDress to Story\n[Company Address]\n\nDear Ms. Banguiz,\n\nGood day. I am a student of North Eastern Mindanao State University and am conducting a research project on business correspondence. I would like to request your permission to interview you regarding the principles that guide Dress to Story and how business correspondence has impacted your organization.\n\nThe interview would take approximately 30\u202fminutes and can be conducted via phone, video call, or in person at a time convenient for you. I have attached a brief interview guide and a consent form for your review.\n\nThank you for considering my request. I look forward to your positive response.\n\nSincerely,\n\nRichard T. Banguiz\nStudent, 1CSC/CITE Department\nNorth Eastern Mindanao State University\n\nApproved by:\n\nLilet Banguiz\n[Title/Position]\n```\n\n*The above sample incorporates the suggested improvements: correct spelling, proper formatting, clear signature blocks, and a professional tone.*"}
+{"role": "user", "content": "summarize the file of Lilet Banguiz in  the gdrive"}
+{"role": "assistant", "content": "Reading 'Lilet Banguiz' to answer your question..."}
+{"role": "assistant", "content": "\ud83d\udcc4 **Regarding 'Lilet T. Banguiz Updated Resume.docx':**\n\n**Resume Summary \u2013 Lilet T. Banguiz**\n\n---\n\n### Contact  \n- **Email:** LiletBanguiz20@gmail.com  \n- **Phone:** 0907\u2011918\u20114496  \n- **Address:** Prk. Samguita, Anahao\u202fBag\u2011o, Tago, Surigao del\u202fSur, Philippines  \n\n### Objective  \nSeeking a challenging position where she can apply her current skills, contribute to the organization, and grow professionally.\n\n### Personal Skills  \n- Hard\u2011working, ready to face challenges  \n- Proficient in Microsoft Office (Word, Excel, PowerPoint)  \n\n### Work Experience  \n\n| Role | Company | Dates | Key Responsibilities |\n|------|---------|-------|-----------------------|\n| **Accounting Staff** | Rowie\u2019s Construction | Jan\u202f2023\u202f\u2013\u202fMar\u202f2025 | Assisted accountant with financial statements; handled HR monthly remittances (SSS, Pag\u2011IBIG, PHIC). |\n| **HR Staff** | Montemar Agri Industrial Corp. | Nov\u202f2022\u202f\u2013\u202fMay\u202f2022 | Processed employee benefits, encoded data & daily time records, released weekly salaries, managed deposits, sales reports, petty cash, inventory. |\n| **Feed Mill \u2013 Bodega In\u2011Charge/Clerk** | Montemar Agri Industrial Corp. | Sep\u202f2020\u202f\u2013\u202fNov\u202f2021 | Received raw\u2011material deliveries, maintained weekly/monthly inventory, purchased corn and released farmer payments. |\n| **Teacher Assistant** | Al Qadisiyah School, Fujairah (UAE) | Nov\u202f2017\u202f\u2013\u202fNov\u202f2019 | Prepared lesson materials, organized activities, supervised children, assisted with record\u2011keeping and behavior coaching. |\n| **Office Clerk** | Dole Philippines Inc. & Tinalak Cooperative | Mar\u202f2017\u202f\u2013\u202fOct\u202f2017; Sep\u202f2014\u202f\u2013\u202fMar\u202f2017 | Encoded production reports, maintained files, operated office equipment, handled contractor payments, HR assistance, inventory control. |\n| **Tele\u2011reliever** | Marc Account Services, Inc. | Mar\u202f2013\u202f\u2013\u202fMay\u202f2013 | Contacted customers for overdue payments, handled mail to post office. |\n| **Cashier** | Super Shopping Market (SM Hypermarket) | Jul\u202f2012\u202f\u2013\u202fJan\u202f2013 | Processed cash, check, and card transactions; scanned items. |\n| **Teller** | Lotto Outlet | Aug\u202f2013\u202f\u2013\u202fSep\u202f2014 | Managed cash, provided customer service, prepared daily sales reports and bank deposits. |\n\n### Education  \n\n| Institution | Degree / Course | Years |\n|-------------|----------------|-------|\n| Surigao del Sur State University | BSBA \u2013 Financial Management | 2008\u20112012 |\n| Jacinto P. Elpa National High School | High School Graduate | 2004\u20112008 |\n| Anahao Bag\u2011o Elementary School | Elementary Graduate | 1998\u20112004 |\n\n### Personal Details  \n\n- **Date of Birth:** December\u202f29,\u202f1991  \n- **Civil Status:** Single  \n- **Gender:** Female  \n- **Height / Weight:** 5\u20191\u201d / 58\u202fkg  \n- **Nationality:** Filipino  \n- **Religion:** Roman Catholic  \n\n### References  \n\n- **Mary Kinneth Elumbariang** \u2013 Accountant, Accounting Head  \n- **Glee P. Formaran** \u2013 (Title not specified)  \n\n---\n\n*Lilet T. Banguiz brings over 8\u202fyears of experience in accounting, HR, inventory control, and administrative support across construction, agribusiness, education, and retail sectors, complemented by a BSBA in Financial Management.*"}
+{"role": "user", "content": "summarize the file of Lilet Banguiz in  the gdrive"}
+{"role": "assistant", "content": "Reading 'Lilet Banguiz' to answer your question..."}
+{"role": "assistant", "content": "\ud83d\udcc4 **Regarding 'Lilet T. Banguiz Updated Resume.docx':**\n\n**Lilet T. Banguiz \u2013 Resume Summary**\n\n- **Contact**\n  - Email: LiletBanguiz20@gmail.com\n  - Phone: 0907\u2011918\u20114496\n  - Address: Prk. Samguita, Anahao\u202fBag\u2011o, Tago, Surigao del\u202fSur\n\n- **Objective**\n  - Seeking a challenging role where she can apply her skills, contribute to the organization, and grow professionally.\n\n- **Personal Skills**\n  - Ready to face challenges, hard\u2011working\n  - Proficient in Microsoft Word, Excel, PowerPoint\n\n- **Personal Information**\n  - DOB: 29\u202fDecember\u202f1991 | Single | Female\n  - Height: 5\u20191\u201d | Weight: 58\u202fkg | Filipino, Roman Catholic\n\n- **Work Experience**\n  - **Accounting Staff**, Rowie\u2019s Construction (Jan\u202f2023\u202f\u2013\u202fMar\u202f2025)  \n    - Assisted accountant with financial statements and HR monthly remittances (SSS, Pag\u2011IBIG, PHIC).\n  - **HR Staff**, Montemar Agri Industrial Corp. (Nov\u202f2022\u202f\u2013\u202fMay\u202f2022)  \n    - Processed employee benefits, managed payroll, handled deposits, sales reports, petty cash, and inventory.\n  - **Feed Mill Bodega Clerk**, Montemar Agri Industrial Corp. (Sept\u202f2020\u202f\u2013\u202fNov\u202f2021)  \n    - Received raw\u2011material deliveries, maintained weekly/monthly inventory, purchased corn and paid farmers.\n  - **Teacher Assistant**, Al Qadisiyah School, Fujairah (Nov\u202f2017\u202f\u2013\u202fNov\u202f2019)  \n    - Prepared lesson materials, supervised children\u2019s activities, assisted with record\u2011keeping and behavior guidance.\n  - **Office Clerk**, Dole Philippines & Tinalak Cooperative (Mar\u202f2017\u202f\u2013\u202fOct\u202f2017; Sep\u202f2014\u202f\u2013\u202fMar\u202f2017)  \n    - Encoded production reports, managed files, operated office equipment, handled contractor payments and HR queries, performed inventory control.\n  - **Telereliever**, Marc Account Services (Mar\u202f2013\u202f\u2013\u202fMay\u202f2013)  \n    - Contacted customers for payments and handled mail.\n  - **Cashier**, Super Shopping Market (Jul\u202f2012\u202f\u2013\u202fJan\u202f2013)  \n    - Processed cash, check, and card transactions.\n  - **Teller**, Lotto Outlet (Aug\u202f2013\u202f\u2013\u202fSep\u202f2014)  \n    - Managed cash handling, customer service, daily sales reports, and bank deposits.\n\n- **Education**\n  - BSBA\u2011FM, Surigao del Sur State University (2008\u20112012)\n  - High School, Jacinto P. Elpa National High School (2004\u20112008)\n  - Elementary, Anahao Bag\u2011o Elementary School (1998\u20112004)\n\n- **References**\n  - Mary Kinneth Elumbariang \u2013 Accountant, Accounting Head\n  - Geelee P. Formaran \u2013 Accountant\n\n*Overall, Lilet brings diverse experience in accounting, HR, inventory management, and administrative support, combined with strong computer skills and a proactive work ethic.*"}
+{"role": "user", "content": "summarize the file of Lilet Banguiz in  the gdrive"}
+{"role": "assistant", "content": "Reading 'Lilet Banguiz' to answer your question..."}
+{"role": "assistant", "content": "\ud83d\udcc4 Regarding 'Lilet T. Banguiz Updated Resume.docx':\n\nLilet T. Banguiz \u2013 Resume Summary  \n\nContact  \n- Email: LiletBanguiz20@gmail.com  \n- Phone: 09079184496  \n- Address: Prk. Samguita, Anahao Bag\u2011o, Tago, Surigao del Sur  \n\nObjective  \nSeeks a challenging position to apply her skills, contribute to an organization, and grow professionally.  \n\nPersonal Skills  \n- Ready to face challenges, hard\u2011working  \n- Proficient in Microsoft Word, Excel, PowerPoint  \n\nWork Experience  \n1. Accounting Staff, Rowie\u2019s Construction (Jan\u202f2023\u202f\u2013\u202fMar\u202f2025) \u2013 Assisted accountant with financial statements and HR monthly remittances (SSS, Pag\u2011IBIG, PHIC).  \n2. HR Staff, Montemar Agri Industrial Corp. (Nov\u202f2022\u202f\u2013\u202fMay\u202f2022) \u2013 Processed employee benefits, handled data entry, payroll, deposits, sales reports, petty cash, and inventory.  \n3. Feed Mill Bodega Clerk, Montemar Agri Industrial Corp. (Sept\u202f2020\u202f\u2013\u202fNov\u202f2021) \u2013 Managed raw\u2011material deliveries, inventory, corn purchases, and cash payments to farmers.  \n4. Teacher Assistant, Al Qadisiyah School, Fujairah, UAE (Nov\u202f2017\u202f\u2013\u202fNov\u202f2019) \u2013 Prepared lesson materials, supervised activities, assisted with record\u2011keeping and student care.  \n5. Office Clerk, Dole Philippines Inc. (Mar\u202f2017\u202f\u2013\u202fOct\u202f2017) and Tinalak Cooperative (Sept\u202f2014\u202f\u2013\u202fMar\u202f2017) \u2013 Data entry, file maintenance, office equipment operation, contractor payments, HR support, inventory control.  \n6. Telereliever, Marc Account Services (Mar\u202f2013\u202f\u2013\u202fMay\u202f2013) \u2013 Customer payment calls and mail handling.  \n7. Cashier, Super Shopping Market (Jul\u202f2012\u202f\u2013\u202fJan\u202f2013) \u2013 Handled cash, checks, credit cards, and scanned items.  \n8. Teller, Lotto Outlet (Aug\u202f2013\u202f\u2013\u202fSep\u202f2014) \u2013 Managed cash, customer service, daily sales reporting, bank deposits.  \n\nEducation  \n- BSBA\u2011FM, Surigao del Sur State University (2008\u20112012)  \n- High School, Jacinto P. Elpa National High School (2004\u20112008)  \n- Elementary, Anahao Bag\u2011o Elementary School (1998\u20112004)  \n\nReferences  \n- Mary Kinneth Elumbariang \u2013 Accountant  \n- Gee Glee P. Formaran \u2013 Accounting Head  \n\nOverall, Lilet has over 8\u202fyears of experience in accounting, HR, inventory, clerical, and customer\u2011service roles, with strong computer skills and a solid academic background in business administration."}
+{"role": "user", "content": "What's the latest stock market news?"}
+{"role": "assistant", "content": "Fetching latest news on stocks..."}
+{"role": "assistant", "content": "Here\u2019s a quick rundown of today\u2019s stock\u2011related headlines:\n\n- The Nasdaq is leading the market higher after news about tariffs, while Amazon\u2019s shares jump thanks to a surge in its data\u2011center business. (Live coverage)\n\n- Home Depot announced it\u2019s scaling back a key employee benefit as the retailer deals with tougher customer spending conditions.\n\n- The broader market got a boost as the Supreme Court struck down the Trump\u2011era tariffs, sending the Dow, S&P\u202f500 and Nasdaq all higher."}
+{"role": "user", "content": "what is the standing in NBA rigth now?"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'NBA current standing'..."}
+{"role": "assistant", "content": "No results found for **'NBA current standing'**.\n\n\ud83d\udca1 **Tip:** Make sure your accounts are connected in the [Admin Dashboard](http://localhost:8000/admin?user_id=6294374079)."}
+{"role": "user", "content": "no like give me the current standing of nba rigth now search it"}
+{"role": "assistant", "content": "Searching your Google Drive and Notion for 'current NBA standings'..."}
+{"role": "assistant", "content": "No results found for **'current NBA standings'**.\n\n\ud83d\udca1 **Tip:** Make sure your accounts are connected in the [Admin Dashboard](http://localhost:8000/admin?user_id=6294374079)."}
+{"role": "user", "content": "no in the search browser"}
+{"role": "assistant", "content": "I'm having a bit of trouble thinking right now. Could you try again in a moment?"}
+{"role": "user", "content": "give me the standing rigth now on NBA internet"}
+{"role": "assistant", "content": "Fetching latest news on NBA standings..."}
+{"role": "assistant", "content": "I encountered an error trying to fetch the news for 'nba standings': URL can't contain control characters. '/rss/search?q=nba standings&hl=en-US&gl=US&ceid=US:en' (found at least ' ')"}
+{"role": "user", "content": "news about standing in nba"}
+{"role": "assistant", "content": "Fetching latest news on nba standings..."}
+{"role": "assistant", "content": "I encountered an error trying to fetch the news for 'nba standings': URL can't contain control characters. '/rss/search?q=nba standings&hl=en-US&gl=US&ceid=US:en' (found at least ' ')"}
+{"role": "user", "content": "how about news about philippines politics"}
+{"role": "assistant", "content": "Fetching latest news on philippines politics..."}
+{"role": "assistant", "content": "Here\u2019s a quick rundown of the latest political news from the Philippines:\n\n- **Visayas budget talks** \u2013 Top officials gathered in a forum to discuss the 2026 national budget, emphasizing projects that directly serve the needs of Filipinos, especially in the Visayas region.\n\n- **Quezon City\u2019s QCitizen ID** \u2013 The city rolled out the QCitizen ID program, aiming to make it easier for residents to access municipal services and social programs.\n\n- **Kanlaon volcano monitoring** \u2013 Authorities are keeping a close eye on the Kanlaon volcano after recent activity. Emergency teams and logistics are on standby, and nearby towns have been warned about possible ashfall.\n\n- **DepEd\u2019s education\u2011industry push** \u2013 The Department of Education is urging stronger links between schools, vocational training and industry partners to improve job pathways for graduates.\n\n- **New steel bridge in Oriental Mindoro** \u2013 The DPWH approved a P100\u2011million steel bridge project for a remote village in Bongabong, with the local mayor seeking additional support to speed up construction."}
+{"role": "user", "content": "hello"}
+{"role": "assistant", "content": "Hello! How can I help you today?"}
+{"role": "user", "content": "make an appointment date on my calendar on febuary 23 9am about meeting in startup team"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "Event created: https://www.google.com/calendar/event?eid=ZjU2dnBoOGNlam4zZ21uZmJxdjkxYXZrbTAgcmljaGFyZGJhbmd1aXpAbQ"}
+{"role": "user", "content": "can you check my email if i have some certificates?"}
+{"role": "assistant", "content": "Reading from gmail..."}
+{"role": "assistant", "content": "\ud83d\udcec **Recent Unread Emails (Gmail):**\n\u2022 From Redis <no-reply@redis.com>: Your free database will be deleted soon unless you take action now\n\u2022 From \"Freelancer.com\" <noreply@notifications.freelancer.com>: Richard, these SEO, Mobile App Development, and Web Design projects and contests might interest you\n\u2022 From LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>: \u201csoftware engineer\u201d: Nexus Consulting - FrontEnd Software Engineer (Remote) and more\n\u2022 From LiNa Recommendations <noreply@e.jobstreet.com>: Remote WFH Vibecoder Javascript/React Developer + 11 new jobs - Job Alert from Jobstreet.com\n\u2022 From Railway <hello@news.railway.app>: DDoS protection, Railway domains, better canvas state"}
+{"role": "user", "content": "can you give me the files you give me earlier about the certificates"}
+{"role": "assistant", "content": "Reading 'certificates' to answer your question..."}
+{"role": "assistant", "content": "The file 'F-ADM-GS-001 - Application for Admission to Graduate Program.pdf' is a 'application/pdf', which I cannot read currently. I work best with text files, Google Docs, and Word Documents."}
+{"role": "user", "content": "make a reminder around 3:40pm that I have a meeting"}
+{"role": "assistant", "content": "\u2705 Reminder set for you: \"I have a meeting\" at 2026-02-21 15:40."}
+{"role": "user", "content": "make a reminder around 3:46pm that I have a meeting"}
+{"role": "assistant", "content": "\u2705 Reminder set for you: \"I have a meeting\" at 2026-02-21 15:46."}
+{"role": "user", "content": "make a reminder around 3:52pm that I have a meeting"}
+{"role": "assistant", "content": "\u2705 Reminder set for you: \"I have a meeting\" at 2026-02-21 07:52."}
+{"role": "user", "content": "make a reminder around 3:53pm that I have a meeting"}
+{"role": "assistant", "content": "\u2705 Reminder set for you: \"I have a meeting\" at 2026-02-21 07:53."}
+{"role": "user", "content": "make a reminder around 3:58pm that I have a meeting"}
+{"role": "assistant", "content": "\u2705 Reminder set for you: \"You have a meeting\" at 2026-02-21 07:58."}
+{"role": "user", "content": "what was that?"}
+{"role": "assistant", "content": "I set a reminder for you that says \u201cYou have a meeting\u201d at 3:58\u202fPM today (2026\u201102\u201121). In the confirmation I showed the timestamp in UTC (2026\u201102\u201121\u202f07:58\u202fUTC). Let me know if you\u2019d like to change the time, add more details, or view all your reminders."}
+{"role": "user", "content": "okay thank you"}
+{"role": "assistant", "content": "You\u2019re welcome! Let me know if you need anything else."}
+{"role": "user", "content": "is there any scehdule I have this month?"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "\ud83d\udcc5 **Here is your Schedule:**\n\u2022 Feb 02, 08:00 PM: Pizza Party\n\u2022 Feb 14, 12:00 AM: Don't forget to pay your Skyro dues"}
+{"role": "user", "content": " Can you check all my schedule this month?"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "\ud83d\udcc5 **Here is your Schedule:**\n\u2022 Feb 02, 08:00 PM: Pizza Party\n\u2022 Feb 14, 12:00 AM: Don't forget to pay your Skyro dues"}
+{"role": "user", "content": " Send an email to splmaginda.jmail.com that I love her so much."}
+{"role": "assistant", "content": "Drafting an email to splmaginda.jmail.com..."}
+{"role": "assistant", "content": "Error sending email: {'splmaginda.jmail.com': (553, b'5.1.3 The recipient address <splmaginda.jmail.com> is not a valid RFC 5321\\n5.1.3 address. For more information, go to\\n5.1.3  https://support.google.com/a/answer/3221692 and review RFC 5321\\n5.1.3 specifications. 98e67ed59e1d1-358af71e797sm1523282a91.5 - gsmtp')}"}
+{"role": "user", "content": " SPL Maginda at gmail.com"}
+{"role": "assistant", "content": "Drafting an email to splmaginda@gmail.com..."}
+{"role": "assistant", "content": "Missing recipient or content for the email. Could you be more specific?"}
+{"role": "user", "content": " I said that please send an email to splmaginda at gmail.com that I love her so much."}
+{"role": "assistant", "content": "Drafting an email to splmaginda@gmail.com..."}
+{"role": "assistant", "content": "Successfully sent email to splmaginda@gmail.com!"}
+{"role": "user", "content": " Can you suggest me a song for her? Like, I want to give her a song. I love her so much."}
+{"role": "assistant", "content": "Here are a few romantic songs that work well as a heartfelt gift:\n\n1. \u201cAll of Me\u201d\u202f\u2013\u202fJohn Legend  \n   A tender piano ballad that talks about loving every part of someone, flaws and all.\n\n2. \u201cPerfect\u201d\u202f\u2013\u202fEd\u202fSheeran  \n   Sweet, melodic, and easy to sing along to\u2014great for expressing that she\u2019s your perfect match.\n\n3. \u201cMake You Feel My Love\u201d\u202f\u2013\u202fAdele (or the original by Bob\u202fDylan)  \n   A soulful declaration of unconditional love that never fades.\n\n4. \u201cYellow\u201d\u202f\u2013\u202fColdplay  \n   Simple, uplifting, and full of warm imagery\u2014perfect if you want something a bit more indie\u2011rock.\n\n5. \u201cI\u2019m Yours\u201d\u202f\u2013\u202fJason\u202fMraz  \n   Light\u2011hearted, breezy, and full of optimism, it\u2019s a fun way to say you\u2019re all in.\n\nPick the one that matches her musical taste and the vibe you want to convey, and maybe add a short personal note about why that song reminds you of her."}
+{"role": "user", "content": " Hello, can you make a schedule for tomorrow 8pm that I will have a meeting?"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "Event created: https://www.google.com/calendar/event?eid=anJoZnIxb21sY2NvNGUwdTFxZWZwNXVpYWcgcmljaGFyZGJhbmd1aXpAbQ"}
+{"role": "user", "content": " Is there a... Do I have a meeting tomorrow?"}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "\ud83d\udcc5 **Here is your Schedule:**\n\u2022 Feb 22, 08:00 PM: Meeting"}
+{"role": "user", "content": " Remind me about the meeting tomorrow, today, at 4.45."}
+{"role": "assistant", "content": "\u2705 **Got it!** I've set a reminder for you:\n\n\ud83d\udcdd \"You have a meeting tomorrow\"\n\u23f0 Feb 21 at 4:45 pm."}
+{"role": "user", "content": " Can you make a GMIT link for a meeting tomorrow 8am?"}
+{"role": "assistant", "content": "Processing your share request..."}
+{"role": "assistant", "content": "I couldn't find any file matching 'meeting tomorrow 8am' in your Google Drive."}
+{"role": "user", "content": " Goodbye. I want you to create a schedule tomorrow for a meeting at 8pm and I want you to create a Google Meet link. Send it to me."}
+{"role": "assistant", "content": "Checking your calendar..."}
+{"role": "assistant", "content": "Event created: https://www.google.com/calendar/event?eid=YXFpc2dpNGoyMWhkY28xMWRuZHVuMG9zaWcgcmljaGFyZGJhbmd1aXpAbQ"}
+{"role": "user", "content": "what is the biggest animal"}
+{"role": "assistant", "content": "The biggest animal on Earth is the blue whale (Balaenoptera musculus). Adult blue whales can reach lengths of about 30\u202fmeters (roughly 100\u202ffeet) and weigh up to 180\u202fmetric tons, making them the largest known animal ever."}

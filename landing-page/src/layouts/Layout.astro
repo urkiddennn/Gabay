@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{title} | Gabay - The Personal AI Assistant</title>
+		<meta
+			name="description"
+			content="Gabay is your secure, ultra-fast personal AI assistant for Telegram and Google Workspace. The best alternative to OpenClaw and NanoClaw for automated workflows."
+		/>
+		<meta
+			name="keywords"
+			content="Personal AI Assistant, Telegram Bot, Google Workspace Automation, AI workflows, OpenClaw alternative, NanoClaw alternative, Groq AI, secure AI"
+		/>
+		<meta name="viewport" content="width=device-width" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://gabay.ai/" />
+		<meta
+			property="og:title"
+			content={`${title} | Gabay - The Personal AI Assistant`}
+		/>
+		<meta
+			property="og:description"
+			content="Secure, ultra-fast personal AI assistant for Telegram and Google Workspace. Automate your life with Gabay."
+		/>
+		<meta property="og:image" content="https://gabay.ai/og-image.png" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://gabay.ai/" />
+		<meta
+			property="twitter:title"
+			content={`${title} | Gabay - The Personal AI Assistant`}
+		/>
+		<meta
+			property="twitter:description"
+			content="Secure, ultra-fast personal AI assistant for Telegram and Google Workspace. Automate your life with Gabay."
+		/>
+		<meta
+			property="twitter:image"
+			content="https://gabay.ai/og-image.png"
+		/>
+		<script is:inline>
+			const theme = (() => {
+				if (
+					typeof localStorage !== "undefined" &&
+					localStorage.getItem("theme")
+				) {
+					return localStorage.getItem("theme");
+				}
+				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					return "dark";
+				}
+				return "light";
+			})();
+
+			if (theme === "light") {
+				document.documentElement.classList.remove("dark");
+			} else {
+				document.documentElement.classList.add("dark");
+			}
+			window.localStorage.setItem("theme", theme);
+		</script>
+	</head>
+	<body
+		class="bg-bg-page text-text-main font-sans antialiased min-h-screen selection:bg-blue-500/30"
+	>
+		<slot />
+	</body>
+</html>

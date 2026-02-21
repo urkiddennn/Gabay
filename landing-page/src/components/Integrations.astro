@@ -1,0 +1,107 @@
+---
+// Integrations Component
+---
+
+<section
+    class="relative w-full max-w-[1240px] mx-auto px-6 py-24 flex flex-col items-center"
+>
+    <!-- Badge -->
+    <div
+        class="relative z-10 flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-main bg-bg-surface mb-8"
+    >
+        <svg
+            class="w-4 h-4 text-blue-500"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span
+            class="text-xs font-semibold text-text-muted tracking-wide uppercase"
+            >Fully Integrated</span
+        >
+    </div>
+
+    <!-- Title -->
+    <h2
+        class="relative z-10 text-4xl md:text-5xl lg:text-[3rem] font-bold tracking-tight text-text-main mb-16 text-center"
+    >
+        YOUR APPS, <span class="text-blue-500">AUTOMATED</span>
+    </h2>
+
+    <!-- Grid of Logos -->
+    <div
+        class="relative z-10 flex flex-wrap justify-center gap-4 md:gap-6 mb-12"
+    >
+        {
+            [
+                {
+                    name: "Telegram",
+                    color: "#2AABEE",
+                    icon: '<path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.43.91-4.04 2.67-.38.26-.72.39-1.03.38-.34-.01-1-.19-1.48-.35-.6-.19-1.08-.29-1.04-.61.02-.17.27-.34.74-.53l8.76-3.37c.4-.16.84-.33 1.18-.33.24 0 .56.05.7.16.11.09.15.22.15.39v.6z"/>',
+                },
+                {
+                    name: "Gmail",
+                    color: "#EA4335",
+                    icon: '<path fill="currentColor" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>',
+                },
+                {
+                    name: "Drive",
+                    color: "#FFC107",
+                    icon: '<path fill="currentColor" d="M8.07 14L4 21h16l-4-7H8.07zm3.93-7L8 14l8 14 4-7-8-14zM4 3L0 10l8 14 4-7L4 3z"/>',
+                },
+                {
+                    name: "Calendar",
+                    color: "#4285F4",
+                    icon: '<path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>',
+                },
+                {
+                    name: "Notion",
+                    color: "#ffffff",
+                    icon: '<path fill="currentColor" d="M4.459 4.208c.745-.606 1.076-.745 2.129-.745h11.231c.828 0 1.103.111 1.628.525.469.359.58.745.58 1.408v12.923c0 .69-.083 1.05-.58 1.464-.497.414-1.076.606-2.126.606H6.17c-1.076 0-1.573-.248-2.126-.718-.58-.469-.69-.883-.69-1.684V5.477c0-.58.11-1.076.58-1.464l.525.195zm14.161 7.234v-5.25c0-.497-.11-.828-.359-1.022-.248-.194-.58-.331-1.05-.331H6.17c-.497 0-.745.083-.994.331-.221.221-.304.552-.304 1.05v12.233c0 .497.083.774.304.994.248.248.552.331 1.05.331h10.955c.497 0 .828-.11 1.05-.386.221-.248.331-.58.331-1.049V11.44zM8.38 8.127v8.946h1.214l4.225-6.544v6.544h1.161V8.127H13.82L9.54 14.671V8.127H8.38z"/>',
+                },
+                {
+                    name: "News (RSS)",
+                    color: "#F26522",
+                    icon: '<path fill="currentColor" d="M3.14 17.65c-1.73 0-3.14 1.41-3.14 3.14S1.41 23.93 3.14 23.93s3.14-1.41 3.14-3.14-1.41-3.14-3.14-3.14zm0-8.5V2.32C13.43 2.32 21.78 10.66 21.78 20.94H14.95c0-6.52-5.28-11.79-11.81-11.79zV2.35c10.25 0 18.59 8.35 18.59 18.6h6.81C28.54 8.71 18.15-1.68 5.6-1.68v6.82z"/>',
+                },
+                {
+                    name: "Weather",
+                    color: "#38bdf8",
+                    icon: '<path fill="currentColor" d="M12.981 3.018a1.5 1.5 0 0 0-1.962 0A7.5 7.5 0 0 0 5.485 10.5h-.008A4.985 4.985 0 0 0 .5 15.492c0 2.761 2.224 5.008 4.985 5.008h13.03a5.523 5.523 0 0 0 0-11.046h-.22a7.513 7.513 0 0 0-5.314-6.436z"/>',
+                },
+            ].map((integration) => (
+                <div class="flex flex-col items-center gap-3">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-surface border border-border-main rounded-xl flex items-center justify-center hover:bg-bg-page transition-colors cursor-pointer group">
+                        <svg
+                            class="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:scale-105"
+                            viewBox="0 0 24 24"
+                            style={`color: ${integration.color}`}
+                        >
+                            <Fragment set:html={integration.icon} />
+                        </svg>
+                    </div>
+                    <span class="text-text-muted text-[10px] font-bold uppercase tracking-wider">
+                        {integration.name}
+                    </span>
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Link -->
+    <a
+        href="#"
+        class="relative z-10 text-blue-500 hover:text-blue-600 font-bold text-xs transition-colors flex items-center gap-1 group"
+    >
+        VIEW ALL 50+ INTEGRATIONS
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
+    </a>
+</section>

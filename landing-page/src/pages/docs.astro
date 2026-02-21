@@ -1,0 +1,73 @@
+---
+import DocsLayout from "../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Introduction">
+    <article class="docs-content">
+        <h1>Documentation</h1>
+        <p class="text-xl text-gray-400 mb-8">
+            Welcome to the Gabay documentation. Gabay is an agentic AI designed
+            to be actually easy to navigate and integrate into your daily
+            workflow.
+        </p>
+
+        <h2 id="quick-start">Quick Start</h2>
+        <p>
+            Getting started with Gabay is straightforward. You can use our CLI
+            tool or integrate the agent directly into your application using our
+            SDK.
+        </p>
+        <pre><code>npm install @gabay/core</code></pre>
+
+        <h2 id="installation">Installation</h2>
+        <p>To install the Gabay environment locally, follow these steps:</p>
+        <ul>
+            <li>Ensure you have <strong>Node.js 18+</strong> installed.</li>
+            <li>Clone the repository or install via npm.</li>
+            <li>
+                Configure your environment variables in a <code>.env</code> file.
+            </li>
+        </ul>
+
+        <h2 id="architecture">Core Architecture</h2>
+        <p>
+            Gabay is built on a modular architecture that separates the <strong
+                >Agent Logic</strong
+            >, <strong>Context Memory</strong>, and <strong
+                >Interface Layout</strong
+            >.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6">
+                <h4 class="text-blue-500 font-bold mb-2">The Brain</h4>
+                <p class="text-sm">
+                    Processes natural language and determines the optimal
+                    sequence of tool calls.
+                </p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6">
+                <h4 class="text-blue-500 font-bold mb-2">The Memory</h4>
+                <p class="text-sm">
+                    Maintains persistent state across conversations using a
+                    vector-based storage system.
+                </p>
+            </div>
+        </div>
+
+        <h3>Configuration</h3>
+        <p>
+            You can customize the agent behavior by modifying the <code
+                >gabay.config.json</code
+            > file at the root of your project.
+        </p>
+        <pre><code>{`{
+  "model": "gabay-ultra-v1",
+  "temperature": 0.7,
+  "max_context_tokens": 8192,
+  "features": {
+    "web_browsing": true,
+    "code_execution": true
+  }
+}`}</code></pre>
+    </article>
+</DocsLayout>

@@ -1,0 +1,107 @@
+---
+// Setup.astro
+---
+
+<section
+    id="setup"
+    class="w-full max-w-7xl mx-auto px-6 py-12 border-t border-border-main/50"
+>
+    <div class="text-center mb-16">
+        <h2
+            class="text-3xl md:text-5xl font-bold text-text-main mb-6 uppercase tracking-tight"
+        >
+            QUICK <span class="text-blue-500">SETUP</span>
+        </h2>
+        <p
+            class="text-text-muted text-lg max-w-2xl mx-auto leading-relaxed font-medium"
+        >
+            Get Gabay running in minutes with these three simple steps.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Step 1: Install -->
+        <div
+            class="flex flex-col gap-4 p-8 bg-bg-surface border border-border-main rounded-xl"
+        >
+            <div
+                class="w-8 h-8 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold text-sm border border-blue-500/20"
+            >
+                1
+            </div>
+            <h3 class="text-xl font-bold text-text-main">Installation</h3>
+            <p class="text-sm text-text-muted leading-relaxed">
+                Install the core agent package via pip or clone the repository
+                to your local machine.
+            </p>
+            <div
+                class="mt-2 p-3 bg-bg-page border border-border-main rounded-md font-mono text-[11px] text-text-main flex flex-col gap-2"
+            >
+                <div>
+                    <span class="text-blue-500">$</span> pip install gabay
+                </div>
+                <div class="text-text-muted font-sans text-[10px] mt-1 italic">
+                    or git clone the repo
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Configuration -->
+        <div
+            class="flex flex-col gap-4 p-8 bg-bg-surface border border-border-main rounded-xl"
+        >
+            <div
+                class="w-8 h-8 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold text-sm border border-blue-500/20"
+            >
+                2
+            </div>
+            <h3 class="text-xl font-bold text-text-main">API Keys</h3>
+            <p class="text-sm text-text-muted leading-relaxed">
+                Set up your environment variables. You'll need access to the
+                following APIs:
+            </p>
+            <ul class="space-y-2 mt-2">
+                <li class="flex items-center gap-2 text-[11px] text-text-main">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                    Groq Cloud (LLM Engine)
+                </li>
+                <li class="flex items-center gap-2 text-[11px] text-text-main">
+                    <div class="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                    Telegram Bot Father Key
+                </li>
+                <li class="flex items-center gap-2 text-[11px] text-text-main">
+                    <div class="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                    Google Cloud Credentials
+                </li>
+            </ul>
+        </div>
+
+        <!-- Step 3: Deployment -->
+        <div
+            class="flex flex-col gap-4 p-8 bg-bg-surface border border-border-main rounded-xl"
+        >
+            <div
+                class="w-8 h-8 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold text-sm border border-blue-500/20"
+            >
+                3
+            </div>
+            <h3 class="text-xl font-bold text-text-main">Launch</h3>
+            <p class="text-sm text-text-muted leading-relaxed">
+                Initialize the agent and connect your Telegram bot. Gabay will
+                start listening for commands.
+            </p>
+            <div
+                class="mt-2 p-3 bg-bg-page border border-border-main rounded-md font-mono text-[11px] text-text-main"
+            >
+                <div>
+                    <span class="text-blue-500">$</span> python -m gabay start
+                </div>
+            </div>
+            <a
+                href="/docs"
+                class="mt-auto text-blue-500 font-bold text-xs uppercase hover:underline"
+                >Full Guide →</a
+            >
+        </div>
+    </div>
+</section>

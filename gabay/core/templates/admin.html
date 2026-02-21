@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabay | Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg: #111115;
+            --surface: #1A1A24;
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 56px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .card-icon {
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid transparent;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .status-active .status-dot {
+            background: var(--success);
+        }
+
+        .status-offline {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .status-offline .status-dot {
+            background: var(--error);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+
+        .card-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .card-btn:hover {
+            background: var(--surface);
+            border-color: var(--text-main);
+        }
+
+        .card-btn.primary {
+            background: var(--text-main);
+            color: var(--bg);
+            border-color: var(--text-main);
+        }
+
+        .card-btn.primary:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Gabay Admin</h1>
+            <p class="subtitle" style="margin-bottom: 24px;">Manage your connected services and account status.</p>
+            <div style="display: flex; justify-content: center; gap: 12px;">
+                <a href="/" class="card-btn" style="padding: 12px 24px; display: inline-block;">🏠 Home</a>
+            </div>
+        </header>
+
+        <div class="grid">
+            <!-- Groq AI Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🧠</div>
+                    <div class="status-badge {% if groq_connected %}status-active{% else %}status-offline{% endif %}">
+                        <div class="status-dot"></div>
+                        {% if groq_connected %}Active{% else %}Missing Key{% endif %}
+                    </div>
+                </div>
+                <h2 class="card-title">Groq AI Engine</h2>
+                <p class="card-desc">Llama 3 power for intent classification and natural language understanding.</p>
+                <a href="/setup/groq?user_id={{ user_id }}"
+                    class="card-btn {% if not groq_connected %}primary{% endif %}">
+                    {% if groq_connected %}Update Key{% else %}Configure AI{% endif %}
+                </a>
+            </div>
+
+            <!-- Regional Settings Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🌐</div>
+                    <div class="status-badge status-active">
+                        <div class="status-dot"></div>
+                        Active
+                    </div>
+                </div>
+                <h2 class="card-title">Regional Settings</h2>
+                <p class="card-desc">Configure system timezone for accurate reminders and scheduling.</p>
+                <a href="/setup/timezone?user_id={{ user_id }}" class="card-btn">
+                    Update Timezone
+                </a>
+            </div>
+
+            <!-- Google OAuth App Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔑</div>
+                    <div
+                        class="status-badge {% if oauth_config_connected %}status-active{% else %}status-offline{% endif %}">
+                        <div class="status-dot"></div>
+                        {% if oauth_config_connected %}Configured{% else %}Missing{% endif %}
+                    </div>
+                </div>
+                <h2 class="card-title">Google OAuth App</h2>
+                <p class="card-desc">Client ID and Secret required for Gmail and Google Drive integration.</p>
+                <a href="/setup/google_oauth?user_id={{ user_id }}"
+                    class="card-btn {% if not oauth_config_connected %}primary{% endif %}">
+                    {% if oauth_config_connected %}Edit Credentials{% else %}Setup App{% endif %}
+                </a>
+            </div>
+            <!-- Telegram Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📱</div>
+                    <div
+                        class="status-badge {% if telegram_connected %}status-active{% else %}status-offline{% endif %}">
+                        <div class="status-dot"></div>
+                        {% if telegram_connected %}Active{% else %}Offline{% endif %}
+                    </div>
+                </div>
+                <h2 class="card-title">Telegram Userbot</h2>
+                <p class="card-desc">MTProto connection allowing Gabay to message any user as yourself.</p>
+                <a href="/setup?user_id=local" class="card-btn {% if not telegram_connected %}primary{% endif %}">
+                    {% if telegram_connected %}Update Session{% else %}Connect Account{% endif %}
+                </a>
+            </div>
+
+            <!-- Gmail Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📧</div>
+                    <div class="status-badge {% if gmail_connected %}status-active{% else %}status-offline{% endif %}">
+                        <div class="status-dot"></div>
+                        {% if gmail_connected %}Connected{% else %}Not Linked{% endif %}
+                    </div>
+                </div>
+                <h2 class="card-title">Gmail</h2>
+                <p class="card-desc">Power your morning briefings and email automation using Google's official API.</p>
+                <a href="/auth/login?user_id={{ user_id }}"
+                    class="card-btn {% if not gmail_connected %}primary{% endif %}">
+                    {% if gmail_connected %}Reconnect{% else %}Authorize Gmail{% endif %}
+                </a>
+            </div>
+
+            <!-- Google Drive Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📁</div>
+                    <div class="status-badge {% if drive_connected %}status-active{% else %}status-offline{% endif %}">
+                        <div class="status-dot"></div>
+                        {% if drive_connected %}Connected{% else %}Not Linked{% endif %}
+                    </div>
+                </div>
+                <h2 class="card-title">Google Drive</h2>
+                <p class="card-desc">Enable deep-search across your documents and files directly from Telegram.</p>
+                <a href="/auth/login?user_id={{ user_id }}"
+                    class="card-btn {% if not drive_connected %}primary{% endif %}">
+                    {% if drive_connected %}Reconnect{% else %}Authorize Drive{% endif %}
+                </a>
+            </div>
+
+            <!-- Notion Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📝</div>
+                    <div class="status-badge {% if notion_connected %}status-active{% else %}status-offline{% endif %}">
+                        <div class="status-dot"></div>
+                        {% if notion_connected %}Active{% else %}Pending{% endif %}
+                    </div>
+                </div>
+                <h2 class="card-title">Notion API</h2>
+                <p class="card-desc">Search through your Notion pages and databases directly from Telegram.</p>
+                <a href="/setup/notion?user_id={{ user_id }}"
+                    class="card-btn {% if not notion_connected %}primary{% endif %}">
+                    {% if notion_connected %}Update Notion{% else %}Configure Notion{% endif %}
+                </a>
+            </div>
+
+            <!-- SMTP Email Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📤</div>
+                    <div class="status-badge {% if smtp_connected %}status-active{% else %}status-offline{% endif %}">
+                        <div class="status-dot"></div>
+                        {% if smtp_connected %}Configured{% else %}Missing Credentials{% endif %}
+                    </div>
+                </div>
+                <h2 class="card-title">SMTP Email</h2>
+                <p class="card-desc">Direct email delivery using App Passwords (bypass OAuth restrictions).</p>
+                <a href="/setup/smtp?user_id={{ user_id }}"
+                    class="card-btn {% if not smtp_connected %}primary{% endif %}">
+                    {% if smtp_connected %}Update SMTP{% else %}Setup SMTP{% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
