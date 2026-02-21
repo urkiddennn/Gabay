@@ -101,12 +101,14 @@ def config():
     click.echo(click.style("║         Gabay Configuration Wizard           ║", fg="cyan", bold=True))
     click.echo(click.style("╚══════════════════════════════════════════════╝", fg="cyan"))
     
-    # 1. Ensure Bot Token is set and valid
-    bot_token = settings.telegram_bot_token
-    if not bot_token or bot_token in ("TBD", "your_bot_token_here"):
-        click.echo("\n🤖 Let's start with your Telegram Bot Token.")
-        click.echo("Get this from @BotFather on Telegram.")
-        bot_token = click.prompt("Enter Bot Token", hide_input=True)
+    # 1. Prompt for Bot Token
+    current_token = settings.telegram_bot_token
+    if not current_token or current_token in ("TBD", "your_bot_token_here"):
+        current_token = ""
+        
+    click.echo("\n🤖 Let's start with your Telegram Bot Token.")
+    click.echo("Get this from @BotFather on Telegram.")
+    bot_token = click.prompt("Enter Bot Token", default=current_token, hide_input=True)
     
     click.echo("🔍 Verifying token...")
     username = _check_token(bot_token)
