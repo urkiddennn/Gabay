@@ -22,11 +22,11 @@ templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 setup_sessions = {}
 
 @router.get("/setup", response_class=HTMLResponse)
-async def setup_page(request: Request, user_id: int):
+async def setup_page(request: Request, user_id: int = 0):
     return templates.TemplateResponse("setup.html", {"request": request, "user_id": user_id})
 
 @router.get("/setup/config", response_class=HTMLResponse)
-async def config_setup_page(request: Request, user_id: int):
+async def config_setup_page(request: Request, user_id: int = 0):
     return templates.TemplateResponse("config_setup.html", {
         "request": request, 
         "user_id": user_id,
@@ -43,7 +43,7 @@ async def config_setup_page(request: Request, user_id: int):
 @router.post("/setup/config")
 async def handle_config_setup(
     request: Request,
-    user_id: int = Form(...),
+    user_id: int = Form(0),
     bot_token: str = Form(None),
     groq_key: str = Form(None),
     google_id: str = Form(None),
