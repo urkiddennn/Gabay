@@ -206,11 +206,15 @@ def get_telegram_app():
 async def start_telegram_polling(application):
     if not application:
         return
-    logger.info("Starting Telegram Bot via start_polling()...")
-    await application.initialize()
-    await application.start()
-    await application.updater.start_polling()
-    logger.info("Telegram Bot is successfully polling for updates!")
+    try:
+        logger.info("Starting Telegram Bot via start_polling()...")
+        await application.initialize()
+        await application.start()
+        await application.updater.start_polling()
+        logger.info("Telegram Bot is successfully polling for updates!")
+    except Exception as e:
+        logger.error(f"❌ Failed to start Telegram Bot: {e}")
+        logger.warning("The Chat API is still running. You can fix your token at http://localhost:8000/setup/config")
 
 async def stop_telegram_polling(application):
     if not application:
