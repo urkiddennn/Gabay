@@ -33,7 +33,10 @@ class Settings(BaseSettings):
     # Notion config
     notion_database_id: str = ""
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", arbitrary_types_allowed=True)
+    # Timezone
+    tz: str = "UTC"
+
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", arbitrary_types_allowed=True, extra="ignore")
 
 # For local development without Docker, use local data folder
 if not os.path.exists("/app/data"):

@@ -81,48 +81,57 @@ def all():
 
 @cli.command()
 def config():
-    """Interactive setup for environment variables (.env)."""
-    click.echo("Gabay Configuration Setup")
-    click.echo("This will create or update your local .env file.")
+    """Setup Gabay via CLI or Web Wizard."""
+    click.echo("Gabay Configuration")
+    mode = click.prompt("Choose setup mode", type=click.Choice(['web', 'cli'], case_sensitive=False), default='web')
     
-    from gabay.core.config import save_to_env
-    
-    telegram_bot_token = click.prompt("Telegram Bot Token (from @BotFather)", default="", hide_input=True)
-    if telegram_bot_token:
-        save_to_env("TELEGRAM_BOT_TOKEN", telegram_bot_token)
+    if mode == 'web':
+        click.echo("🚀 Launching Setup Wizard at http://localhost:8000/setup/config")
+        click.echo("Please keep this terminal open while you configure Gabay.")
+        # Auto-open browser if possible
+        import webbrowser
+        webbrowser.open("http://localhost:8000/setup/config")
+        uvicorn.run("gabay.core.main:app", host="0.0.0.0", port=8000, reload=False)
+    else:
+        click.echo("\n--- CLI Configuration Wizard ---")
+        from gabay.core.config import save_to_env, settings
         
-    groq_api_key = click.prompt("Groq API Key (for LLM)", default="", hide_input=True)
-    if groq_api_key:
-        save_to_env("GROQ_API_KEY", groq_api_key)
+        telegram_bot_token = click.prompt("Telegram Bot Token", default=settings.telegram_bot_token, hide_input=True)
+        if telegram_bot_token and telegram_bot_token != "TBD":
+            save_to_env("TELEGRAM_BOT_TOKEN", telegram_bot_token)
+            
+        groq_api_key = click.prompt("Groq API Key", default=settings.groq_api_key, hide_input=True)
+        if groq_api_key:
+            save_to_env("GROQ_API_KEY", groq_api_key)
+            
+        google_client_id = click.prompt("Google OAuth Client ID", default=settings.google_client_id)
+        if google_client_id:
+            save_to_env("GOOGLE_CLIENT_ID", google_client_id)
+            
+        google_client_secret = click.prompt("Google OAuth Client Secret", default=settings.google_client_secret, hide_input=True)
+        if google_client_secret:
+            save_to_env("GOOGLE_CLIENT_SECRET", google_client_secret)
+            
+        click.echo("\n--- Mailbox Credentials (SMTP) ---")
+        smtp_host = click.prompt("SMTP Host", default=settings.smtp_host or "smtp.gmail.com")
+        save_to_env("SMTP_HOST", smtp_host)
         
-    google_client_id = click.prompt("Google OAuth Client ID", default="")
-    if google_client_id:
-        save_to_env("GOOGLE_CLIENT_ID", google_client_id)
+        smtp_port = click.prompt("SMTP Port", default=settings.smtp_port, type=int)
+        save_to_env("SMTP_PORT", str(smtp_port))
         
-    google_client_secret = click.prompt("Google OAuth Client Secret", default="", hide_input=True)
-    if google_client_secret:
-        save_to_env("GOOGLE_CLIENT_SECRET", google_client_secret)
-        
-    click.echo("\n--- Mailbox Credentials (SMTP) ---")
-    smtp_host = click.prompt("SMTP Host (e.g., smtp.gmail.com)", default="smtp.gmail.com")
-    save_to_env("SMTP_HOST", smtp_host)
-    
-    smtp_port = click.prompt("SMTP Port", default=587, type=int)
-    save_to_env("SMTP_PORT", str(smtp_port))
-    
-    smtp_user = click.prompt("SMTP User (your email)", default="")
-    if smtp_user:
-        save_to_env("SMTP_USER", smtp_user)
-        
-    smtp_pass = click.prompt("SMTP Password (App Password)", default="", hide_input=True)
-    if smtp_pass:
-        save_to_env("SMTP_PASSWORD", smtp_pass)
+        smtp_user = click.prompt("SMTP User", default=settings.smtp_user)
+        if smtp_user:
+            save_to_env("SMTP_USER", smtp_user)
+            
+        smtp_pass = click.prompt("SMTP Password", default=settings.smtp_password, hide_input=True)
+        if smtp_pass:
+            save_to_env("SMTP_PASSWORD", smtp_pass)
 
-    click.echo("\n--- Region ---")
-    tz = click.prompt("Timezone", default="Asia/Manila")
-    save_to_env("TZ", tz)
-        
-    click.echo("✅ .env file updated successfully!")
+        click.echo("\n--- Region ---")
+        tz = click.prompt("Timezone", default=settings.tz)
+        save_to_env("TZ", tz)
+            
+        click.echo("✅ .env file updated successfully!")
 
 if __name__ == '__main__':
     cli()
