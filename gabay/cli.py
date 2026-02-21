@@ -79,27 +79,66 @@ def all():
         for p in processes:
             p.terminate()
 
+def _check_token(token: str):
+    """Verify Telegram Bot Token and return username."""
+    import requests
+    try:
+        resp = requests.get(f"https://api.telegram.org/bot{token}/getMe", timeout=5)
+        if resp.status_code == 200:
+            return resp.json().get("result", {}).get("username")
+    except Exception:
+        pass
+    return None
+
 @cli.command()
 def config():
     """Setup Gabay via CLI or Web Wizard."""
-    click.echo("Gabay Configuration")
-    mode = click.prompt("Choose setup mode", type=click.Choice(['web', 'cli'], case_sensitive=False), default='web')
+    from gabay.core.config import save_to_env, settings
+    import requests # Ensure it's available for _check_token
     
-    if mode == 'web':
-        click.echo("🚀 Launching Setup Wizard at http://localhost:8000/setup/config")
-        click.echo("Please keep this terminal open while you configure Gabay.")
-        # Auto-open browser if possible
+    click.clear()
+    click.echo(click.style("╔══════════════════════════════════════════════╗", fg="cyan"))
+    click.echo(click.style("║         Gabay Configuration Wizard           ║", fg="cyan", bold=True))
+    click.echo(click.style("╚══════════════════════════════════════════════╝", fg="cyan"))
+    
+    # 1. Ensure Bot Token is set and valid
+    bot_token = settings.telegram_bot_token
+    if not bot_token or bot_token in ("TBD", "your_bot_token_here"):
+        click.echo("\n🤖 Let's start with your Telegram Bot Token.")
+        click.echo("Get this from @BotFather on Telegram.")
+        bot_token = click.prompt("Enter Bot Token", hide_input=True)
+    
+    click.echo("🔍 Verifying token...")
+    username = _check_token(bot_token)
+    
+    if username:
+        click.echo(click.style(f"✅ Verified! Your bot is @{username}", fg="green"))
+        save_to_env("TELEGRAM_BOT_TOKEN", bot_token)
+    else:
+        click.echo(click.style("❌ Invalid token. Please check your credentials.", fg="red"))
+        if not click.confirm("Continue anyway?"):
+            return
+
+    # 2. Choose Mode
+    click.echo("\nHow would you like to configure the rest of Gabay?")
+    click.echo(click.style("1. Web UI (Recommended) ", fg="yellow") + "- Setup everything in a beautiful dashboard.")
+    click.echo(click.style("2. CLI Terminal        ", fg="yellow") + "- Configure directly in this window.")
+    
+    mode_choice = click.prompt("Select option (1/2)", type=int, default=1)
+    
+    if mode_choice == 1:
+        click.echo("\n🚀 Launching Setup Wizard at http://localhost:8000/setup/config")
+        click.echo(click.style("Please keep this terminal open while you configure Gabay.", dim=True))
+        
+        # Auto-open browser
         import webbrowser
         webbrowser.open("http://localhost:8000/setup/config")
-        uvicorn.run("gabay.core.main:app", host="0.0.0.0", port=8000, reload=False)
+        
+        import uvicorn
+        uvicorn.run("gabay.core.main:app", host="0.0.0.0", port=8000, reload=False, log_level="error")
     else:
         click.echo("\n--- CLI Configuration Wizard ---")
-        from gabay.core.config import save_to_env, settings
         
-        telegram_bot_token = click.prompt("Telegram Bot Token", default=settings.telegram_bot_token, hide_input=True)
-        if telegram_bot_token and telegram_bot_token != "TBD":
-            save_to_env("TELEGRAM_BOT_TOKEN", telegram_bot_token)
-            
         groq_api_key = click.prompt("Groq API Key", default=settings.groq_api_key, hide_input=True)
         if groq_api_key:
             save_to_env("GROQ_API_KEY", groq_api_key)
@@ -131,7 +170,7 @@ def config():
         tz = click.prompt("Timezone", default=settings.tz)
         save_to_env("TZ", tz)
             
-        click.echo("✅ .env file updated successfully!")
+        click.echo(click.style("\n✅ Configuration complete! Run 'gabay all' to start your assistant.", fg="green"))
 
 if __name__ == '__main__':
     cli()

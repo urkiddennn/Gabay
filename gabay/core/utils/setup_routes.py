@@ -65,11 +65,24 @@ async def handle_config_setup(
     if tz: save_to_env("TZ", tz)
     
     return HTMLResponse(content=f"""
-        <div style="font-family: sans-serif; text-align: center; padding: 50px; background: #0f172a; color: white; min-height: 100vh;">
-            <h1 style="color: #4ade80;">✅ Configuration Saved!</h1>
-            <p>Your settings have been updated. Please restart the backend services for changes to take effect.</p>
-            <br>
-            <a href="/admin?user_id={user_id}" style="color: #6366f1; text-decoration: none; font-weight: bold;">Go to Dashboard</a>
+        <div style="font-family: 'Inter', sans-serif; text-align: center; padding: 60px 20px; background: #111115; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="background: #1A1A24; padding: 40px; border-radius: 20px; border: 1px solid #333; max-width: 500px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <div style="font-size: 60px; margin-bottom: 20px;">✅</div>
+                <h1 style="color: #4ade80; margin-bottom: 15px; font-weight: 700;">Configuration Saved!</h1>
+                <p style="color: #94a3b8; line-height: 1.6; margin-bottom: 30px;">
+                    Your settings have been updated successfully. 
+                </p>
+                <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 30px;">
+                    <h3 style="color: #818cf8; margin-top: 0; font-size: 16px;">Next Step:</h3>
+                    <p style="margin-bottom: 0; font-size: 14px;">
+                        Go to Telegram and send <strong>/start</strong> to your bot. It will respond with your personalized <strong>Admin Dashboard</strong> link.
+                    </p>
+                </div>
+                <p style="font-size: 12px; color: #64748b;">
+                    If you already have your User ID, you can try access the dashboard directly:
+                </p>
+                <a href="/admin?user_id={user_id}" style="display: inline-block; background: #6366f1; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s;">Go to Dashboard</a>
+            </div>
         </div>
     """)
 
