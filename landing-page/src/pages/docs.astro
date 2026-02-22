@@ -6,68 +6,292 @@ import DocsLayout from "../layouts/DocsLayout.astro";
     <article class="docs-content">
         <h1>Documentation</h1>
         <p class="text-xl text-gray-400 mb-8">
-            Welcome to the Gabay documentation. Gabay is an agentic AI designed
-            to be actually easy to navigate and integrate into your daily
-            workflow.
+            Gabay is an advanced agentic AI that bridges the gap between natural
+            language chat and professional productivity tools.
         </p>
 
-        <h2 id="quick-start">Quick Start</h2>
+        <h2 id="installation">Local Installation</h2>
         <p>
-            Getting started with Gabay is straightforward. You can use our CLI
-            tool or integrate the agent directly into your application using our
-            SDK.
+            Gabay can be installed as a Python package for local configuration
+            and development:
         </p>
-        <pre><code>npm install @gabay/core</code></pre>
+        <pre><code>pip install gabay</code></pre>
+        <p>Once installed, run the configuration wizard to get started:</p>
+        <pre><code>gabay config</code></pre>
 
-        <h2 id="installation">Installation</h2>
-        <p>To install the Gabay environment locally, follow these steps:</p>
-        <ul>
-            <li>Ensure you have <strong>Node.js 18+</strong> installed.</li>
-            <li>Clone the repository or install via npm.</li>
+        <h2 id="bot-setup">Telegram API Configuration</h2>
+        <p>
+            Gabay uses a Bot for commands and a Userbot for acting on your
+            behalf.
+        </p>
+        <ol>
             <li>
-                Configure your environment variables in a <code>.env</code> file.
+                <strong>Create a Bot</strong>: Find <strong>@BotFather</strong> on
+                Telegram.
+                <ul>
+                    <li>Type <code>/newbot</code> and follow instructions.</li>
+                    <li>Save your <strong>Bot Token</strong>.</li>
+                </ul>
             </li>
-        </ul>
+            <li>
+                <strong>Get API Credentials</strong>:
+                <ul>
+                    <li>
+                        Log in to <a
+                            href="https://my.telegram.org"
+                            target="_blank"
+                            class="text-blue-500">my.telegram.org</a
+                        >.
+                    </li>
+                    <li>Go to <strong>API development tools</strong>.</li>
+                    <li>
+                        Create an application to get your <code>API_ID</code> and
+                        <code>API_HASH</code>.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <strong>Authenticate</strong>: Your <code>TELEGRAM_PHONE</code> is
+                required for the initial Userbot session login.
+            </li>
+        </ol>
 
-        <h2 id="architecture">Core Architecture</h2>
+        <h2 id="google-setup">Google Cloud Architecture</h2>
         <p>
-            Gabay is built on a modular architecture that separates the <strong
-                >Agent Logic</strong
-            >, <strong>Context Memory</strong>, and <strong
-                >Interface Layout</strong
-            >.
+            Enable the following APIs in your <a
+                href="https://console.cloud.google.com/"
+                target="_blank"
+                class="text-blue-500">Google Cloud Console</a
+            >:
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-            <div class="bg-white/5 border border-white/10 rounded-lg p-6">
-                <h4 class="text-blue-500 font-bold mb-2">The Brain</h4>
-                <p class="text-sm">
-                    Processes natural language and determines the optimal
-                    sequence of tool calls.
-                </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
+            <div
+                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+            >
+                <span class="block text-blue-500 font-bold mb-1">Gmail</span>
+                <span class="text-xs text-text-muted italic"
+                    >Email Management</span
+                >
             </div>
-            <div class="bg-white/5 border border-white/10 rounded-lg p-6">
-                <h4 class="text-blue-500 font-bold mb-2">The Memory</h4>
-                <p class="text-sm">
-                    Maintains persistent state across conversations using a
-                    vector-based storage system.
-                </p>
+            <div
+                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+            >
+                <span class="block text-blue-500 font-bold mb-1">Drive</span>
+                <span class="text-xs text-text-muted italic"
+                    >File Operations</span
+                >
+            </div>
+            <div
+                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+            >
+                <span class="block text-blue-500 font-bold mb-1">Docs</span>
+                <span class="text-xs text-text-muted italic"
+                    >Research Reports</span
+                >
+            </div>
+            <div
+                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+            >
+                <span class="block text-blue-500 font-bold mb-1">Slides</span>
+                <span class="text-xs text-text-muted italic">Presentations</span
+                >
+            </div>
+            <div
+                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+            >
+                <span class="block text-blue-500 font-bold mb-1">Sheets</span>
+                <span class="text-xs text-text-muted italic">Spreadsheets</span>
+            </div>
+            <div
+                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+            >
+                <span class="block text-blue-500 font-bold mb-1">Calendar</span>
+                <span class="text-xs text-text-muted italic">Scheduling</span>
             </div>
         </div>
 
-        <h3>Configuration</h3>
+        <h3 id="oauth">OAuth 2.0 Configuration</h3>
+        <ol>
+            <li>
+                <strong>Consent Screen</strong>: Set User Type to <strong
+                    >External</strong
+                > and add your email to <strong>Test Users</strong>.
+            </li>
+            <li>
+                <strong>Credentials</strong>: Create an <strong
+                    >OAuth Client ID</strong
+                > for a <strong>Web Application</strong>.
+            </li>
+            <li>
+                <strong>Redirect URIs</strong>: Add <code
+                    >http://localhost:8000/auth/google/callback</code
+                >.
+            </li>
+        </ol>
+
+        <h2 id="notion">Notion Integration</h2>
+        <ol>
+            <li>
+                Create an integration at <a
+                    href="https://www.notion.com/my-integrations"
+                    target="_blank"
+                    class="text-blue-500">Notion My Integrations</a
+                >.
+            </li>
+            <li>Grant "Read", "Update", and "Insert" permissions.</li>
+            <li>
+                Connect your integration to your database via the "Connect to"
+                menu in Notion.
+            </li>
+        </ol>
+
+        <h2 id="environment">Environment Configuration</h2>
         <p>
-            You can customize the agent behavior by modifying the <code
-                >gabay.config.json</code
-            > file at the root of your project.
+            Create a <code>.env</code> file in your project root:
         </p>
-        <pre><code>{`{
-  "model": "gabay-ultra-v1",
-  "temperature": 0.7,
-  "max_context_tokens": 8192,
-  "features": {
-    "web_browsing": true,
-    "code_execution": true
-  }
-}`}</code></pre>
+        <pre><code>{`# Telegram
+TELEGRAM_BOT_TOKEN="your_token"
+TELEGRAM_API_ID=12345
+TELEGRAM_API_HASH="your_hash"
+TELEGRAM_PHONE="+123456789"
+
+# LLM Intelligence
+GROQ_API_KEY="your_groq_key"
+
+# Google OAuth
+GOOGLE_CLIENT_ID="your_google_id"
+GOOGLE_CLIENT_SECRET="your_google_secret"`}</code></pre>
+
+        <h2 id="memory">Cognitive Memory</h2>
+        <p>
+            Gabay now features a <strong
+                >20-message conversational buffer</strong
+            >. This allows for deep context resolution:
+        </p>
+        <pre><code>"Research the history of Rome."
+"Now email it to my boss." (Gabay knows "it" refers to the research)</code></pre>
+
+        <h2 id="docs-quality">Professional Documentation</h2>
+        <p>
+            Gabay doesn't just dump text; it builds professional documents. Our <strong
+                >Formatting Engine</strong
+            > automatically converts raw intelligence into structured Google Docs:
+        </p>
+        <ul>
+            <li>
+                <strong>Typography</strong>: Uses <em>Merriweather</em> and <em
+                    >Montserrat</em
+                > for professional reading.
+            </li>
+            <li>
+                <strong>Structure</strong>: Automatic centered titles, bolded
+                subheadings, and native bullet lists.
+            </li>
+            <li>
+                <strong>Design</strong>: Professional spacing and logical
+                hierarchy.
+            </li>
+        </ul>
+
+        <h2 id="slides">Slides V3: Professional Engine</h2>
+        <p>
+            Our "Professional V3" engine creates cinematic presentations with:
+        </p>
+        <ul>
+            <li>
+                <strong>Cinematic Layouts</strong>: Custom-built <em>BLANK</em> layouts
+                for total design control.
+            </li>
+            <li>
+                <strong>Sleek Dark Mode</strong>: High-contrast, minimalist
+                navy/black aesthetics.
+            </li>
+            <li>
+                <strong>Visual Accents</strong>: Dynamic accent lines and
+                professional font pairings (Montserrat & Roboto).
+            </li>
+            <li>
+                <strong>Native Bullets</strong>: Clean, structured lists for
+                clarity.
+            </li>
+        </ul>
+
+        <h2 id="recurring">Interval Scheduling</h2>
+        <p>Handle high-frequency tasks with precision:</p>
+        <pre><code>"Remind me to check the oven every minute for 5 times."</code></pre>
+        <p>
+            Gabay manages individual counts and seconds-based intervals
+            autonomously.
+        </p>
+
+        <h2 id="research">Autonomous Research</h2>
+        <p>
+            Gabay performs web research and synthesizes findings into structured
+            documents.
+        </p>
+        <pre><code>"Research AI agents and save to a doc"</code></pre>
+
+        <h2 id="sharing">Sharing & Permissions</h2>
+        <ul>
+            <li><strong>Public</strong>: <code>"...make it public"</code></li>
+            <li>
+                <strong>Private Invite</strong>: <code
+                    >"...invite user@gmail.com"</code
+                >
+            </li>
+            <li>
+                <strong>Roles</strong>: Choose <code>reader</code> or <code
+                    >writer</code
+                >.
+            </li>
+        </ul>
+
+        <h2 id="commands">Command Reference</h2>
+        <div class="overflow-x-auto">
+            <table
+                class="w-full text-left border-collapse my-8 transition-colors duration-300 min-w-[500px]"
+            >
+                <thead>
+                    <tr class="border-b border-border-main text-text-main">
+                        <th class="py-3 pr-4">Feature</th>
+                        <th class="py-3">Example Command</th>
+                    </tr>
+                </thead>
+                <tbody class="text-text-muted text-sm">
+                    <tr class="border-b border-border-main/50">
+                        <td class="py-3 pr-4 font-mono text-blue-500">Docs</td>
+                        <td class="py-3">"Create a doc about Q3 strategy"</td>
+                    </tr>
+                    <tr class="border-b border-border-main/50">
+                        <td class="py-3 pr-4 font-mono text-blue-500">Slides</td
+                        >
+                        <td class="py-3"
+                            >"Make a professional deck about space"</td
+                        >
+                    </tr>
+                    <tr class="border-b border-border-main/50">
+                        <td class="py-3 pr-4 font-mono text-blue-500">Sheets</td
+                        >
+                        <td class="py-3"
+                            >"Generate a spreadsheet of crypto trends"</td
+                        >
+                    </tr>
+                    <tr class="border-b border-border-main/50">
+                        <td class="py-3 pr-4 font-mono text-blue-500"
+                            >Research</td
+                        >
+                        <td class="py-3"
+                            >"Research global remote work impact"</td
+                        >
+                    </tr>
+                    <tr class="border-b border-border-main/50">
+                        <td class="py-3 pr-4 font-mono text-blue-500"
+                            >Reminders</td
+                        >
+                        <td class="py-3">"Remind me every 30s for 10 times"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </article>
 </DocsLayout>

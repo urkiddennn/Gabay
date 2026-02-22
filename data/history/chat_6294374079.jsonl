@@ -351,3 +351,11 @@
 {"role": "assistant", "content": "Event created: https://www.google.com/calendar/event?eid=YXFpc2dpNGoyMWhkY28xMWRuZHVuMG9zaWcgcmljaGFyZGJhbmd1aXpAbQ"}
 {"role": "user", "content": "what is the biggest animal"}
 {"role": "assistant", "content": "The biggest animal on Earth is the blue whale (Balaenoptera musculus). Adult blue whales can reach lengths of about 30\u202fmeters (roughly 100\u202ffeet) and weigh up to 180\u202fmetric tons, making them the largest known animal ever."}
+{"role": "user", "content": "hello\\"}
+{"role": "assistant", "content": "I'm having a bit of trouble thinking right now. Could you try again in a moment?"}
+{"role": "user", "content": "hello"}
+{"role": "assistant", "content": "I'm having a bit of trouble thinking right now. Could you try again in a moment?"}
+{"role": "user", "content": "hello"}
+{"role": "assistant", "content": "I'm having a bit of trouble thinking right now. Could you try again in a moment?"}
+{"role": "user", "content": "hello"}
+{"role": "assistant", "content": "Hello! How can I help you today?"}

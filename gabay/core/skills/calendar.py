@@ -1,6 +1,7 @@
 import logging
 import json
 from gabay.core.connectors.calendar_api import get_events, create_event
+from gabay.core.connectors.smtp_api import send_smtp_email
 
 logger = logging.getLogger(__name__)
 
@@ -34,11 +35,26 @@ def handle_calendar_skill(user_id: int, command_args_str: str) -> str:
             summary = data.get("summary", "New Event")
             start_time = data.get("start_time")
             end_time = data.get("end_time")
+            attendees = data.get("attendees", [])
+            email_confirmation_to = data.get("email_confirmation_to")
             
             if not start_time or not end_time:
                 return "I need a start time and end time to create an event."
                 
-            result = create_event(str(user_id), summary, start_time, end_time)
+            result = create_event(str(user_id), summary, start_time, end_time, attendees=attendees)
+            
+            # Hybrid Context: Send follow-up email if requested
+            if "Event created" in result and email_confirmation_to:
+                try:
+                    event_link = result.split(": ")[1] if ": " in result else ""
+                    subject = f"Appointment: {summary}"
+                    email_body = f"I've scheduled our appointment: {summary}\nTime: {start_time}\n\nLink: {event_link}\n\n--\nSent via Gabay."
+                    send_smtp_email(email_confirmation_to, subject, email_body, user_id=str(user_id))
+                    result += f" and confirmation email sent to {email_confirmation_to}."
+                except Exception as e:
+                    logger.error(f"Failed to send hybrid email for calendar: {e}")
+                    result += " (Failed to send follow-up email)"
+                    
             return result
             
         else:

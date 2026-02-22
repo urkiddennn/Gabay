@@ -10,11 +10,40 @@ const { title } = Astro.props;
 ---
 
 <Layout title={`${title} | Gabay Docs`}>
+    <!-- Mobile Header -->
+    <div
+        class="lg:hidden sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-bg-surface border-b border-border-main"
+    >
+        <a href="/" class="flex items-center gap-2">
+            <img src="/logo.png" alt="Gabay" class="h-6 w-6" />
+            <span class="text-text-main font-bold">Gabay</span>
+        </a>
+        <button
+            id="mobile-sidebar-toggle"
+            class="p-2 text-text-muted hover:text-blue-500 transition-colors"
+            aria-label="Toggle Menu"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+
     <div class="max-w-[1400px] mx-auto flex">
         <DocsSidebar />
 
         <main
-            class="flex-1 px-8 md:px-16 lg:px-24 py-16 lg:ml-64 min-h-screen transition-colors duration-300"
+            class="flex-1 px-6 md:px-16 lg:px-24 py-8 md:py-16 lg:ml-64 min-h-screen transition-colors duration-300"
         >
             <div class="max-w-4xl docs-content">
                 <slot />
@@ -22,6 +51,26 @@ const { title } = Astro.props;
         </main>
     </div>
 </Layout>
+
+<script>
+    const toggle = document.getElementById("mobile-sidebar-toggle");
+    const sidebar = document.getElementById("docs-sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    if (toggle && sidebar && overlay) {
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("-translate-x-full");
+            overlay.classList.toggle("hidden");
+            document.body.classList.toggle("overflow-hidden");
+        });
+
+        overlay.addEventListener("click", () => {
+            sidebar.classList.add("-translate-x-full");
+            overlay.classList.add("hidden");
+            document.body.classList.remove("overflow-hidden");
+        });
+    }
+</script>
 
 <style is:global>
     @reference "../styles/global.css";

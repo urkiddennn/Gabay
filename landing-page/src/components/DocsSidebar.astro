@@ -4,30 +4,47 @@ const sidebarItems = [
         title: "Getting Started",
         items: [
             { label: "Introduction", href: "/docs" },
-            { label: "Quick Start", href: "#quick-start" },
             { label: "Installation", href: "#installation" },
+            { label: "Environment Setup", href: "#environment" },
+            { label: "Running with Docker", href: "#docker" },
         ],
     },
     {
-        title: "Core Concepts",
+        title: "Hybrid Productivity",
         items: [
-            { label: "Architecture", href: "#architecture" },
-            { label: "AI Components", href: "#components" },
-            { label: "Memory System", href: "#memory" },
+            { label: "Autonomous Research", href: "#research" },
+            { label: "Professional Slides V2", href: "#slides" },
+            { label: "Professional Sheets", href: "#sheets" },
+        ],
+    },
+    {
+        title: "Advanced Features",
+        items: [
+            { label: "Hybrid Orchestration", href: "#orchestration" },
+            { label: "Sharing & Permissions", href: "#sharing" },
+            { label: "Account Pairing", href: "#pairing" },
         ],
     },
     {
         title: "Reference",
         items: [
-            { label: "API Reference", href: "#api" },
-            { label: "CLI Tools", href: "#cli" },
+            { label: "Command Reference", href: "#commands" },
+            { label: "Core Architecture", href: "#architecture" },
         ],
     },
 ];
 ---
 
+<!-- Overlay for mobile sidebar -->
+<div
+    id="sidebar-overlay"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity duration-300"
+>
+</div>
+
 <aside
-    class="w-64 fixed left-0 top-0 bottom-0 bg-bg-surface border-r border-border-main overflow-y-auto hidden lg:block z-40 transition-colors duration-300"
+    id="docs-sidebar"
+    class="w-64 fixed left-0 top-0 bottom-0 bg-bg-surface border-r border-border-main overflow-y-auto z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 lg:block lg:z-40"
 >
     <!-- Sidebar Branding -->
     <div class="px-8 pt-8 pb-4 border-b border-border-main mb-6">

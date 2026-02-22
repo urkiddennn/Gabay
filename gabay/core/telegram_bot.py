@@ -7,7 +7,8 @@ from gabay.core.memory import append_message, get_recent_history, get_user_state
 from gabay.core.llm_router import classify_intent
 from gabay.core.skills.reminders import handle_reminder_skill
 from gabay.core.utils.voice import transcribe_audio
-from gabay.worker.tasks import process_brief, process_save, process_search, process_read, process_calendar, process_share, process_file_qa, process_news
+from gabay.worker.tasks import process_brief, process_save, process_search, process_read, process_calendar, process_share, process_file_qa, process_news, process_docs, process_slides, process_sheets
+from fastapi import FastAPI
 
 logger = logging.getLogger(__name__)
 
@@ -15,8 +16,8 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     admin_link = f"{settings.base_url}/admin?user_id={user_id}"
     await update.message.reply_text(
-        "👋 **Hello! I am Gabay**, your productivity assistant.\n\n"
-        f"🛠 **[Open Admin Dashboard]({admin_link})**\n"
+        "👋 Hello! I am Gabay, your productivity assistant.\n\n"
+        f"🛠 [Open Admin Dashboard]({admin_link})\n"
         "Use the link above to connect Telegram, Gmail, and Notion in one place!"
     )
 
@@ -62,14 +63,21 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE, ove
     # 1. Save chat history
     append_message(user_id, "user", text)
     
-    # 2. Intent classification routing with time context
+    # 2. Intent classification routing with time context & history
     from datetime import datetime, timezone
     current_utc = datetime.now(timezone.utc).isoformat()
-    # For local dev, system local time is user local time. 
-    # In Docker, it might be UTC unless TZ is set.
     user_local_time = datetime.now().isoformat() 
     
-    classification = await classify_intent(text, current_utc=current_utc, user_local_time=user_local_time)
+    # Fetch history for context-aware classification
+    from gabay.core.memory import get_recent_history
+    history = get_recent_history(user_id, limit=10)
+    
+    classification = await classify_intent(
+        text, 
+        chat_history=history, 
+        current_utc=current_utc, 
+        user_local_time=user_local_time
+    )
     intent = classification.intent
     args = classification.command_args
     
@@ -126,6 +134,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE, ove
         process_news.delay(user_id, topic)
     elif intent == "reminder":
         response_text = handle_reminder_skill(str(user_id), args)
+    elif intent == "docs":
+        response_text = "Handling your document request..."
+        process_docs.delay(user_id, args)
+    elif intent == "slides":
+        response_text = "Designing your professional presentation slides..."
+        process_slides.delay(user_id, args)
+    elif intent == "sheets":
+        response_text = "Generating your professional spreadsheet data..."
+        process_sheets.delay(user_id, args)
     else:
         from gabay.core.skills.chat import handle_chat_skill
         response_text = await handle_chat_skill(user_id, text)
@@ -142,7 +159,7 @@ async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     voice = update.effective_message.voice
     
     # 1. Notify user
-    status_msg = await update.effective_message.reply_text("🎤 **Listening...** (Transcribing voice note)")
+    status_msg = await update.effective_message.reply_text("🎤 Listening... (Transcribing voice note)")
     
     try:
         # 2. Download voice message
@@ -163,7 +180,7 @@ async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         # 4. Process as normal message
-        await status_msg.edit_text(f"📝 **Transcribed:** \"{transcribed_text}\"")
+        await status_msg.edit_text(f"📝 Transcribed: {transcribed_text}")
         await handle_message(update, context, overridden_text=transcribed_text)
         
     except Exception as e:
@@ -202,6 +219,39 @@ def get_telegram_app():
     application.add_handler(MessageHandler(filters.VOICE, handle_voice))
     
     return application
+
+async def ensure_bot_started(app: FastAPI):
+    """Checks if the bot is started, and if not (or if token changed), starts it."""
+    current_token = settings.telegram_bot_token
+    if not current_token or current_token in ("TBD", "your_telegram_bot_token_here"):
+        logger.warning("ensure_bot_started: No valid token available.")
+        return
+
+    # Check if we already have an app and if it's for the same token
+    existing_app = getattr(app.state, "telegram_app", None)
+    
+    if existing_app:
+        # If it's already running and token is the same, do nothing
+        if existing_app.bot.token == current_token:
+            if existing_app.updater and existing_app.updater.running:
+                logger.info("Telegram Bot is already running with current token.")
+                return
+            else:
+                logger.info("Telegram Bot exists but not polling. Starting...")
+                await start_telegram_polling(existing_app)
+                return
+        else:
+            logger.info("Token changed! Stopping old bot and starting new one...")
+            await stop_telegram_polling(existing_app)
+            app.state.telegram_app = None
+
+    # (Re)Initialize
+    new_app = get_telegram_app()
+    if new_app:
+        app.state.telegram_app = new_app
+        await start_telegram_polling(new_app)
+    else:
+        logger.error("Failed to initialize new Telegram app.")
 
 async def start_telegram_polling(application):
     if not application:

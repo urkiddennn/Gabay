@@ -6,6 +6,7 @@ from fastapi.templating import Jinja2Templates
 from gabay.core.config import settings, save_to_env
 from gabay.core.utils.userbot import get_userbot_client
 from gabay.core.connectors.token_manager import token_manager
+from gabay.core.telegram_bot import ensure_bot_started
 from telethon import TelegramClient
 from pathlib import Path
 
@@ -64,24 +65,38 @@ async def handle_config_setup(
     if smtp_pass: save_to_env("SMTP_PASSWORD", smtp_pass)
     if tz: save_to_env("TZ", tz)
     
+    # Try to start the bot immediately if token was provided
+    if bot_token:
+        try:
+            await ensure_bot_started(request.app)
+        except Exception as e:
+            logger.error(f"Failed to start bot after config: {e}")
+
+    # Use the user_id from the form if provided, otherwise stick with what we have
+    final_user_id = user_id if user_id != 0 else "0"
+
     return HTMLResponse(content=f"""
         <div style="font-family: 'Inter', sans-serif; text-align: center; padding: 60px 20px; background: #111115; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div style="background: #1A1A24; padding: 40px; border-radius: 20px; border: 1px solid #333; max-width: 500px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                <div style="font-size: 60px; margin-bottom: 20px;">✅</div>
-                <h1 style="color: #4ade80; margin-bottom: 15px; font-weight: 700;">Configuration Saved!</h1>
+                <div style="font-size: 60px; margin-bottom: 20px;">🚀</div>
+                <h1 style="color: #4ade80; margin-bottom: 15px; font-weight: 700;">Settings Applied!</h1>
                 <p style="color: #94a3b8; line-height: 1.6; margin-bottom: 30px;">
-                    Your settings have been updated successfully. 
+                    Your configuration has been updated. 
                 </p>
                 <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 30px;">
-                    <h3 style="color: #818cf8; margin-top: 0; font-size: 16px;">Next Step:</h3>
+                    <h3 style="color: #818cf8; margin-top: 0; font-size: 16px;">What's next?</h3>
                     <p style="margin-bottom: 0; font-size: 14px;">
-                        Go to Telegram and send <strong>/start</strong> to your bot. It will respond with your personalized <strong>Admin Dashboard</strong> link.
+                        1. Open your bot on Telegram.<br>
+                        2. Send <strong>/start</strong>.<br>
+                        3. The bot will reply with a <strong>unique dashboard link</strong> containing your real User ID.
                     </p>
                 </div>
-                <p style="font-size: 12px; color: #64748b;">
-                    If you already have your User ID, you can try access the dashboard directly:
-                </p>
-                <a href="/admin?user_id={user_id}" style="display: inline-block; background: #6366f1; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s;">Go to Dashboard</a>
+                <div style="margin-bottom: 20px;">
+                    <p style="font-size: 12px; color: #64748b;">
+                        Current ID: {final_user_id} (This will update once you /start the bot)
+                    </p>
+                </div>
+                <a href="/admin?user_id={final_user_id}" style="display: inline-block; background: #6366f1; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s;">Go to Dashboard</a>
             </div>
         </div>
     """)

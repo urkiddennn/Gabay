@@ -8,22 +8,7 @@ from gabay.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-REMINDERS_FILE = os.path.join(os.getcwd(), "data", "reminders.json")
-
-def ensure_reminders_file():
-    os.makedirs(os.path.dirname(REMINDERS_FILE), exist_ok=True)
-    if not os.path.exists(REMINDERS_FILE):
-        with open(REMINDERS_FILE, 'w') as f:
-            json.dump([], f)
-
-def load_reminders():
-    ensure_reminders_file()
-    with open(REMINDERS_FILE, 'r') as f:
-        return json.load(f)
-
-def save_reminders(reminders):
-    with open(REMINDERS_FILE, 'w') as f:
-        json.dump(reminders, f, indent=4)
+from gabay.core.database import db
 
 def parse_relative_time(time_str):
     """
@@ -58,8 +43,6 @@ def handle_reminder_skill(user_id: str, command_args_str: str) -> str:
         data = json.loads(command_args_str)
         action = data.get("action", "create")
         
-        reminders = load_reminders()
-        
         if action == "create":
             message = data.get("message")
             trigger_str = data.get("trigger_time")
@@ -73,18 +56,22 @@ def handle_reminder_skill(user_id: str, command_args_str: str) -> str:
             
             new_reminder = {
                 "id": str(uuid.uuid4()),
-                "user_id": user_id,
+                "user_id": int(user_id),
                 "message": message,
                 "trigger_time": trigger_dt.isoformat(),
                 "original_trigger": trigger_str,
                 "frequency": frequency,
                 "recipient": recipient,
                 "created_at": datetime.now().isoformat(),
-                "status": "pending"
+                "status": "pending",
+                # Optional recurring fields
+                "interval_seconds": data.get("interval_seconds"),
+                "remaining_count": data.get("remaining_count"),
+                "action": data.get("action"),
+                "payload": data.get("payload")
             }
             
-            reminders.append(new_reminder)
-            save_reminders(reminders)
+            db.create_reminder(new_reminder)
             
             target_user = f"to {recipient}" if recipient else "for you"
             
@@ -107,7 +94,7 @@ def handle_reminder_skill(user_id: str, command_args_str: str) -> str:
             )
 
         elif action == "list":
-            user_reminders = [r for r in reminders if r["user_id"] == user_id]
+            user_reminders = db.get_reminders(user_id=int(user_id), status="pending")
             if not user_reminders:
                 return "You have no active reminders."
             
@@ -118,13 +105,11 @@ def handle_reminder_skill(user_id: str, command_args_str: str) -> str:
             return resp
 
         elif action == "delete":
-            # Just clear all for now or match by text
             msg_to_delete = data.get("message", "").lower()
-            new_list = [r for r in reminders if not (r["user_id"] == user_id and msg_to_delete in r["message"].lower())]
-            if len(new_list) < len(reminders):
-                save_reminders(new_list)
-                return "Successfully removed the reminder."
-            return "Could not find a matching reminder to delete."
+            if not msg_to_delete:
+                return "Please specify which reminder to delete."
+            db.delete_reminder(user_id=int(user_id), message_key=msg_to_delete)
+            return f"Requested deletion of reminders matching: '{msg_to_delete}'"
 
         return "Unknown reminder action."
         

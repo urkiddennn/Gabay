@@ -53,7 +53,7 @@ def get_events(user_id: str, time_min: str = None, time_max: str = None) -> list
         logger.error(f"Error fetching calendar events: {e}")
         return [f"Failed to fetch calendar events. Error: {str(e)}"]
 
-def create_event(user_id: str, summary: str, start_time: str, end_time: str) -> str:
+def create_event(user_id: str, summary: str, start_time: str, end_time: str, attendees: list = None) -> str:
     """Create a new event on the user's primary calendar."""
     service = get_google_service(user_id, "calendar", "v3")
     if not service:
@@ -71,6 +71,9 @@ def create_event(user_id: str, summary: str, start_time: str, end_time: str) -> 
             'timeZone': 'UTC',
           }
         }
+        
+        if attendees:
+            event['attendees'] = [{"email": email} for email in attendees]
 
         event = service.events().insert(calendarId='primary', body=event).execute()
         return f"Event created: {event.get('htmlLink')}"

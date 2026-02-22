@@ -51,6 +51,13 @@ settings = Settings()
 
 def save_to_env(key: str, value: str):
     """Utility to interactively save a new key to the .env file."""
+    # Strip literal quotes if present (e.g. "token" -> token)
+    if value.startswith('"') and value.endswith('"'):
+        value = value[1:-1]
+    if value.startswith("'") and value.endswith("'"):
+        value = value[1:-1]
+    value = value.strip()
+
     env_path = pathlib.Path(".env")
     if not env_path.exists():
         env_path.touch()
@@ -63,12 +70,15 @@ def save_to_env(key: str, value: str):
         key_found = False
         for line in lines:
             if line.startswith(f"{key}="):
-                f.write(f"{key}={value}\n")
+                f.write(f"{key}=\"{value}\"\n")
                 key_found = True
             else:
                 f.write(line)
         if not key_found:
-            f.write(f"{key}={value}\n")
+            f.write(f"{key}=\"{value}\"\n")
             
-    # Update current runtime settings implicitly (or caller updates it)
+    # Update current runtime environment and settings object
     os.environ[key] = value
+    attr_name = key.lower()
+    if hasattr(settings, attr_name):
+        setattr(settings, attr_name, value)

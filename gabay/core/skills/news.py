@@ -35,7 +35,7 @@ async def handle_news_skill(topic: str) -> str:
         user_prompt = f"User asked for news about: {topic}\n\nHere are the raw RSS items:\n\n{rss_text}"
         
         response = await client.chat.completions.create(
-            model="groq/compound-mini",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}

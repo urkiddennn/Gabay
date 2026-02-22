@@ -43,12 +43,22 @@ const useCases = [
         description: "We use OAuth2 for direct integration. We don't store your documents; we process them temporarily and securely.",
         benefits: ["OAuth2 granular permissions", "No persistent document storage", "Local-first processing options"]
     },
+    {
+        id: "hybrid",
+        title: "Hybrid Research",
+        subtitle: "Autonomous research, slide design, and data analysis.",
+        icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+        description: "Gabay orchestrates complex workflows. It researches topics, designs professional Slides, and structures data into Sheets—all from a single Telegram command.",
+        benefits: ["Single-command research & slides", "Automated professional design", "Structured data generation"]
+    },
 ];
 ---
 
 <section id="use-cases" class="max-w-[1240px] mx-auto px-6 pt-4 pb-20 overflow-hidden">
     <!-- Tab Navigation -->
-    <div class="flex flex-wrap lg:grid lg:grid-cols-5 gap-4 mb-8">
+    <div
+        class="flex overflow-x-auto pb-4 lg:pb-0 hide-scrollbar lg:grid lg:grid-cols-6 gap-4 mb-8"
+    >
         {
             useCases.map((useCase, index) => (
                 <button
@@ -131,6 +141,23 @@ const useCases = [
                                         <div class="flex flex-col gap-1">
                                             <div class="h-2 w-48 bg-zinc-200 dark:bg-zinc-700 rounded"></div>
                                             <div class="h-2 w-40 bg-zinc-100 dark:bg-zinc-800 rounded"></div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                            {useCase.id === 'hybrid' && (
+                                <>
+                                    <div class="flex gap-2"><span class="text-blue-500">user:</span> <span class="text-text-main">research renewable energy trends and make 5 slides</span></div>
+                                    <div class="flex gap-2 p-2 border border-blue-500/10 rounded">
+                                        <span class="text-purple-500 font-bold">gabay:</span>
+                                        <div class="flex flex-col gap-1">
+                                            <div class="h-2 w-48 bg-zinc-200 dark:bg-zinc-700 rounded"></div>
+                                            <div class="h-2 w-40 bg-zinc-100 dark:bg-zinc-800 rounded"></div>
+                                            <div class="mt-2 grid grid-cols-3 gap-1">
+                                                <div class="aspect-video bg-zinc-200 dark:bg-zinc-700 rounded-sm"></div>
+                                                <div class="aspect-video bg-zinc-200 dark:bg-zinc-700 rounded-sm"></div>
+                                                <div class="aspect-video bg-zinc-200 dark:bg-zinc-700 rounded-sm"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </>

@@ -5,6 +5,8 @@ from gabay.core.connectors.notion_api import append_to_database
 
 logger = logging.getLogger(__name__)
 
+from gabay.core.database import db
+
 def save_file_or_text(user_id: str, file_path: str = None, text_content: str = None) -> str:
     """
     Determines if the payload is a file or text.
@@ -20,14 +22,17 @@ def save_file_or_text(user_id: str, file_path: str = None, text_content: str = N
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
                 url = append_to_database(user_id, content)
+                db.log_save(int(user_id), "notion", url)
                 return f"Text file saved to Notion database: {url}"
             else:
                 # Media or binary -> Drive
                 url = upload_file_to_drive(user_id, file_path, mime_type or "application/octet-stream")
+                db.log_save(int(user_id), "drive", url)
                 return f"File uploaded to Google Drive Gabay folder: {url}"
                 
         elif text_content:
             url = append_to_database(user_id, text_content)
+            db.log_save(int(user_id), "notion", url)
             return f"Note saved to Notion database: {url}"
             
         else:

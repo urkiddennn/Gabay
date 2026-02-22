@@ -111,48 +111,146 @@ def process_news(user_id: int, topic: str):
     send_telegram_message(user_id, result)
     return result
 
+@celery_app.task(name="worker.tasks.process_docs")
+def process_docs(user_id: int, command_args: str):
+    from gabay.core.skills.docs import handle_docs_skill
+    try:
+        result = run_async(handle_docs_skill(user_id, command_args))
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        result = loop.run_until_complete(handle_docs_skill(user_id, command_args))
+    append_message(user_id, "assistant", result)
+    send_telegram_message(user_id, result)
+    return result
+
+@celery_app.task(name="worker.tasks.process_slides")
+def process_slides(user_id: int, command_args: str):
+    from gabay.core.skills.slides import handle_slides_skill
+    import json
+    def run_skill(args_str):
+        data = json.loads(args_str)
+        topic = data.get("topic")
+        title = data.get("title")
+        email_to = data.get("email_to")
+        invite_email = data.get("invite_email")
+        share_mode = data.get("share_mode", "private")
+        role = data.get("role", "writer")
+        
+        try:
+            return run_async(handle_slides_skill(
+                user_id, topic, title=title, 
+                email_to=email_to, invite_email=invite_email, 
+                share_mode=share_mode, role=role
+            ))
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            return loop.run_until_complete(handle_slides_skill(
+                user_id, topic, title=title, 
+                email_to=email_to, invite_email=invite_email, 
+                share_mode=share_mode, role=role
+            ))
+
+    try:
+        result = run_skill(command_args)
+    except Exception as e:
+        logger.error(f"Error processing slides task: {e}")
+        result = f"I couldn't process the slides request content: {e}"
+        
+    append_message(user_id, "assistant", result)
+    send_telegram_message(user_id, result)
+    return result
+
+@celery_app.task(name="worker.tasks.process_sheets")
+def process_sheets(user_id: int, command_args: str):
+    from gabay.core.skills.sheets import handle_sheets_skill
+    import json
+    def run_skill(args_str):
+        data = json.loads(args_str)
+        topic = data.get("topic")
+        title = data.get("title")
+        email_to = data.get("email_to")
+        invite_email = data.get("invite_email")
+        share_mode = data.get("share_mode", "private")
+        role = data.get("role", "writer")
+        
+        try:
+            return run_async(handle_sheets_skill(
+                user_id, topic, title=title, 
+                email_to=email_to, invite_email=invite_email, 
+                share_mode=share_mode, role=role
+            ))
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            return loop.run_until_complete(handle_sheets_skill(
+                user_id, topic, title=title, 
+                email_to=email_to, invite_email=invite_email, 
+                share_mode=share_mode, role=role
+            ))
+
+    try:
+        result = run_skill(command_args)
+    except Exception as e:
+        logger.error(f"Error processing sheets task: {e}")
+        result = f"I couldn't process the spreadsheet request content: {e}"
+        
+    append_message(user_id, "assistant", result)
+    send_telegram_message(user_id, result)
+    return result
+
 @celery_app.task(name="worker.tasks.check_reminders")
 def check_reminders():
-    from gabay.core.skills.reminders import load_reminders, save_reminders
+    from gabay.core.database import db
     from datetime import datetime, timedelta, timezone
     import logging
     
     logger = logging.getLogger("gabay.worker.tasks")
-    reminders = load_reminders()
+    reminders = db.get_reminders(status="pending")
     now = datetime.now(timezone.utc)
-    updated = False
     
     for r in reminders:
-        if r["status"] == "pending":
-            trigger_dt = datetime.fromisoformat(r["trigger_time"])
-            # Ensure trigger_dt is aware (in case it was stored without TZ info)
-            if trigger_dt.tzinfo is None:
-                trigger_dt = trigger_dt.replace(tzinfo=timezone.utc)
-                
-            if now >= trigger_dt:
-                logger.info(f"Triggering reminder: {r['id']} - {r['message']}")
-                execute_reminder.delay(r["id"])
-                
-                # Update status immediately to prevent double firing
-                if r["frequency"] == "daily":
-                    r["trigger_time"] = (trigger_dt + timedelta(days=1)).isoformat()
-                elif r["frequency"] == "weekly":
-                    r["trigger_time"] = (trigger_dt + timedelta(weeks=1)).isoformat()
-                else:
-                    r["status"] = "completed"
-                updated = True
-                
-    if updated:
-        save_reminders(reminders)
+        trigger_dt = datetime.fromisoformat(r["trigger_time"])
+        # Ensure trigger_dt is aware (in case it was stored without TZ info)
+        if trigger_dt.tzinfo is None:
+            trigger_dt = trigger_dt.replace(tzinfo=timezone.utc)
+            
+        if now >= trigger_dt:
+            logger.info(f"Triggering reminder: {r['id']} - {r['message']}")
+            execute_reminder.delay(r["id"])
+            
+            # Update status immediately to prevent double firing
+            updates = {}
+            interval = r.get("interval_seconds")
+            remaining = r.get("remaining_count")
+
+            if interval and (remaining is None or remaining > 0):
+                # Reschedule
+                next_trigger = trigger_dt + timedelta(seconds=interval)
+                updates["trigger_time"] = next_trigger.isoformat()
+                if remaining is not None:
+                    updates["remaining_count"] = remaining - 1
+            elif r["frequency"] == "daily":
+                updates["trigger_time"] = (trigger_dt + timedelta(days=1)).isoformat()
+            elif r["frequency"] == "weekly":
+                updates["trigger_time"] = (trigger_dt + timedelta(weeks=1)).isoformat()
+            else:
+                updates["status"] = "completed"
+            
+            db.update_reminder(r["id"], updates)
 
 @celery_app.task(name="worker.tasks.execute_reminder")
 def execute_reminder(reminder_id: str):
-    from gabay.core.skills.reminders import load_reminders
+    from gabay.core.database import db
     from gabay.core.memory import get_contacts
     from gabay.core.utils.telegram import send_telegram_message
     
-    reminders = load_reminders()
-    reminder = next((r for r in reminders if r["id"] == reminder_id), None)
+    # Query specific reminder by ID
+    with db._get_connection() as conn:
+        row = conn.execute("SELECT * FROM reminders WHERE id = ?", (reminder_id,)).fetchone()
+    
+    reminder = dict(row) if row else None
     
     if not reminder:
         return
@@ -168,6 +266,15 @@ def execute_reminder(reminder_id: str):
         target_chat_id = contacts.get(recipient_name.lower(), user_id)
         
     prefix = "🔔 **Reminder:** " if target_chat_id == user_id else ""
-    send_telegram_message(target_chat_id, f"{prefix}{message}")
+    
+    action = reminder.get("action")
+    payload = reminder.get("payload")
+    
+    if action == "email" and payload:
+        # Instead of just a text message, run the email task
+        process_email.delay(user_id, payload)
+    else:
+        # Default: Send text message
+        send_telegram_message(target_chat_id, f"{prefix}{message}")
 
 from gabay.core.utils.telegram import send_telegram_message

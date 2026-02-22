@@ -67,7 +67,7 @@ async def handle_document_qa_skill(user_id: int, command_args_str: str) -> str:
         user_prompt = f"Document Title: {file_name}\n\nDocument Text:\n{content}\n\n---\n\nUser Question: {question}"
         
         response = await client.chat.completions.create(
-            model="groq/compound-mini",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
