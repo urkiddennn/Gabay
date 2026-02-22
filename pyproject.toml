@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gabay"
-version = "0.1.91"
+version = "0.1.92"
 description = "A self-hosted, Telegram-first AI assistant for productivity."
 authors = [
-    { name = "Gabay Team", email = "[EMAIL_ADDRESS]" }
+    { name = "Gabay Team", email = "richardbanguiz@gmail.com" }
 ]
 license = { text = "MIT" }
 readme = "README.md"
