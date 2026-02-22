@@ -63,3 +63,11 @@ auth_state.json
 **/__pycache__/**
 **/data/**
 **/.env
+
+# Secrets
+secrets.json
+gabay_userbot.session
+reminder_db.json
+reminder_db.json-journal
+.env
+.env.local
