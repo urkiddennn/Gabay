@@ -3,53 +3,76 @@ import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <nav
-    class="sticky top-0 flex items-center justify-between bg-bg-page px-8 lg:px-42 py-4 border-b border-border-main z-50 transition-colors duration-300"
+    class="sticky top-0 w-full glass z-50 transition-all duration-300 px-8 lg:px-24 py-4"
 >
-    <div class="flex items-center gap-6">
-        <!-- Gabay Logo -->
-        <a href="/" class="flex items-center gap-2.5">
-            <img
-                src="/logo.png"
-                alt="Gabay - The Personal AI Assistant Logo"
-                class="h-7 w-7 object-contain"
-            />
-            <span class="text-text-main text-xl font-bold tracking-tight">
-                Gabay
-            </span>
-        </a>
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-10">
+            <!-- Gabay Logo -->
+            <a
+                href="/"
+                class="flex items-center gap-3 group transition-transform hover:scale-105 active:scale-95"
+            >
+                <img
+                    src="/logo.png"
+                    alt="Gabay Logo"
+                    class="h-8 w-8 object-contain"
+                />
+                <span class="text-text-main text-2xl font-bold tracking-tight">
+                    Gabay
+                </span>
+            </a>
 
-        <div
-            class="hidden lg:flex items-center gap-8 text-[13px] font-semibold text-text-muted ml-4"
-        >
-            <a href="#features" class="hover:text-text-main transition-colors"
-                >Features</a
+            <div
+                class="hidden lg:flex items-center gap-8 text-[14px] font-semibold text-text-muted"
             >
-            <a href="#comparison" class="hover:text-text-main transition-colors"
-                >Comparison</a
-            >
-            <a href="#faq" class="hover:text-text-main transition-colors">FAQ</a
-            >
-            <a href="/docs" class="hover:text-text-main transition-colors"
-                >Docs</a
-            >
+                <a
+                    href="/#use-cases"
+                    class="hover:text-brand-primary transition-colors relative group"
+                    >What is Gabay?
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-primary transition-all group-hover:w-full"
+                    ></span>
+                </a>
+                <a
+                    href="/#setup"
+                    class="hover:text-brand-primary transition-colors relative group"
+                    >Get Started
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-primary transition-all group-hover:w-full"
+                    ></span>
+                </a>
+                <a
+                    href="/#faq"
+                    class="hover:text-brand-primary transition-colors relative group"
+                    >FAQ
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-primary transition-all group-hover:w-full"
+                    ></span>
+                </a>
+                <a
+                    href="/docs"
+                    class="hover:text-brand-primary transition-colors relative group"
+                    >Docs
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-primary transition-all group-hover:w-full"
+                    ></span>
+                </a>
+            </div>
         </div>
-    </div>
 
-    <div class="flex items-center gap-6">
-        <ThemeToggle />
-        <div class="hidden sm:flex items-center gap-6">
-            <a
-                href="#demo"
-                class="text-[13px] font-bold text-text-muted hover:text-text-main transition-colors"
-            >
-                Contact sales
-            </a>
-            <a
-                href="/docs"
-                class="bg-text-main text-bg-page px-5 py-2 rounded-md text-[13px] font-bold transition-all hover:opacity-90"
-            >
-                Get Started
-            </a>
+        <div class="flex items-center gap-6">
+            <ThemeToggle />
+            <div class="hidden sm:flex items-center gap-8">
+                <a
+                    href="#demo"
+                    class="text-[14px] font-bold text-text-muted hover:text-text-main transition-colors"
+                >
+                    Contact sales
+                </a>
+                <a href="/docs" class="btn-premium px-6! py-2! text-[14px]!">
+                    Try Gabay
+                </a>
+            </div>
         </div>
     </div>
 </nav>

@@ -7,7 +7,12 @@ from gabay.core.memory import append_message, get_recent_history, get_user_state
 from gabay.core.llm_router import classify_intent
 from gabay.core.skills.reminders import handle_reminder_skill
 from gabay.core.utils.voice import transcribe_audio
-from gabay.worker.tasks import process_brief, process_save, process_search, process_read, process_calendar, process_share, process_file_qa, process_news, process_docs, process_slides, process_sheets
+from gabay.core.utils.dispatcher import dispatch_task
+from gabay.worker.tasks import (
+    process_brief, process_save, process_search, process_read, 
+    process_calendar, process_share, process_file_qa, process_news, 
+    process_docs, process_slides, process_sheets, process_email
+)
 from fastapi import FastAPI
 
 logger = logging.getLogger(__name__)
@@ -81,68 +86,34 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE, ove
     intent = classification.intent
     args = classification.command_args
     
-    # 3. Handle routing / offload to worker
-    if intent == "brief":
-        response_text = "Fetching your daily briefing from Gmail and Meta..."
-        process_brief.delay(user_id)
-    elif intent == "search":
-        response_text = f"Searching your Google Drive and Notion for '{args}'..."
-        process_search.delay(user_id, args)
-    elif intent == "read":
-        source = args or "all"
-        response_text = f"Reading from {source}..."
-        process_read.delay(user_id, source=source)
-    elif intent == "email":
-        import json
-        try:
-            email_data = json.loads(args)
-            recipient = email_data.get("recipient", "Unknown")
-            response_text = f"Drafting an email to {recipient}..."
-            from gabay.worker.tasks import process_email
-            process_email.delay(user_id, args)
-        except Exception:
-            response_text = "I couldn't quite catch the recipient or message. Could you rephrase?"
-    elif intent == "save":
-        response_text = "Please reply directly to a file/document with the /save command to save it."
-        # If they actually provided text right after save
-        if args:
-            process_save.delay(user_id, text_content=args)
+    # 3. Intent Mapping (Shrinks the code significantly)
+    INTENT_MAP = {
+        "brief": (process_brief, "Fetching your daily briefing..."),
+        "search": (process_search, f"Searching for '{args}'..."),
+        "read": (process_read, f"Reading from {args or 'all'}..."),
+        "email": (process_email, "Drafting your email..."),
+        "save": (process_save, "Processing save request..."),
+        "calendar": (process_calendar, "Checking your calendar..."),
+        "share": (process_share, "Processing share request..."),
+        "file_qa": (process_file_qa, "Reading document to answer..."),
+        "news": (process_news, f"Fetching news on {args or 'world'}..."),
+        "docs": (process_docs, "Handling document request..."),
+        "slides": (process_slides, "Designing slides..."),
+        "sheets": (process_sheets, "Generating spreadsheet...")
+    }
+
+    if intent in INTENT_MAP:
+        task_func, response_text = INTENT_MAP[intent]
+        # Dispatch handles local vs worker execution automatically
+        await dispatch_task(task_func, user_id, args)
     elif intent == "weather":
         from gabay.core.skills.weather import handle_weather_skill
         response_text = handle_weather_skill(args)
     elif intent == "message":
         from gabay.core.skills.message import handle_message_skill
         response_text = await handle_message_skill(user_id, args)
-    elif intent == "calendar":
-        response_text = "Checking your calendar..."
-        process_calendar.delay(user_id, args)
-    elif intent == "share":
-        response_text = "Processing your share request..."
-        process_share.delay(user_id, args)
-    elif intent == "file_qa":
-        import json
-        try:
-            qa_data = json.loads(args)
-            file_name = qa_data.get("file_query", "the document")
-        except:
-            file_name = "the document"
-        response_text = f"Reading '{file_name}' to answer your question..."
-        process_file_qa.delay(user_id, args)
-    elif intent == "news":
-        topic = args if args else "world"
-        response_text = f"Fetching latest news on {topic}..."
-        process_news.delay(user_id, topic)
     elif intent == "reminder":
         response_text = handle_reminder_skill(str(user_id), args)
-    elif intent == "docs":
-        response_text = "Handling your document request..."
-        process_docs.delay(user_id, args)
-    elif intent == "slides":
-        response_text = "Designing your professional presentation slides..."
-        process_slides.delay(user_id, args)
-    elif intent == "sheets":
-        response_text = "Generating your professional spreadsheet data..."
-        process_sheets.delay(user_id, args)
     else:
         from gabay.core.skills.chat import handle_chat_skill
         response_text = await handle_chat_skill(user_id, text)
@@ -269,7 +240,16 @@ async def start_telegram_polling(application):
 async def stop_telegram_polling(application):
     if not application:
         return
-    logger.info("Stopping Telegram Bot...")
-    await application.updater.stop()
-    await application.stop()
-    await application.shutdown()
+    try:
+        logger.info("Stopping Telegram Bot...")
+        # Only stop if it's actually running to avoid "Updater is not running" error
+        if application.updater and application.updater.running:
+            await application.updater.stop()
+        
+        if application.running:
+            await application.stop()
+            
+        await application.shutdown()
+        logger.info("Telegram Bot stopped successfully.")
+    except Exception as e:
+        logger.warning(f"Error while stopping Telegram Bot: {e}")

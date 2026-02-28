@@ -9,10 +9,10 @@ services:
     volumes:
       - ./data:/app/data
       - ./gabay:/app/gabay
+      - ./.env:/app/.env
     env_file:
       - .env
     environment:
-      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - REDIS_URL=redis://redis:6379/0
       - LOG_LEVEL=INFO
       - TZ=${TZ:-UTC}
@@ -28,6 +28,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./gabay:/app/gabay
+      - ./.env:/app/.env
     env_file:
       - .env
     environment:
@@ -55,6 +56,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./gabay:/app/gabay
+      - ./.env:/app/.env
     env_file:
       - .env
     environment:

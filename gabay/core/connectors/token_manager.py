@@ -35,6 +35,11 @@ class TokenManager:
 
     def get_token(self, provider: str, user_id: str) -> dict:
         data = self._read_tokens()
-        return data.get(user_id, {}).get(provider)
+        return data.get(str(user_id), {}).get(provider)
+
+    def get_all_users(self) -> list:
+        """Returns all user IDs that have at least one token stored."""
+        data = self._read_tokens()
+        return list(data.keys())
 
 token_manager = TokenManager()

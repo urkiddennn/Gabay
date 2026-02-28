@@ -33,6 +33,8 @@ async def config_setup_page(request: Request, user_id: int = 0):
         "user_id": user_id,
         "bot_token": os.getenv("TELEGRAM_BOT_TOKEN", ""),
         "groq_key": os.getenv("GROQ_API_KEY", ""),
+        "gemini_key": os.getenv("GEMINI_API_KEY", ""),
+        "llm_provider": settings.llm_provider,
         "google_id": os.getenv("GOOGLE_CLIENT_ID", ""),
         "google_secret": os.getenv("GOOGLE_CLIENT_SECRET", ""),
         "smtp_host": os.getenv("SMTP_HOST", "smtp.gmail.com"),
@@ -47,6 +49,8 @@ async def handle_config_setup(
     user_id: int = Form(0),
     bot_token: str = Form(None),
     groq_key: str = Form(None),
+    gemini_key: str = Form(None),
+    llm_provider: str = Form(None),
     google_id: str = Form(None),
     google_secret: str = Form(None),
     smtp_host: str = Form(None),
@@ -57,6 +61,8 @@ async def handle_config_setup(
 ):
     if bot_token: save_to_env("TELEGRAM_BOT_TOKEN", bot_token)
     if groq_key: save_to_env("GROQ_API_KEY", groq_key)
+    if gemini_key: save_to_env("GEMINI_API_KEY", gemini_key)
+    if llm_provider: save_to_env("LLM_PROVIDER", llm_provider)
     if google_id: save_to_env("GOOGLE_CLIENT_ID", google_id)
     if google_secret: save_to_env("GOOGLE_CLIENT_SECRET", google_secret)
     if smtp_host: save_to_env("SMTP_HOST", smtp_host)
@@ -272,22 +278,30 @@ async def handle_notion_setup(
         logger.error(f"Notion save error: {e}")
         return HTMLResponse(content=f"Error saving Notion key: {e}. <a href='/setup/notion?user_id={user_id}'>Try again</a>", status_code=400)
 
-@router.get("/setup/groq", response_class=HTMLResponse)
-async def groq_setup_page(request: Request, user_id: str):
-    return templates.TemplateResponse("groq_setup.html", {
+@router.get("/setup/llm", response_class=HTMLResponse)
+async def llm_setup_page(request: Request, user_id: str):
+    return templates.TemplateResponse("llm_setup.html", {
         "request": request,
         "user_id": user_id,
-        "groq_api_key": os.getenv("GROQ_API_KEY", "")
+        "groq_api_key": os.getenv("GROQ_API_KEY", ""),
+        "gemini_api_key": os.getenv("GEMINI_API_KEY", ""),
+        "llm_provider": settings.llm_provider
     })
 
-@router.post("/setup/groq")
-async def handle_groq_setup(
+@router.post("/setup/llm")
+async def handle_llm_setup(
     request: Request,
     user_id: str = Form(...),
-    groq_api_key: str = Form(...)
+    groq_api_key: str = Form(None),
+    gemini_api_key: str = Form(None),
+    llm_provider: str = Form(...)
 ):
-    save_to_env("GROQ_API_KEY", groq_api_key)
-    settings.groq_api_key = groq_api_key
+    if groq_api_key is not None:
+        save_to_env("GROQ_API_KEY", groq_api_key)
+    if gemini_api_key is not None:
+        save_to_env("GEMINI_API_KEY", gemini_api_key)
+    
+    save_to_env("LLM_PROVIDER", llm_provider)
     return RedirectResponse(url=f"/admin?user_id={user_id}", status_code=303)
 
 @router.get("/setup/google_oauth", response_class=HTMLResponse)

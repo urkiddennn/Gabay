@@ -193,6 +193,19 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .engine-status-badge {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .engine-status-badge.missing {
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 
@@ -223,20 +236,38 @@
         </header>
 
         <div class="grid">
-            <!-- Groq AI Card -->
+            <!-- AI Engine Card -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-icon">🧠</div>
-                    <div class="status-badge {% if groq_connected %}status-active{% else %}status-offline{% endif %}">
+                    <div
+                        class="status-badge {% if groq_connected or gemini_connected %}status-active{% else %}status-offline{% endif %}">
                         <div class="status-dot"></div>
-                        {% if groq_connected %}Active{% else %}Missing Key{% endif %}
+                        {% if groq_connected or gemini_connected %}Active{% else %}Disconnected{% endif %}
                     </div>
                 </div>
-                <h2 class="card-title">Groq AI Engine</h2>
-                <p class="card-desc">Llama 3 power for intent classification and natural language understanding.</p>
-                <a href="/setup/groq?user_id={{ user_id }}"
-                    class="card-btn {% if not groq_connected %}primary{% endif %}">
-                    {% if groq_connected %}Update Key{% else %}Configure AI{% endif %}
+                <h2 class="card-title">AI Engine</h2>
+                <div style="margin-bottom: 24px;">
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-size: 13px; color: var(--text-muted);">Groq (Llama 3)</span>
+                        <span class="engine-status-badge {% if not groq_connected %}missing{% endif %}">
+                            {% if groq_connected %}Connected{% else %}Missing{% endif %}
+                        </span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 13px; color: var(--text-muted);">Google Gemini</span>
+                        <span class="engine-status-badge {% if not gemini_connected %}missing{% endif %}">
+                            {% if gemini_connected %}Connected{% else %}Missing{% endif %}
+                        </span>
+                    </div>
+                </div>
+                <p class="card-desc" style="font-style: italic; font-size: 12px; margin-bottom: 24px;">
+                    Active Provider: <strong style="color: var(--primary);">{{ llm_provider | upper }}</strong>
+                </p>
+                <a href="/setup/llm?user_id={{ user_id }}"
+                    class="card-btn {% if not (groq_connected or gemini_connected) %}primary{% endif %}">
+                    Configure AI Engine
                 </a>
             </div>
 

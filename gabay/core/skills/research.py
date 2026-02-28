@@ -1,7 +1,8 @@
 import logging
 import json
 from gabay.core.config import settings
-from groq import AsyncGroq
+from gabay.core.utils.llm import get_llm_response
+from gabay.core.utils.telegram import send_telegram_message
 
 logger = logging.getLogger(__name__)
 
@@ -11,8 +12,10 @@ async def handle_research_skill(user_id: str, topic: str) -> str:
     In the future, this will integrate with web search APIs.
     """
     try:
-        client = AsyncGroq(api_key=settings.groq_api_key)
+        # 1. Start Research Notification
+        send_telegram_message(user_id, f"🔍 **Deep Research:** I'm starting a comprehensive research on '{topic}'... This might take a moment as I gather detailed insights.")
         
+        # 1. Generate Research Report via LLM
         system_prompt = (
             "You are Gabay Research AI. Your task is to provide a comprehensive, detailed, and cited research report on the user's topic. "
             "Structure your response with: "
@@ -26,15 +29,14 @@ async def handle_research_skill(user_id: str, topic: str) -> str:
         
         user_prompt = f"Research Topic: {topic}\n\nPlease provide a full research paper on this."
         
-        response = await client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
+        report = await get_llm_response(
+            system_prompt=system_prompt,
+            prompt=user_prompt
         )
         
-        report = response.choices[0].message.content
+        if not report:
+            return "The AI assistant returned an empty response. Please try again."
+        
         return report
         
     except Exception as e:

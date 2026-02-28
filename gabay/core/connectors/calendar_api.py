@@ -53,6 +53,26 @@ def get_events(user_id: str, time_min: str = None, time_max: str = None) -> list
         logger.error(f"Error fetching calendar events: {e}")
         return [f"Failed to fetch calendar events. Error: {str(e)}"]
 
+def get_raw_events(user_id: str, time_min: str = None, time_max: str = None) -> list[dict]:
+    """Retrieve raw event objects from the user's primary Google Calendar."""
+    service = get_google_service(user_id, "calendar", "v3")
+    if not service:
+        return []
+
+    try:
+        events_result = service.events().list(
+            calendarId='primary',
+            timeMin=time_min,
+            timeMax=time_max,
+            maxResults=10,
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+        return events_result.get('items', [])
+    except Exception as e:
+        logger.error(f"Error fetching raw calendar events: {e}")
+        return []
+
 def create_event(user_id: str, summary: str, start_time: str, end_time: str, attendees: list = None) -> str:
     """Create a new event on the user's primary calendar."""
     service = get_google_service(user_id, "calendar", "v3")

@@ -118,6 +118,26 @@ class DatabaseManager:
                 )
             ''')
             
+            # 7. User Priorities (Persistent Memory)
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS user_priorities (
+                    user_id INTEGER PRIMARY KEY,
+                    priorities TEXT, -- JSON list of strings
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
+            # 8. User Preferences (Intelligent Scheduling, etc)
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS user_preferences (
+                    user_id INTEGER PRIMARY KEY,
+                    focus_time_start TEXT, -- e.g. "09:00"
+                    focus_time_end TEXT,   -- e.g. "11:00"
+                    no_meetings_days TEXT, -- JSON list of strings (e.g ["Friday"])
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
             conn.commit()
         
         # Run migrations for existing databases
@@ -307,5 +327,48 @@ class DatabaseManager:
                 VALUES (?, ?, ?)
             ''', (user_id, source_type, content_meta))
             conn.commit()
+
+    # --- Priorities & Preferences ---
+
+    def set_user_priorities(self, user_id: int, priorities: list):
+        with self._get_connection() as conn:
+            conn.execute('''
+                INSERT INTO user_priorities (user_id, priorities, updated_at)
+                VALUES (?, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(user_id) DO UPDATE SET priorities=excluded.priorities, updated_at=excluded.updated_at
+            ''', (user_id, json.dumps(priorities)))
+            conn.commit()
+
+    def get_user_priorities(self, user_id: int):
+        with self._get_connection() as conn:
+            row = conn.execute("SELECT priorities FROM user_priorities WHERE user_id = ?", (user_id,)).fetchone()
+            return json.loads(row["priorities"]) if row and row["priorities"] else []
+
+    def set_user_preferences(self, user_id: int, prefs: dict):
+        with self._get_connection() as conn:
+            conn.execute('''
+                INSERT INTO user_preferences (user_id, focus_time_start, focus_time_end, no_meetings_days, updated_at)
+                VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(user_id) DO UPDATE SET 
+                    focus_time_start=excluded.focus_time_start, 
+                    focus_time_end=excluded.focus_time_end, 
+                    no_meetings_days=excluded.no_meetings_days, 
+                    updated_at=excluded.updated_at
+            ''', (
+                user_id, 
+                prefs.get("focus_time_start"), 
+                prefs.get("focus_time_end"), 
+                json.dumps(prefs.get("no_meetings_days", []))
+            ))
+            conn.commit()
+
+    def get_user_preferences(self, user_id: int):
+        with self._get_connection() as conn:
+            row = conn.execute("SELECT * FROM user_preferences WHERE user_id = ?", (user_id,)).fetchone()
+            if not row:
+                return {}
+            data = dict(row)
+            data["no_meetings_days"] = json.loads(data["no_meetings_days"]) if data.get("no_meetings_days") else []
+            return data
 
 db = DatabaseManager()

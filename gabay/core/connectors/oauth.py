@@ -4,6 +4,7 @@ from gabay.core.connectors.token_manager import token_manager
 from gabay.core.config import settings
 from google_auth_oauthlib.flow import Flow
 import json
+import base64
 
 auth_router = APIRouter()
 import logging
@@ -90,17 +91,45 @@ def google_login(user_id: str, request: Request):
     auth_url, _ = flow.authorization_url(
         prompt='consent', 
         access_type='offline', 
-        include_granted_scopes='true',
-        state=user_id
+        include_granted_scopes='true'
     )
+    
+    # Stateless PKCE: Encode user_id and code_verifier into the state parameter
+    state_data = {
+        "user_id": user_id,
+        "code_verifier": flow.code_verifier
+    }
+    state_b64 = base64.urlsafe_b64encode(json.dumps(state_data).encode()).decode().rstrip("=")
+    
+    # Re-inject state into the authorization URL
+    from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+    u = urlparse(auth_url)
+    query = parse_qs(u.query)
+    query['state'] = [state_b64]
+    auth_url = urlunparse(u._replace(query=urlencode(query, doseq=True)))
     
     return RedirectResponse(auth_url)
 
 @auth_router.get("/google/callback")
 def google_callback(request: Request):
     code = request.query_params.get("code")
-    user_id = request.query_params.get("state") or request.query_params.get("user_id") or "local"
-    
+    # Stateless PKCE: Decode user_id and code_verifier from state
+    state = request.query_params.get("state")
+    user_id = request.query_params.get("user_id") or "local"
+    code_verifier = None
+    if state:
+        try:
+            # Add padding back if needed
+            padding = 4 - (len(state) % 4)
+            if padding < 4:
+                state += "=" * padding
+            state_data = json.loads(base64.urlsafe_b64decode(state).decode())
+            user_id = state_data.get("user_id", user_id)
+            code_verifier = state_data.get("code_verifier")
+            logger.info(f"Decoded state for user_id: {user_id}")
+        except Exception as e:
+            logger.error(f"Failed to decode state: {e}")
+
     logger.info(f"Processing Google callback for user_id: {user_id}")
     
     if not code:
@@ -120,6 +149,10 @@ def google_callback(request: Request):
         scopes=GOOGLE_SCOPES,
         redirect_uri=f"{settings.base_url}/auth/google/callback"
     )
+    
+    # Set the code_verifier from state to satisfy PKCE
+    if code_verifier:
+        flow.code_verifier = code_verifier
     
     flow.fetch_token(code=code)
     creds = flow.credentials

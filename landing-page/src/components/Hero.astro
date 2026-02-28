@@ -1,78 +1,144 @@
 ---
-// Hero Component
+
 ---
 
-<section
-    class="max-w-[1000px] mx-auto px-6 w-full flex flex-col items-center text-center pt-16 pb-8 lg:pt-24 lg:pb-12"
->
-    <div class="flex flex-col items-center gap-8 max-w-4xl">
-        <h1
-            class="text-5xl md:text-6xl lg:text-7xl font-semibold text-balance leading-tight tracking-tight text-text-main"
+<section class="relative overflow-hidden pt-20 pb-16 lg:pt-32 lg:pb-24">
+    <!-- Background Decor -->
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none opacity-50 dark:opacity-30"
+    >
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-primary/20 blur-[120px] rounded-full"
         >
-            The Personal AI Assistant for Telegram & Workspace
+        </div>
+        <div
+            class="absolute bottom-[10%] right-[-5%] w-[35%] h-[35%] bg-brand-secondary/20 blur-[100px] rounded-full"
+        >
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+        <!-- Badge -->
+        <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/20 dark:border-white/10 mb-8 animate-fade-in"
+        >
+            <span class="relative flex h-2 w-2">
+                <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+                ></span>
+                <span
+                    class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+                ></span>
+            </span>
+            <span
+                class="text-[12px] font-bold uppercase tracking-wider text-text-muted"
+                >Safe, Secure & Always Ready</span
+            >
+        </div>
+
+        <h1
+            class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-balance leading-[1.1] tracking-tighter text-text-main mb-8"
+        >
+            Your Workspace,<br />
+            <span
+                class="text-transparent bg-clip-text bg-linear-to-r from-brand-primary to-brand-secondary"
+            >
+                Reimagined in Telegram
+            </span>
         </h1>
 
         <p
-            class="text-lg md:text-xl text-text-muted leading-relaxed max-w-3xl font-medium"
+            class="text-xl md:text-2xl text-text-muted leading-relaxed max-w-3xl mb-12 font-medium"
         >
-            Gabay is a secure, ultra-fast assistant that researches complex
-            topics, creates professional presentations, and manages your
-            documents—all autonomously through Telegram.
+            Gabay handles your emails, manages your documents, and finds your
+            files autonomously. No complex apps, no learning curve—just chat.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center gap-4 mt-8">
-            <a
-                href="https://t.me/GabayAgentBot"
-                class="bg-text-main text-bg-page px-8 py-3 rounded-md font-semibold transition-all hover:opacity-90"
-            >
-                Add Gabay to Telegram
+        <div class="flex flex-col sm:flex-row items-center gap-6 mb-12">
+            <a href="https://t.me/GabayAgentBot" class="btn-premium group">
+                Start Chatting
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><line x1="5" y1="12" x2="19" y2="12"></line><polyline
+                        points="12 5 19 12 12 19"></polyline></svg
+                >
             </a>
             <a
-                href="#demo"
-                class="text-text-main font-semibold hover:underline underline-offset-4"
+                href="/docs"
+                class="text-[16px] font-bold text-text-main hover:text-brand-primary transition-colors flex items-center gap-2"
             >
-                Request a demo
+                See how it works
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    ></path><polyline points="15 3 21 3 21 9"></polyline><line
+                        x1="10"
+                        y1="14"
+                        x2="21"
+                        y2="3"></line></svg
+                >
             </a>
         </div>
 
-        <!-- CLI Install -->
-        <div
-            class="max-w-sm w-full flex justify-between items-center gap-3 px-4 py-4 bg-bg-surface border border-border-main rounded-md group cursor-pointer font-mono text-sm transition-colors hover:border-zinc-400 dark:hover:border-zinc-500"
-            id="copy-pip"
-        >
-            <span class="text-text-muted"
-                >$ <span class="text-text-main">pip install gabay</span></span
+        <!-- Terminal Snippet -->
+        <div class="animate-fade-in [animation-delay:200ms] group">
+            <div
+                class="flex items-center gap-3 px-6 py-3 bg-bg-surface border border-border-main rounded-2xl font-mono text-sm transition-all hover:border-brand-primary/50"
             >
-
-            <svg
-                class="w-4 h-4 text-text-muted group-hover:text-blue-500 transition-colors ml-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                ></path>
-            </svg>
+                <span class="text-brand-primary font-bold select-none">$</span>
+                <code class="text-text-main font-semibold"
+                    >pip install gabay</code
+                >
+                <div
+                    class="ml-4 pl-4 border-l border-border-main text-text-muted group-hover:text-brand-primary transition-colors cursor-pointer select-none"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><rect x="9" y="9" width="13" height="13" rx="2" ry="2"
+                        ></rect><path
+                            d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                        ></path></svg
+                    >
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<script>
-    document.getElementById("copy-pip")?.addEventListener("click", () => {
-        navigator.clipboard.writeText("pip install gabay");
-        const text = document.querySelector("#copy-pip span:nth-child(2)");
-        if (text) {
-            const original = text.textContent;
-            text.textContent = "Copied!";
-            text.classList.add("text-blue-500");
-            setTimeout(() => {
-                text.textContent = original;
-                text.classList.remove("text-blue-500");
-            }, 2000);
+<style>
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
         }
-    });
-</script>
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-fade-in {
+        animation: fade-in 0.6s ease-out forwards;
+    }
+</style>

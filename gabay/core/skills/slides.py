@@ -3,7 +3,8 @@ import json
 import uuid
 from gabay.core.connectors.google_api import create_google_presentation, add_slide_to_presentation, share_file
 from gabay.core.config import settings
-from groq import AsyncGroq
+from gabay.core.utils.llm import get_llm_response
+from gabay.core.utils.telegram import send_telegram_message
 
 logger = logging.getLogger(__name__)
 
@@ -19,48 +20,40 @@ async def handle_slides_skill(user_id: int, topic: str, title: str = None, email
         title = f"Presentation on {topic}"
         
     try:
-        # 1. Generate Slide Content via LLM
-        client = AsyncGroq(api_key=settings.groq_api_key)
-        
+        # 1. Phase 1: Planning & Outline
+        send_telegram_message(user_id, f"🎨 **Planning Presentation:** I'm drafting an outline for your slides on '{topic}'...")
+
         system_prompt = (
-            "You are a professional presentation designer for a top-tier consulting firm (like McKinsey or BCG). "
-            "Your goal is to structure a high-impact, 5-slide presentation that is both visually stunning and intellectually deep. "
-            "For each slide, provide:\n"
-            "1. A punchy, insightful Title.\n"
-            "2. 3-4 professional bullet points that go beyond the obvious. Use '•' at the start of each bullet.\n"
-            "3. A 'image_query' that specifically describes a high-resolution, professional, and abstract or relevant stock photo "
-            "from Unsplash (e.g., 'modern neural network light trails', 'minimalist architecture office', 'sustainable energy concept'). "
-            "Avoid generic or cartoonish queries.\n\n"
-            "Return a JSON object with a key 'slides', which is a list of objects with keys: 'title', 'body', 'image_query'."
+            "You are a professional presentation designer at a top-tier consulting firm. "
+            "Your goal is to structure a high-impact, 7-slide presentation. "
+            "First, return a JSON object with a key 'outline' which is a brief list of the 7 slide titles. "
+            "Then, include a key 'slides', which is a list of 7 objects with 'title', 'body', and 'image_query'. "
+            "IMPORTANT: For 'body', provide 3-4 professional sentences or phrases. DO NOT include bullet points (•, -, *) in the text; these will be added automatically. "
+            "For 'image_query', provide a highly specific, keyword-rich description for a professional stock photo (e.g., 'abstract blue data visualization', 'modern skyscraper glass reflections', 'diverse team collaborating in bright office'). Avoid generic terms."
         )
         
-        user_prompt = f"Topic: {topic}\n\nPlease generate a 5-slide professional presentation structure."
+        user_prompt = f"Topic: {topic}\n\nPlease plan and generate a 7-slide professional presentation."
         
-        response = await client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
+        slides_data = await get_llm_response(
+            system_prompt=system_prompt,
+            prompt=user_prompt,
             response_format={ "type": "json_object" }
         )
         
-        content = response.choices[0].message.content
-        if not content:
+        if not slides_data:
             return "The AI assistant returned an empty response. Please try again."
 
-        # Safe parsing
-        try:
-            slides_data = json.loads(content)
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to parse slides JSON: {e}. Content: {content}")
-            return "I failed to parse the presentation structure. Please try again."
-
+        outline = slides_data.get("outline", [])
+        if outline:
+            outline_str = "\n".join([f"{i+1}. {t}" for i, t in enumerate(outline)])
+            send_telegram_message(user_id, f"📝 **Presentation Plan:**\n\n{outline_str}\n\n*Starting creation now...*")
+        
         slides = slides_data.get("slides", [])
         if not slides:
             return "I couldn't generate any slides for this topic. Please try again."
 
         # 2. Create the Presentation
+        send_telegram_message(user_id, "🔧 Creating Google Slides file...")
         presentation_result = create_google_presentation(str(user_id), title)
         if "error" in presentation_result:
             return f"Failed to create presentation: {presentation_result['error']}"
@@ -68,8 +61,10 @@ async def handle_slides_skill(user_id: int, topic: str, title: str = None, email
         presentation_id = presentation_result["id"]
         presentation_link = presentation_result["link"]
 
-        # 3. Add Slides
+        # 3. Add Slides Step-by-Step
+        num_slides = len(slides)
         for i, s in enumerate(slides):
+            send_telegram_message(user_id, f"✍️ Adding slide {i+1} of {num_slides}: **{s.get('title')}**...")
             s_title = s.get("title", f"Slide {i+1}")
             s_body = s.get("body", "")
             if isinstance(s_body, list):
@@ -77,14 +72,7 @@ async def handle_slides_skill(user_id: int, topic: str, title: str = None, email
             
             # Use Unsplash Source for beautiful, professional images
             image_query = s.get("image_query", topic).replace(" ", ",")
-            image_url = f"https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800" # Fallback professional office
-            
-            # Special trick: Unsplash Source is deprecated, but we can use their public search redirect
-            # or just a high-quality placeholder for now. 
-            # For "Internet images", we'll use a reliable source.
-            if image_query:
-                # We'll use a slightly more robust placeholder service that allows queries
-                image_url = f"https://loremflickr.com/800/600/{image_query}/all"
+            image_url = f"https://loremflickr.com/800/600/{image_query}/all"
 
             add_slide_to_presentation(str(user_id), presentation_id, s_title, s_body, image_url=image_url)
 

@@ -1,7 +1,9 @@
+from gabay.core.connectors.calendar_api import get_events, create_event, get_raw_events
+from gabay.core.connectors.smtp_api import send_smtp_email
+from gabay.core.skills.search import execute_search
 import logging
 import json
-from gabay.core.connectors.calendar_api import get_events, create_event
-from gabay.core.connectors.smtp_api import send_smtp_email
+from datetime import datetime, timezone, timedelta
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +45,7 @@ def handle_calendar_skill(user_id: int, command_args_str: str) -> str:
                 
             result = create_event(str(user_id), summary, start_time, end_time, attendees=attendees)
             
-            # Hybrid Context: Send follow-up email if requested
+            # Send follow-up email if requested
             if "Event created" in result and email_confirmation_to:
                 try:
                     event_link = result.split(": ")[1] if ": " in result else ""
@@ -63,3 +65,42 @@ def handle_calendar_skill(user_id: int, command_args_str: str) -> str:
     except Exception as e:
         logger.error(f"Error in calendar skill: {e}")
         return f"Error interacting with calendar: {e}"
+
+async def handle_calendar_briefing(user_id: int):
+    """
+    Proactively checks for upcoming meetings and sends a briefing with related documents.
+    """
+    from gabay.core.utils.telegram import send_telegram_message
+    
+    try:
+        # Check events in next 45 minutes
+        now = datetime.now(timezone.utc)
+        soon = now + timedelta(minutes=45)
+        
+        events = get_raw_events(str(user_id), time_min=now.isoformat(), time_max=soon.isoformat())
+        if not events:
+            return
+            
+        for event in events:
+            summary = event.get('summary', 'Meeting')
+            start_time_str = event['start'].get('dateTime', event['start'].get('date'))
+            
+            # 2. Extract context and search Docs
+            search_query = f"{summary} meeting notes proposal"
+            relevant_docs = await execute_search(str(user_id), search_query)
+            
+            briefing = f"📅 **Upcoming Meeting Briefing**\n\n"
+            briefing += f"**Event:** {summary}\n"
+            briefing += f"**Time:** {start_time_str}\n\n"
+            
+            if "I couldn't find" not in relevant_docs:
+                briefing += f"🔍 **Related Context Found:**\n{relevant_docs}\n"
+            else:
+                briefing += "🔍 No specific related documents found for this meeting.\n"
+                
+            briefing += "\n*Sent 30 mins before your meeting starts.*"
+            
+            send_telegram_message(user_id, briefing)
+            
+    except Exception as e:
+        logger.error(f"Error in meeting briefing: {e}")

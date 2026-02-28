@@ -22,5 +22,9 @@ celery_app.conf.update(
             "task": "worker.tasks.check_reminders",
             "schedule": 60.0,
         },
+        "proactive-heartbeat-every-15-minutes": {
+            "task": "worker.tasks.proactive_heartbeat",
+            "schedule": 900.0, # 15 minutes
+        },
     },
 )

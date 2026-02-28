@@ -1,5 +1,5 @@
 import logging
-from gabay.core.connectors.google_api import get_unread_emails
+from gabay.core.connectors.google_api import get_unread_emails_full
 from gabay.core.connectors.notion_api import search_notion
 
 logger = logging.getLogger(__name__)
@@ -12,10 +12,10 @@ async def handle_read_skill(user_id: str, source: str = "all") -> str:
     
     if source in ("gmail", "all"):
         try:
-            emails = get_unread_emails(user_id)
+            emails = get_unread_emails_full(user_id)
             if emails:
                 results.append("📬 **Recent Unread Emails (Gmail):**")
-                results.extend([f"• {email}" for email in emails])
+                results.extend([f"• From: {e['sender']} - {e['subject']}" for e in emails])
             else:
                 if source == "gmail":
                     results.append("You have no unread emails in Gmail.")

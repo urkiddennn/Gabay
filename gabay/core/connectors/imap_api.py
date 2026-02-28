@@ -7,13 +7,8 @@ from gabay.core.config import settings
 logger = logging.getLogger(__name__)
 
 def get_unread_emails_imap() -> list[str]:
-    """
-    Fetches unread email subjects using IMAP.
-    Requires SMTP_USER (as IMAP user) and SMTP_PASSWORD in .env.
-    Note: Most providers use 'imap.gmail.com' for IMAP host.
-    """
-    # We'll assume the user might want a separate IMAP_HOST but for simplicity 
-    # we'll try to derive it or use a common default if not provided.
+
+
     imap_host = os.environ.get("IMAP_HOST", "imap.gmail.com") 
     
     if not settings.smtp_user or not settings.smtp_password:

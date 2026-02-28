@@ -3,6 +3,8 @@ from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request as GoogleRequest
 import json
+import re
+import uuid
 from gabay.core.connectors.token_manager import token_manager
 from gabay.core.config import settings
 
@@ -39,26 +41,78 @@ def get_google_service(user_id: str, service_name: str, version: str):
             
     return build(service_name, version, credentials=creds)
 
-def get_unread_emails(user_id: str) -> list[str]:
+def get_unread_emails_full(user_id: str, max_results: int = 5) -> list[dict]:
+    """Returns unread emails with full metadata (id, subject, sender, snippet)."""
+    return search_gmail_full(user_id, query='is:unread', max_results=max_results)
+
+def search_gmail_full(user_id: str, query: str, max_results: int = 10) -> list[dict]:
+    """Searches for emails matching a query and returns metadata (id, subject, sender, snippet)."""
     service = get_google_service(user_id, "gmail", "v1")
     if not service:
         return []
     
     try:
-        results = service.users().messages().list(userId='me', q='is:unread', maxResults=5).execute()
+        results = service.users().messages().list(userId='me', q=query, maxResults=max_results).execute()
         messages = results.get('messages', [])
         
-        email_summaries = []
+        email_data = []
         for msg in messages:
-            m = service.users().messages().get(userId='me', id=msg['id']).execute()
-            # Extract basic info
-            headers = m['payload']['headers']
+            m = service.users().messages().get(userId='me', id=msg['id'], format='minimal').execute()
+            msg_id = m.get('id')
+            snippet = m.get('snippet', '')
+            
+            m_full = service.users().messages().get(userId='me', id=msg_id).execute()
+            headers = m_full['payload']['headers']
             subject = next((h['value'] for h in headers if h['name'] == 'Subject'), "No Subject")
             sender = next((h['value'] for h in headers if h['name'] == 'From'), "Unknown")
-            email_summaries.append(f"From {sender}: {subject}")
-        return email_summaries
+            
+            email_data.append({
+                "id": msg_id,
+                "subject": subject,
+                "sender": sender,
+                "snippet": snippet
+            })
+        return email_data
     except Exception as e:
-        logger.error(f"Gmail error: {e}")
+        logger.error(f"Gmail search error: {e}")
+        return []
+
+def get_thread_messages(user_id: str, thread_id: str) -> list[dict]:
+    """Fetches all messages in a Gmail thread and returns simplified metadata."""
+    service = get_google_service(user_id, "gmail", "v1")
+    if not service:
+        return []
+    
+    try:
+        thread = service.users().threads().get(userId='me', id=thread_id).execute()
+        messages = []
+        for msg in thread.get('messages', []):
+            snippet = msg.get('snippet', '')
+            headers = msg['payload']['headers']
+            sender = next((h['value'] for h in headers if h['name'] == 'From'), "Unknown")
+            messages.append({
+                "from": sender,
+                "snippet": snippet
+            })
+        return messages
+    except Exception as e:
+        logger.error(f"Error fetching thread {thread_id}: {e}")
+        return []
+
+def get_sheet_values(user_id: str, spreadsheet_id: str, range_name: str = "Sheet1!A1:Z100") -> list[list]:
+    """Reads a range of cells from a Google Sheet."""
+    service = get_google_service(user_id, "sheets", "v4")
+    if not service:
+        return []
+    
+    try:
+        result = service.spreadsheets().values().get(
+            spreadsheetId=spreadsheet_id, 
+            range=range_name
+        ).execute()
+        return result.get('values', [])
+    except Exception as e:
+        logger.error(f"Error reading Google Sheet {spreadsheet_id}: {e}")
         return []
 
 def upload_file_to_drive(user_id: str, file_path: str, mime_type: str) -> str:
@@ -248,19 +302,19 @@ def _get_doc_formatting_requests(title: str, text: str) -> list:
         {
             'updateTextStyle': {
                 'range': {'startIndex': 1, 'endIndex': title_end},
-                'style': {
+                'textStyle': {
                     'fontSize': {'magnitude': 24, 'unit': 'PT'},
                     'bold': True,
-                    'fontFamily': 'Merriweather',
-                    'foregroundColor': {'opaqueColor': {'rgbColor': {'red': 0.1, 'green': 0.1, 'blue': 0.3}}}
+                    'weightedFontFamily': {'fontFamily': 'Montserrat'},
+                    'foregroundColor': {'color': {'rgbColor': {'red': 0.05, 'green': 0.1, 'blue': 0.25}}}
                 },
-                'fields': 'fontSize,bold,fontFamily,foregroundColor'
+                'fields': 'fontSize,bold,weightedFontFamily,foregroundColor'
             }
         },
         {
             'updateParagraphStyle': {
                 'range': {'startIndex': 1, 'endIndex': title_end},
-                'style': {
+                'paragraphStyle': {
                     'alignment': 'CENTER',
                     'spaceBelow': {'magnitude': 18, 'unit': 'PT'}
                 },
@@ -270,7 +324,6 @@ def _get_doc_formatting_requests(title: str, text: str) -> list:
     ])
     
     # 4. Parse headers and body
-    import re
     # Find headers (## Header or ### Header)
     # Note: Indices shift after each update if we aren't careful.
     # But batchUpdate applies them sequentially or as a batch. 
@@ -290,18 +343,18 @@ def _get_doc_formatting_requests(title: str, text: str) -> list:
             requests.append({
                 'updateTextStyle': {
                     'range': {'startIndex': start, 'endIndex': end},
-                    'style': {
+                    'textStyle': {
                         'fontSize': {'magnitude': 16 if level == 2 else 13, 'unit': 'PT'},
                         'bold': True,
-                        'fontFamily': 'Montserrat'
+                        'weightedFontFamily': {'fontFamily': 'Montserrat'}
                     },
-                    'fields': 'fontSize,bold,fontFamily'
+                    'fields': 'fontSize,bold,weightedFontFamily'
                 }
             })
             requests.append({
                 'updateParagraphStyle': {
                     'range': {'startIndex': start, 'endIndex': end},
-                    'style': {
+                    'paragraphStyle': {
                         'spaceAbove': {'magnitude': 12, 'unit': 'PT'},
                         'spaceBelow': {'magnitude': 6, 'unit': 'PT'}
                     },
@@ -323,6 +376,16 @@ def _get_doc_formatting_requests(title: str, text: str) -> list:
         current_index += line_len
         
     return requests
+
+def _clean_body_text(text: str) -> str:
+    """Removes common leading bullet characters from each line to prepare for native bulleting."""
+    lines = text.split('\n')
+    cleaned_lines = []
+    for line in lines:
+        # Strip leading dots, bullets, dashes, or stars followed by a space
+        cleaned = re.sub(r'^\s*[•\-\*]\s*', '', line)
+        cleaned_lines.append(cleaned)
+    return '\n'.join(cleaned_lines)
 
 def append_to_google_doc(user_id: str, document_id: str, text: str) -> bool:
     """Appends text to the end of an existing Google Doc with basic formatting."""
@@ -390,11 +453,10 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
         return False
         
     try:
-        import uuid
         slide_id = str(uuid.uuid4())
         
-        # Layout Choice: If there's an image, use a split-screen layout.
-        # Otherwise, use a center-aligned minimal layout.
+        # Clean the body text for native bulleting
+        cleaned_body = _clean_body_text(body)
         
         requests = [
             {
@@ -406,7 +468,7 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                     }
                 }
             },
-            # Page Background (Ultra-sleek Dark Grayscale)
+            # Page Background (Ultra-sleek Deep Navy/Charcoal)
             {
                 'updatePageProperties': {
                     'objectId': slide_id,
@@ -414,7 +476,7 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                         'pageBackgroundFill': {
                             'solidFill': {
                                 'color': {
-                                    'rgbColor': {'red': 0.02, 'green': 0.02, 'blue': 0.03}
+                                    'rgbColor': {'red': 0.05, 'green': 0.07, 'blue': 0.09} # Modern #0d1117 style
                                 }
                             }
                         }
@@ -428,7 +490,7 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
         title_box_id = f"title_{slide_id}"
         body_box_id = f"body_{slide_id}"
         
-        # 1. Title Positioning
+        # 1. Title Positioning (Shifted slightly and smaller font to avoid overlap)
         requests.extend([
             {
                 'createShape': {
@@ -436,8 +498,8 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                     'shapeType': 'TEXT_BOX',
                     'elementProperties': {
                         'pageObjectId': slide_id,
-                        'size': {'height': {'magnitude': 1000000, 'unit': 'EMU'}, 'width': {'magnitude': 5000000, 'unit': 'EMU'}},
-                        'transform': {'scaleX': 1, 'scaleY': 1, 'translateX': 400000, 'translateY': 400000, 'unit': 'EMU'}
+                        'size': {'height': {'magnitude': 1200000, 'unit': 'EMU'}, 'width': {'magnitude': 4500000 if image_url else 8500000, 'unit': 'EMU'}},
+                        'transform': {'scaleX': 1, 'scaleY': 1, 'translateX': 400000, 'translateY': 350000, 'unit': 'EMU'}
                     }
                 }
             },
@@ -446,7 +508,7 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                 'objectId': title_box_id,
                 'style': {
                     'foregroundColor': {'opaqueColor': {'rgbColor': {'red': 1.0, 'green': 1.0, 'blue': 1.0}}},
-                    'fontSize': {'magnitude': 32, 'unit': 'PT'},
+                    'fontSize': {'magnitude': 26, 'unit': 'PT'}, # Scaled down for professionalism
                     'bold': True,
                     'fontFamily': 'Montserrat'
                 },
@@ -454,7 +516,7 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
             }}
         ])
         
-        # 2. Body Positioning
+        # 2. Body Positioning (Increased translateY to 1.6M EMU to leave clearance for title)
         requests.extend([
             {
                 'createShape': {
@@ -464,35 +526,34 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                         'pageObjectId': slide_id,
                         'size': {
                             'height': {'magnitude': 3000000, 'unit': 'EMU'}, 
-                            'width': {'magnitude': 4500000 if image_url else 8000000, 'unit': 'EMU'}
+                            'width': {'magnitude': 4100000 if image_url else 8000000, 'unit': 'EMU'}
                         },
-                        'transform': {'scaleX': 1, 'scaleY': 1, 'translateX': 400000, 'translateY': 1500000, 'unit': 'EMU'}
+                        'transform': {'scaleX': 1, 'scaleY': 1, 'translateX': 400000, 'translateY': 1750000, 'unit': 'EMU'}
                     }
                 }
             },
-            {'insertText': {'objectId': body_box_id, 'text': body}},
+            {'insertText': {'objectId': body_box_id, 'text': cleaned_body}},
             {'updateTextStyle': {
                 'objectId': body_box_id,
                 'style': {
-                    'foregroundColor': {'opaqueColor': {'rgbColor': {'red': 0.85, 'green': 0.85, 'blue': 0.88}}},
-                    'fontSize': {'magnitude': 14, 'unit': 'PT'},
+                    'foregroundColor': {'opaqueColor': {'rgbColor': {'red': 0.88, 'green': 0.88, 'blue': 0.92}}},
+                    'fontSize': {'magnitude': 13, 'unit': 'PT'},
                     'fontFamily': 'Roboto'
                 },
                 'fields': 'foregroundColor,fontSize,fontFamily'
             }}
         ])
         
-        # Apply native Slide bullets if text contains bullets
-        if "•" in body or "- " in body:
-            requests.append({
-                'createParagraphBullets': {
-                    'objectId': body_box_id,
-                    'textRange': {'type': 'ALL'},
-                    'bulletPreset': 'BULLET_DISC_CIRCLE_SQUARE'
-                }
-            })
+        # Apply native Slide bullets
+        requests.append({
+            'createParagraphBullets': {
+                'objectId': body_box_id,
+                'textRange': {'type': 'ALL'},
+                'bulletPreset': 'BULLET_DISC_CIRCLE_SQUARE'
+            }
+        })
         
-        # 3. Image (Cinematic Side Banner)
+        # 3. Image (Cinematic Side Banner - Properly proportioned)
         if image_url:
             img_id = f"img_{slide_id}"
             requests.append({
@@ -503,12 +564,12 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                         'pageObjectId': slide_id,
                         'size': {
                             'height': {'magnitude': 5143500, 'unit': 'EMU'}, 
-                            'width': {'magnitude': 4114400, 'unit': 'EMU'}
+                            'width': {'magnitude': 4400000, 'unit': 'EMU'}
                         },
                         'transform': {
                             'scaleX': 1,
                             'scaleY': 1,
-                            'translateX': 5029600, 
+                            'translateX': 5100000, 
                             'translateY': 0,
                             'unit': 'EMU'
                         }
@@ -516,7 +577,7 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                 }
             })
             
-        # 4. Accent Line (Professional detail)
+        # 4. Accent Line (Positioned below title for visual structure)
         line_id = f"line_{slide_id}"
         requests.append({
             'createLine': {
@@ -524,8 +585,8 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                 'lineCategory': 'STRAIGHT',
                 'elementProperties': {
                     'pageObjectId': slide_id,
-                    'size': {'height': {'magnitude': 0, 'unit': 'EMU'}, 'width': {'magnitude': 4000000, 'unit': 'EMU'}},
-                    'transform': {'scaleX': 1, 'scaleY': 1, 'translateX': 400000, 'translateY': 1200000, 'unit': 'EMU'}
+                    'size': {'height': {'magnitude': 0, 'unit': 'EMU'}, 'width': {'magnitude': 3500000, 'unit': 'EMU'}},
+                    'transform': {'scaleX': 1, 'scaleY': 1, 'translateX': 400000, 'translateY': 1625000, 'unit': 'EMU'}
                 }
             }
         })
@@ -534,9 +595,9 @@ def add_slide_to_presentation(user_id: str, presentation_id: str, title: str, bo
                 'objectId': line_id,
                 'lineProperties': {
                     'lineFill': {
-                        'solidFill': {'color': {'rgbColor': {'red': 0.2, 'green': 0.5, 'blue': 1.0}}}
+                        'solidFill': {'color': {'rgbColor': {'red': 0.3, 'green': 0.6, 'blue': 1.0}}}
                     },
-                    'weight': {'magnitude': 2, 'unit': 'PT'}
+                    'weight': {'magnitude': 1.5, 'unit': 'PT'}
                 },
                 'fields': 'lineFill,weight'
             }
@@ -601,10 +662,12 @@ def update_sheet_values(user_id: str, spreadsheet_id: str, values: list, range_n
                         },
                         'cell': {
                             'userEnteredFormat': {
-                                'textFormat': {'bold': True}
+                                'textFormat': {'bold': True},
+                                'horizontalAlignment': 'CENTER',
+                                'backgroundColor': {'red': 0.9, 'green': 0.95, 'blue': 1.0}
                             }
                         },
-                        'fields': 'userEnteredFormat.textFormat.bold'
+                        'fields': 'userEnteredFormat.textFormat.bold,userEnteredFormat.horizontalAlignment,userEnteredFormat.backgroundColor'
                     }
                 }
                 service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body={'requests': [bold_request]}).execute()
@@ -613,3 +676,133 @@ def update_sheet_values(user_id: str, spreadsheet_id: str, values: list, range_n
     except Exception as e:
         logger.error(f"Error updating Google Sheet {spreadsheet_id}: {e}")
         return False
+def search_contacts(user_id: str, query: str) -> list[dict]:
+    """Searches for contacts by name or email using the People API."""
+    service = get_google_service(user_id, "people", "v1")
+    if not service:
+        return []
+
+    try:
+        results = service.people().searchContacts(
+            query=query,
+            readMask="names,emailAddresses"
+        ).execute()
+
+        connections = results.get('results', [])
+        contacts = []
+        for conn in connections:
+            person = conn.get('person', {})
+            names = person.get('names', [])
+            emails = person.get('emailAddresses', [])
+            
+            display_name = names[0].get('displayName', 'Unknown') if names else 'Unknown'
+            email = emails[0].get('value') if emails else None
+            
+            if email:
+                contacts.append({
+                    "name": display_name,
+                    "email": email
+                })
+        return contacts
+    except Exception as e:
+        logger.error(f"People API search error: {e}")
+        return []
+
+def get_contact_by_name(user_id: str, name: str) -> dict:
+    """Attempts to find a single best-match contact by name."""
+    contacts = search_contacts(user_id, name)
+    if not contacts:
+        return None
+    # Return the first match for now (exact match logic could be added)
+    return contacts[0]
+
+def upload_file_binary(user_id: str, content: bytes, filename: str, mime_type: str) -> str:
+    """Uploads raw bytes to Google Drive and returns the file ID."""
+    service = get_google_service(user_id, "drive", "v3")
+    if not service:
+        return None
+    from googleapiclient.http import MediaIoBaseUpload
+    from io import BytesIO
+    try:
+        file_metadata = {'name': filename}
+        media = MediaIoBaseUpload(BytesIO(content), mimetype=mime_type, resumable=True)
+        file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+        return file.get('id')
+    except Exception as e:
+        logger.error(f"Error uploading binary file to Drive: {e}")
+        return None
+
+def add_chart_to_sheet(user_id: str, spreadsheet_id: str, sheet_id: int, title: str, range_name: str) -> bool:
+    """Adds a basic bar chart to a Google Sheet based on a data range."""
+    service = get_google_service(user_id, "sheets", "v4")
+    if not service:
+        return False
+    try:
+        chart_request = {
+            'addChart': {
+                'chart': {
+                    'spec': {
+                        'title': title,
+                        'basicChart': {
+                            'chartType': 'BAR',
+                            'legendPosition': 'BOTTOM_LEGEND',
+                            'axis': [
+                                {'position': 'BOTTOM_AXIS', 'title': 'Value'},
+                                {'position': 'LEFT_AXIS', 'title': 'Category'}
+                            ],
+                            'domains': [
+                                {
+                                    'domain': {
+                                        'sourceRange': {
+                                            'sources': [
+                                                {
+                                                    'sheetId': sheet_id,
+                                                    'startRowIndex': 0,
+                                                    'endRowIndex': 10,
+                                                    'startColumnIndex': 0,
+                                                    'endColumnIndex': 1
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            'series': [
+                                {
+                                    'series': {
+                                        'sourceRange': {
+                                            'sources': [
+                                                {
+                                                    'sheetId': sheet_id,
+                                                    'startRowIndex': 0,
+                                                    'endRowIndex': 10,
+                                                    'startColumnIndex': 1,
+                                                    'endColumnIndex': 2
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    'targetAxis': 'LEFT_AXIS'
+                                }
+                            ]
+                        }
+                    },
+                    'position': {
+                        'newSheet': False,
+                        'overlayPosition': {
+                            'anchorCell': {
+                                'sheetId': sheet_id,
+                                'rowIndex': 12,
+                                'columnIndex': 1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body={'requests': [chart_request]}).execute()
+        return True
+    except Exception as e:
+        logger.error(f"Error adding chart to Sheet {spreadsheet_id}: {e}")
+        return False
+

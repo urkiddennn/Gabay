@@ -2,7 +2,7 @@ import logging
 import json
 from gabay.core.connectors.google_api import search_drive, download_drive_file
 from gabay.core.config import settings
-from groq import AsyncGroq
+from gabay.core.utils.llm import get_llm_response
 
 logger = logging.getLogger(__name__)
 
@@ -53,8 +53,7 @@ async def handle_document_qa_skill(user_id: int, command_args_str: str) -> str:
         if len(content) > 100000:
             content = content[:100000] + "... [Document Trunkated for Length]"
             
-        # Ask Groq about the document
-        client = AsyncGroq(api_key=settings.groq_api_key)
+        # Ask AI about the document
         system_prompt = (
             "You are Gabay, a helpful AI assistant. You have been provided with the text of a document from the user's Google Drive. "
             "Answer the user's question based strictly on the content of the document. "
@@ -66,15 +65,13 @@ async def handle_document_qa_skill(user_id: int, command_args_str: str) -> str:
         
         user_prompt = f"Document Title: {file_name}\n\nDocument Text:\n{content}\n\n---\n\nUser Question: {question}"
         
-        response = await client.chat.completions.create(
-            model="openai/gpt-oss-120b",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
+        answer = await get_llm_response(
+            system_prompt=system_prompt,
+            prompt=user_prompt
         )
         
-        answer = response.choices[0].message.content
+        if not answer:
+            return f"I read the document '{file_name}', but the AI assistant returned an empty answer. Please try again."
         return f"📄 Regarding '{file_name}':\n\n{answer}"
         
     except Exception as e:

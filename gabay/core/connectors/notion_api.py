@@ -18,8 +18,8 @@ def get_notion_client(user_id: str = "local"):
     return Client(auth=notion_key)
 
 def append_to_database(user_id: str, content: str) -> str:
-    # Use "local" if it's a generic request or specific user_id
-    # For now, let's try to get config for the specific user, fallback to local
+    # Use local config if no specific user ID
+    
     config = get_notion_config(user_id) or get_notion_config("local")
     
     client = get_notion_client(user_id) or get_notion_client("local")
@@ -30,15 +30,11 @@ def append_to_database(user_id: str, content: str) -> str:
     if not db_id:
         return "Notion Database ID not configured. Please add NOTION_DATABASE_ID to your settings."
         
-    # Sanitize Database ID (Notion often requires no dashes)
+    # Sanitize Database ID (remove dashes)
     db_id = db_id.replace("-", "")
         
     try:
-        # Create a new page in the specified database
-        # For simple tasks, we use the 'content' as the 'Name' or 'title' property.
-        # We need to find the name of the 'title' property first, but usually it's "Name" or "title".
-        
-        # First, let's try to find the title property name
+        # Locate title property
         db = client.databases.retrieve(database_id=db_id)
         title_prop = next((name for name, prop in db['properties'].items() if prop['type'] == 'title'), 'Name')
         
@@ -66,7 +62,7 @@ def search_notion(user_id: str, query: str) -> list[dict]:
         
         parsed_results = []
         for page in pages:
-            # Extract title (handling different property structures)
+            # Extract title
             properties = page.get("properties", {})
             title = "Untitled"
             for prop in properties.values():

@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     
     # LLM config
     groq_api_key: str = ""
+    gemini_api_key: str = ""
+    llm_provider: str = "groq" # "groq" or "gemini"
     
     # Google OAuth
     google_client_id: str = ""

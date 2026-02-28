@@ -39,7 +39,10 @@ dependencies = [
     "notion-client>=2.2.0",
     "requests>=2.31.0",
     "python-dotenv>=1.0.0",
-    "click>=8.0.0"
+    "click>=8.0.0",
+    "pypdf>=3.17.0",
+    "pytesseract>=0.3.10",
+    "reportlab>=4.0.0"
 ]
 
 [project.urls]

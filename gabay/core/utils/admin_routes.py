@@ -37,8 +37,10 @@ async def admin_dashboard(request: Request):
     smtp_config = token_manager.get_token("smtp", user_id) or {}
     smtp_connected = bool(smtp_config.get("host") or (settings.smtp_host and settings.smtp_user and settings.smtp_password))
 
-    # Check Groq Status
+    # Check LLM Status
     groq_connected = bool(settings.groq_api_key or os.getenv("GROQ_API_KEY"))
+    gemini_connected = bool(settings.gemini_api_key or os.getenv("GEMINI_API_KEY"))
+    llm_provider = settings.llm_provider
 
     # Check Google OAuth App Status
     oauth_config_connected = bool(settings.google_client_id and settings.google_client_secret)
@@ -51,6 +53,8 @@ async def admin_dashboard(request: Request):
         "notion_connected": notion_connected,
         "smtp_connected": smtp_connected,
         "groq_connected": groq_connected,
+        "gemini_connected": gemini_connected,
+        "llm_provider": llm_provider,
         "oauth_config_connected": oauth_config_connected,
         "user_id": user_id
     })

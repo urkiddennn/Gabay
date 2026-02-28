@@ -5,212 +5,145 @@
 const useCases = [
     {
         id: "telegram",
-        title: "Telegram Assistant",
-        subtitle: "Access your workspace directly from Telegram chat.",
+        title: "Always-Ready Chat",
+        subtitle: "Your personal assistant, right in your favorite chat app.",
         icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>`,
-        description: "Gabay lives in Telegram, giving you instant access to your files and workflows without switching apps.",
-        benefits: ["Manage Drive files via chat", "Get Gmail notifications & summaries", "Coordinate Calendar events"]
+        description: "Gabay lives in Telegram. No new apps to download or websites to learn. Just send a message, and it gets to work.",
+        benefits: ["Find any file by just asking", "Get daily summaries of your emails", "Check your calendar with a quick chat"]
     },
     {
         id: "workspace",
-        title: "Workspace Intelligence",
-        subtitle: "Deep integration with Drive, Gmail, and Calendar.",
+        title: "Magic Search",
+        subtitle: "Find anything in your files and emails instantly.",
         icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>`,
-        description: "Gabay understands your context. It doesn't just search; it reasons across your documents and emails.",
-        benefits: ["Summarize long email threads", "Draft replies based on Drive docs", "Synthesize data from multiple spreadsheets"]
+        description: "Gabay doesn't just search for words; it understands what you're looking for. It links your emails and documents together perfectly.",
+        benefits: ["Read through long email chains for you", "Suggest replies based on your past docs", "Organize data from your spreadsheets"]
     },
     {
         id: "speed",
-        title: "Groq Speed",
-        subtitle: "Real-time responses powered by Groq LPUs.",
+        title: "Instant Answers",
+        subtitle: "No waiting. Get what you need the moment you ask.",
         icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
-        description: "Gabay is built for speed. Leveraging Groq's high-performance LLM inference, responses feel instantaneous.",
-        benefits: ["Sub-second agent execution", "Real-time news & stock updates", "Zero-friction voice interactions"]
+        description: "Powered by ultra-fast technology, Gabay responds in the blink of an eye. No 'thinking' icons for minutes—just answers.",
+        benefits: ["Lightning-fast reply drafting", "Real-time news & information", "Quick translations and summaries"]
     },
     {
         id: "async",
-        title: "Async Automations",
-        subtitle: "Handle long-running tasks in the background.",
+        title: "Helper on Autopilot",
+        subtitle: "Handles the heavy lifting while you focus on life.",
         icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>`,
-        description: "For tasks that take time, Gabay works asynchronously. Send a request and get notified when it's done.",
-        benefits: ["Background document processing", "Scheduled reminders & followups", "Complex multi-step task chains"]
+        description: "For bigger tasks, Gabay works in the background. Ask it to organize a project, and it will notify you when it's done.",
+        benefits: ["Processes heavy documents while you're away", "Sends you reminders automatically", "Manages multiple steps without you watching"]
     },
     {
         id: "privacy",
-        title: "Privacy First",
-        subtitle: "Your data stays yours. In-memory processing.",
+        title: "Safe & Private",
+        subtitle: "Your data belongs to you. We keep it that way.",
         icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>`,
-        description: "We use OAuth2 for direct integration. We don't store your documents; we process them temporarily and securely.",
-        benefits: ["OAuth2 granular permissions", "No persistent document storage", "Local-first processing options"]
+        description: "We use official connections to your accounts. Gabay doesn't store your documents forever; it only looks at them when you ask.",
+        benefits: ["Direct links to your official accounts", "No permanent document copies", "Industry-standard security built-in"]
     },
     {
         id: "hybrid",
-        title: "Hybrid Research",
-        subtitle: "Autonomous research, slide design, and data analysis.",
+        title: "Research Expert",
+        subtitle: "Turns raw ideas into professional results.",
         icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
-        description: "Gabay orchestrates complex workflows. It researches topics, designs professional Slides, and structures data into Sheets—all from a single Telegram command.",
-        benefits: ["Single-command research & slides", "Automated professional design", "Structured data generation"]
+        description: "Ask Gabay to research a topic, and it can write a full report or even design a slide deck for you automatically.",
+        benefits: ["One message for research and reports", "Finished slides designed for you", "Clean, structured summaries"]
     },
 ];
 ---
 
-<section id="use-cases" class="max-w-[1240px] mx-auto px-6 pt-4 pb-20 overflow-hidden">
-    <!-- Tab Navigation -->
-    <div
-        class="flex overflow-x-auto pb-4 lg:pb-0 hide-scrollbar lg:grid lg:grid-cols-6 gap-4 mb-8"
-    >
-        {
-            useCases.map((useCase, index) => (
-                <button
-                    data-tab={useCase.id}
-                    class={`use-case-tab flex flex-col items-start p-6 rounded-xl transition-all duration-200 text-left border cursor-pointer ${
-                        index === 0
-                            ? "active bg-text-main text-bg-page border-text-main"
-                            : "bg-bg-page border-border-main text-text-muted hover:border-zinc-400 dark:hover:border-zinc-600"
-                    }`}
-                >
-                    <div class={`mb-4 ${index === 0 ? "text-blue-400" : "text-blue-500"}`}>
-                        <Fragment set:html={useCase.icon} />
-                    </div>
-                    <h3 class={`text-sm font-bold mb-1 ${index === 0 ? "" : "text-text-main"}`}>
-                        {useCase.title}
-                    </h3>
-                    <p class={`text-[11px] leading-relaxed line-clamp-2`}>
-                        {useCase.subtitle}
-                    </p>
-                </button>
-            ))
-        }
-    </div>
-
-    <!-- Active Use Case Mockup Area -->
-    <div
-        class="bg-bg-page border border-border-main rounded-xl p-8 lg:p-16 min-h-[500px] flex flex-col justify-center relative overflow-hidden"
-    >
-        {useCases.map((useCase, index) => (
+<section id="use-cases" class="max-w-[1240px] mx-auto px-6 py-24 space-y-32">
+    {
+        useCases.map((useCase, index) => (
             <div 
-                id={`content-${useCase.id}`} 
-                class={`use-case-content grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index === 0 ? "flex" : "hidden"}`}
+                class={`flex flex-col lg:flex-row items-center gap-12 lg:gap-24 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
             >
-                <div class="flex flex-col gap-6">
-                    <span class="text-[10px] font-bold tracking-[0.2em] text-blue-500 uppercase">FEATURE HIGHLIGHT</span>
-                    <h2 class="text-3xl lg:text-4xl font-bold tracking-tight text-text-main">
+                <!-- Text Content -->
+                <div class="flex-1 flex flex-col gap-6">
+                    <div class="flex items-center gap-3 text-zinc-500 uppercase tracking-widest text-[10px] font-bold">
+                        <Fragment set:html={useCase.icon} />
+                        <span>FEATURE HIGHLIGHT</span>
+                    </div>
+                    <h2 class="text-3xl lg:text-5xl font-bold tracking-tight text-text-main leading-tight">
                         {useCase.title}
                     </h2>
-                    <div class="flex flex-col gap-4 text-base text-text-muted leading-relaxed">
-                        <p>{useCase.description}</p>
-                        <ul class="space-y-3 mt-2">
-                            {useCase.benefits.map((benefit) => (
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-4 h-4 text-blue-500 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span class="text-sm">{benefit}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <p class="text-lg text-text-muted leading-relaxed">
+                        {useCase.description}
+                    </p>
+                    <ul class="space-y-4 py-2">
+                        {useCase.benefits.map((benefit) => (
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-black mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm font-medium text-text-main">{benefit}</span>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
                 <!-- Mockup side -->
-                <div class="bg-zinc-100 dark:bg-zinc-800 border border-border-main rounded-lg p-2">
-                    <div class="bg-white dark:bg-zinc-900 rounded-md border border-border-main aspect-video flex flex-col overflow-hidden">
-                        <div class="h-8 bg-zinc-50 dark:bg-zinc-800 border-b border-border-main flex items-center px-3 gap-1.5">
-                            <div class="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-600"></div>
-                            <div class="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-600"></div>
-                            <div class="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-600"></div>
-                        </div>
-                        <div class="flex-1 p-4 font-mono text-[10px] flex flex-col gap-2 overflow-hidden bg-white dark:bg-zinc-900">
-                            {useCase.id === 'telegram' && (
-                                <>
-                                    <div class="flex gap-2"><span class="text-blue-500">user:</span> <span class="text-text-main">any new meetings?</span></div>
-                                    <div class="flex gap-2 p-2 border border-blue-500/10 rounded">
-                                        <span class="text-purple-500 font-bold">gabay:</span>
-                                        <div class="flex flex-col gap-1">
-                                            <div class="h-2 w-32 bg-zinc-200 dark:bg-zinc-700 rounded"></div>
-                                            <div class="h-2 w-24 bg-zinc-100 dark:bg-zinc-800 rounded"></div>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                            {useCase.id === 'workspace' && (
-                                <>
-                                    <div class="flex gap-2"><span class="text-blue-500">user:</span> <span class="text-text-main">summarize the project proposal in Drive</span></div>
-                                    <div class="flex gap-2 p-2 border border-blue-500/10 rounded">
-                                        <span class="text-purple-500 font-bold">gabay:</span>
-                                        <div class="flex flex-col gap-1">
-                                            <div class="h-2 w-48 bg-zinc-200 dark:bg-zinc-700 rounded"></div>
-                                            <div class="h-2 w-40 bg-zinc-100 dark:bg-zinc-800 rounded"></div>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                            {useCase.id === 'hybrid' && (
-                                <>
-                                    <div class="flex gap-2"><span class="text-blue-500">user:</span> <span class="text-text-main">research renewable energy trends and make 5 slides</span></div>
-                                    <div class="flex gap-2 p-2 border border-blue-500/10 rounded">
-                                        <span class="text-purple-500 font-bold">gabay:</span>
-                                        <div class="flex flex-col gap-1">
-                                            <div class="h-2 w-48 bg-zinc-200 dark:bg-zinc-700 rounded"></div>
-                                            <div class="h-2 w-40 bg-zinc-100 dark:bg-zinc-800 rounded"></div>
-                                            <div class="mt-2 grid grid-cols-3 gap-1">
-                                                <div class="aspect-video bg-zinc-200 dark:bg-zinc-700 rounded-sm"></div>
-                                                <div class="aspect-video bg-zinc-200 dark:bg-zinc-700 rounded-sm"></div>
-                                                <div class="aspect-video bg-zinc-200 dark:bg-zinc-700 rounded-sm"></div>
+                <div class="flex-1 w-full flex items-center justify-center">
+                    <div class="w-full bg-bg-surface border border-border-main rounded-lg p-3 lg:p-4 transition-all">
+                        <div class="bg-bg-page rounded-md border border-border-main aspect-video flex flex-col overflow-hidden">
+                            <div class="h-8 bg-brand-primary/5 border-b border-border-main flex items-center px-4 gap-2">
+                                <div class="w-2.5 h-2.5 rounded-full border border-border-main"></div>
+                                <div class="w-2.5 h-2.5 rounded-full border border-border-main"></div>
+                                <div class="w-2.5 h-2.5 rounded-full border border-border-main"></div>
+                            </div>
+                            <div class="flex-1 p-6 font-mono text-xs flex flex-col gap-3 overflow-hidden bg-bg-surface">
+                                {useCase.id === 'telegram' && (
+                                    <>
+                                        <div class="flex gap-2"><span class="text-black font-bold">user:</span> <span class="text-text-main italic">any new meetings tomorrow?</span></div>
+                                        <div class="flex gap-2 p-3 bg-brand-primary/5 border border-border-main rounded-md">
+                                            <span class="text-text-main font-bold">gabay:</span>
+                                            <div class="flex flex-col gap-2 flex-1">
+                                                <div class="h-2 w-full bg-brand-primary/10 rounded-full"></div>
+                                                <div class="h-2 w-3/4 bg-brand-primary/5 rounded-full"></div>
                                             </div>
                                         </div>
+                                    </>
+                                )}
+                                {useCase.id === 'workspace' && (
+                                    <>
+                                        <div class="flex gap-2"><span class="text-black font-bold">user:</span> <span class="text-text-main italic">find the contract from last week</span></div>
+                                        <div class="flex gap-2 p-3 bg-brand-primary/5 border border-border-main rounded-md">
+                                            <span class="text-text-main font-bold">gabay:</span>
+                                            <div class="flex flex-col gap-2 flex-1">
+                                                <div class="h-2 w-full bg-brand-primary/10 rounded-full"></div>
+                                                <div class="h-2 w-1/2 bg-brand-primary/5 rounded-full"></div>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                                {useCase.id === 'hybrid' && (
+                                    <>
+                                        <div class="flex gap-2"><span class="text-black font-bold">user:</span> <span class="text-text-main italic">research 2025 tech trends and make slides</span></div>
+                                        <div class="flex gap-2 p-3 bg-brand-primary/5 border border-border-main rounded-md">
+                                            <span class="text-text-main font-bold">gabay:</span>
+                                            <div class="flex flex-col gap-2 flex-1">
+                                                <div class="h-2 w-full bg-brand-primary/10 rounded-full"></div>
+                                                <div class="mt-2 grid grid-cols-3 gap-2">
+                                                    <div class="aspect-video bg-brand-primary/5 rounded-sm border border-border-main"></div>
+                                                    <div class="aspect-video bg-brand-primary/5 rounded-sm border border-border-main"></div>
+                                                    <div class="aspect-video bg-brand-primary/5 rounded-sm border border-border-main"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                                {/* Generic fallback for other categories */}
+                                {['speed', 'async', 'privacy'].includes(useCase.id) && (
+                                    <div class="flex items-center justify-center h-full text-text-muted italic opacity-50">
+                                        Processing request in real-time...
                                     </div>
-                                </>
-                            )}
-                            {/* Generic fallback for other tabs */}
-                            {['speed', 'async', 'privacy'].includes(useCase.id) && (
-                                <div class="flex items-center justify-center h-full text-zinc-400 italic">
-                                    Visualizing {useCase.title.toLowerCase()}...
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         ))}
-    </div>
 </section>
-
-<script>
-    const tabs = document.querySelectorAll('.use-case-tab');
-    const contents = document.querySelectorAll('.use-case-content');
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const targetId = tab.getAttribute('data-tab');
-
-            // Update Tab Styles
-            tabs.forEach(t => {
-                t.classList.remove('active', 'bg-text-main', 'text-bg-page', 'border-text-main');
-                t.classList.add('bg-bg-page', 'border-border-main', 'text-text-muted');
-                const icon = t.querySelector('div');
-                if (icon) icon.classList.replace('text-blue-400', 'text-blue-500');
-                const title = t.querySelector('h3');
-                if (title) title.classList.add('text-text-main');
-            });
-
-            tab.classList.add('active', 'bg-text-main', 'text-bg-page', 'border-text-main');
-            tab.classList.remove('bg-bg-page', 'border-border-main', 'text-text-muted');
-            const activeIcon = tab.querySelector('div');
-            if (activeIcon) activeIcon.classList.replace('text-blue-500', 'text-blue-400');
-            const activeTitle = tab.querySelector('h3');
-            if (activeTitle) activeTitle.classList.remove('text-text-main');
-
-            // Switch Content
-            contents.forEach(content => {
-                if (content.id === `content-${targetId}`) {
-                    content.classList.remove('hidden');
-                    content.classList.add('flex');
-                } else {
-                    content.classList.add('hidden');
-                    content.classList.remove('flex');
-                }
-            });
-        });
-    });
-</script>

@@ -147,8 +147,21 @@
                 <input type="password" name="bot_token" value="{{ bot_token }}" placeholder="e.g. 123456:ABC-DEF...">
             </div>
             <div class="form-group">
-                <label>Groq API Key (Llama 3 Power)</label>
-                <input type="password" name="groq_key" value="{{ groq_key }}" placeholder="gsk_...">
+                <label>Active AI Provider</label>
+                <select name="llm_provider">
+                    <option value="groq" {% if llm_provider=='groq' %}selected{% endif %}>Groq (Llama 3)</option>
+                    <option value="gemini" {% if llm_provider=='gemini' %}selected{% endif %}>Google Gemini</option>
+                </select>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <label>Groq API Key</label>
+                    <input type="password" name="groq_key" value="{{ groq_key }}" placeholder="gsk_...">
+                </div>
+                <div class="form-group">
+                    <label>Gemini API Key</label>
+                    <input type="password" name="gemini_key" value="{{ gemini_key }}" placeholder="AIza...">
+                </div>
             </div>
 
             <div class="section-title">Mailbox (SMTP)</div>

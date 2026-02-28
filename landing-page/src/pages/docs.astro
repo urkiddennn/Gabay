@@ -4,294 +4,333 @@ import DocsLayout from "../layouts/DocsLayout.astro";
 
 <DocsLayout title="Introduction">
     <article class="docs-content">
-        <h1>Documentation</h1>
-        <p class="text-xl text-gray-400 mb-8">
-            Gabay is an advanced agentic AI that bridges the gap between natural
-            language chat and professional productivity tools.
+        <h1 class="text-6xl! mb-4!">Welcome to Gabay</h1>
+        <p class="text-2xl! text-text-muted mb-12! leading-relaxed!">
+            Gabay is your personal AI assistant that lives right inside
+            Telegram. It connects your emails, documents, and calendar into one
+            simple conversation.
         </p>
 
-        <h2 id="installation">Local Installation</h2>
-        <p>
-            Gabay can be installed as a Python package for local configuration
-            and development:
-        </p>
-        <pre><code>pip install gabay</code></pre>
-        <p>Once installed, run the configuration wizard to get started:</p>
-        <pre><code>gabay config</code></pre>
+        <section class="mb-16">
+            <h2 id="how-to-start" class="text-3xl! mb-8!">
+                How to Get Started
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div
+                    class="flex flex-col gap-4 p-8 glass rounded-2xl border border-border-main transition-transform hover:scale-[1.02]"
+                >
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center shrink-0 font-extrabold text-xl"
+                    >
+                        1
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-text-main">
+                            Add the Bot
+                        </h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Find <a
+                                href="https://t.me/GabayAgentBot"
+                                class="text-brand-primary font-bold hover:underline"
+                                >@GabayAgentBot</a
+                            > on Telegram and send a message.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col gap-4 p-8 glass rounded-2xl border border-border-main transition-transform hover:scale-[1.02]"
+                >
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center shrink-0 font-extrabold text-xl"
+                    >
+                        2
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-text-main">
+                            Link Accounts
+                        </h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Gabay will send you a secure link. Use it to safely
+                            connect your Google Workspace.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col gap-4 p-8 glass rounded-2xl border border-border-main transition-transform hover:scale-[1.02]"
+                >
+                    <div
+                        class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0 font-extrabold text-xl"
+                    >
+                        3
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-text-main">
+                            Start Chatting
+                        </h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Ask Gabay to find files, write reports, or draft
+                            emails. It's that simple. 🚀
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h2 id="bot-setup">Telegram API Configuration</h2>
-        <p>
-            Gabay uses a Bot for commands and a Userbot for acting on your
-            behalf.
+        <h2 id="common-tasks" class="text-3xl! mb-8!">What can I ask Gabay?</h2>
+        <p class="mb-8 font-medium">
+            Gabay is designed to handle the boring stuff so you don't have to.
+            Try sending commands like:
         </p>
-        <ol>
-            <li>
-                <strong>Create a Bot</strong>: Find <strong>@BotFather</strong> on
-                Telegram.
-                <ul>
-                    <li>Type <code>/newbot</code> and follow instructions.</li>
-                    <li>Save your <strong>Bot Token</strong>.</li>
-                </ul>
-            </li>
-            <li>
-                <strong>Get API Credentials</strong>:
-                <ul>
-                    <li>
-                        Log in to <a
-                            href="https://my.telegram.org"
-                            target="_blank"
-                            class="text-blue-500">my.telegram.org</a
-                        >.
-                    </li>
-                    <li>Go to <strong>API development tools</strong>.</li>
-                    <li>
-                        Create an application to get your <code>API_ID</code> and
-                        <code>API_HASH</code>.
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <strong>Authenticate</strong>: Your <code>TELEGRAM_PHONE</code> is
-                required for the initial Userbot session login.
-            </li>
-        </ol>
 
-        <h2 id="google-setup">Google Cloud Architecture</h2>
-        <p>
-            Enable the following APIs in your <a
-                href="https://console.cloud.google.com/"
-                target="_blank"
-                class="text-blue-500">Google Cloud Console</a
-            >:
-        </p>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-12">
             <div
-                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+                class="p-8 glass rounded-2xl border border-border-main hover:border-brand-primary/30 transition-colors"
             >
-                <span class="block text-blue-500 font-bold mb-1">Gmail</span>
-                <span class="text-xs text-text-muted italic"
-                    >Email Management</span
-                >
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-5 h-5 text-blue-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            ></path></svg
+                        >
+                    </div>
+                    <span class="text-text-main font-bold text-lg"
+                        >Find & Read</span
+                    >
+                </div>
+                <p class="text-text-muted italic mb-2">
+                    "Find any emails about my upcoming trip."
+                </p>
+                <p class="text-text-muted italic">
+                    "What's the main takeaway from my last meeting notes?"
+                </p>
             </div>
+
             <div
-                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+                class="p-8 glass rounded-2xl border border-border-main hover:border-emerald-500/30 transition-colors"
             >
-                <span class="block text-blue-500 font-bold mb-1">Drive</span>
-                <span class="text-xs text-text-muted italic"
-                    >File Operations</span
-                >
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-5 h-5 text-emerald-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                            ></path></svg
+                        >
+                    </div>
+                    <span
+                        class="text-text-main font-bold text-lg text-emerald-500"
+                        >Create & Write</span
+                    >
+                </div>
+                <p class="text-text-muted italic mb-2">
+                    "Create a professional Google Doc about AI trends."
+                </p>
+                <p class="text-text-muted italic">
+                    "Draft a polite reply to the email from Sarah."
+                </p>
             </div>
+
             <div
-                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+                class="p-8 glass rounded-2xl border border-border-main hover:border-purple-500/30 transition-colors"
             >
-                <span class="block text-blue-500 font-bold mb-1">Docs</span>
-                <span class="text-xs text-text-muted italic"
-                    >Research Reports</span
-                >
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-5 h-5 text-purple-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                            ></path></svg
+                        >
+                    </div>
+                    <span
+                        class="text-text-main font-bold text-lg text-purple-500"
+                        >Organize</span
+                    >
+                </div>
+                <p class="text-text-muted italic mb-2">
+                    "Extract my latest Stripe invoices into a spreadsheet."
+                </p>
+                <p class="text-text-muted italic">
+                    "Remind me to check the mail every day at 10 AM."
+                </p>
             </div>
+
             <div
-                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
+                class="p-8 glass rounded-2xl border border-border-main hover:border-amber-500/30 transition-colors"
             >
-                <span class="block text-blue-500 font-bold mb-1">Slides</span>
-                <span class="text-xs text-text-muted italic">Presentations</span
-                >
-            </div>
-            <div
-                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
-            >
-                <span class="block text-blue-500 font-bold mb-1">Sheets</span>
-                <span class="text-xs text-text-muted italic">Spreadsheets</span>
-            </div>
-            <div
-                class="p-4 bg-bg-card border border-border-main rounded-xl text-center"
-            >
-                <span class="block text-blue-500 font-bold mb-1">Calendar</span>
-                <span class="text-xs text-text-muted italic">Scheduling</span>
+                <div class="flex items-center gap-3 mb-4">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-5 h-5 text-amber-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                            ></path></svg
+                        >
+                    </div>
+                    <span
+                        class="text-text-main font-bold text-lg text-amber-500"
+                        >Present</span
+                    >
+                </div>
+                <p class="text-text-muted italic mb-2">
+                    "Make a 7-slide deck about our marketing plan."
+                </p>
+                <p class="text-text-muted italic">
+                    "Find 'Project Blue' and send it to my manager."
+                </p>
             </div>
         </div>
 
-        <h3 id="oauth">OAuth 2.0 Configuration</h3>
-        <ol>
-            <li>
-                <strong>Consent Screen</strong>: Set User Type to <strong
-                    >External</strong
-                > and add your email to <strong>Test Users</strong>.
-            </li>
-            <li>
-                <strong>Credentials</strong>: Create an <strong
-                    >OAuth Client ID</strong
-                > for a <strong>Web Application</strong>.
-            </li>
-            <li>
-                <strong>Redirect URIs</strong>: Add <code
-                    >http://localhost:8000/auth/google/callback</code
-                >.
-            </li>
-        </ol>
+        <section
+            class="p-8 rounded-2xl bg-brand-primary/5 border border-brand-primary/10 mb-16"
+        >
+            <h2 id="safety" class="text-2xl! mb-4! border-0! pb-0!">
+                Your Privacy & Safety
+            </h2>
+            <p class="text-text-muted leading-relaxed mb-0!">
+                We take security seriously. Gabay uses official "OAuth"
+                connections—this means <strong
+                    >we never see your passwords</strong
+                >. You have full control over what Gabay can access, and you can
+                disconnect your accounts at any time with a single command.
+            </p>
+        </section>
 
-        <h2 id="notion">Notion Integration</h2>
-        <ol>
-            <li>
-                Create an integration at <a
-                    href="https://www.notion.com/my-integrations"
-                    target="_blank"
-                    class="text-blue-500">Notion My Integrations</a
-                >.
-            </li>
-            <li>Grant "Read", "Update", and "Insert" permissions.</li>
-            <li>
-                Connect your integration to your database via the "Connect to"
-                menu in Notion.
-            </li>
-        </ol>
+        <div class="relative py-8">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-border-main"></div>
+            </div>
+            <div class="relative flex justify-center">
+                <span
+                    class="px-6 glass text-sm font-bold tracking-widest uppercase text-text-muted"
+                    >Developers Only</span
+                >
+            </div>
+        </div>
 
-        <h2 id="environment">Environment Configuration</h2>
-        <p>
-            Create a <code>.env</code> file in your project root:
+        <h2 id="advanced" class="text-3xl! mb-6! mt-12!">Self-Hosting Guide</h2>
+        <p class="text-text-muted mb-8 text-lg">
+            For technical users who want to host their own instance of Gabay.
         </p>
+
+        <h3 id="installation" class="text-xl! mb-4!">Local Installation</h3>
+        <pre class="mb-4!"><code>pip install gabay</code></pre>
+        <p class="text-sm! text-text-muted mb-8!">
+            Once installed, run the configuration wizard: <code
+                class="text-brand-primary ml-2!">gabay config</code>
+        </p>
+
+        <h3 id="bot-setup" class="text-xl! mb-4!">
+            API Keys (Telegram & Google)
+        </h3>
+        <p class="mb-4">
+            For a private instance, you'll need the following credentials:
+        </p>
+        <ul
+            class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none! ml-0! mb-12!"
+        >
+            <li
+                class="p-4 glass rounded-xl border border-border-main flex items-center gap-3"
+            >
+                <div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+                <span class="font-semibold">Bot Token from @BotFather</span>
+            </li>
+            <li
+                class="p-4 glass rounded-xl border border-border-main flex items-center gap-3"
+            >
+                <div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+                <span class="font-semibold"
+                    >API ID/Hash from my.telegram.org</span
+                >
+            </li>
+            <li
+                class="p-4 glass rounded-xl border border-border-main flex items-center gap-3"
+            >
+                <div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+                <span class="font-semibold">Gemini or Groq API Key</span>
+            </li>
+            <li
+                class="p-4 glass rounded-xl border border-border-main flex items-center gap-3"
+            >
+                <div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+                <span class="font-semibold">Google Cloud OAuth Credentials</span
+                >
+            </li>
+        </ul>
+
+        <h3 id="google-cloud" class="text-xl! mb-4!">Google Cloud APIs</h3>
+        <p class="mb-6">
+            Enable these in your Google Cloud Console for full functionality:
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+            <div
+                class="p-4 text-center rounded-xl glass border border-border-main text-xs font-bold uppercase tracking-wider text-text-muted"
+            >
+                Gmail API
+            </div>
+            <div
+                class="p-4 text-center rounded-xl glass border border-border-main text-xs font-bold uppercase tracking-wider text-text-muted"
+            >
+                Drive API
+            </div>
+            <div
+                class="p-4 text-center rounded-xl glass border border-border-main text-xs font-bold uppercase tracking-wider text-text-muted"
+            >
+                Docs/Slides/Sheets
+            </div>
+            <div
+                class="p-4 text-center rounded-xl glass border border-border-main text-xs font-bold uppercase tracking-wider text-text-muted"
+            >
+                Calendar API
+            </div>
+        </div>
+
+        <h3 id="environment" class="text-xl! mb-4!">Example .env File</h3>
         <pre><code>{`# Telegram
 TELEGRAM_BOT_TOKEN="your_token"
 TELEGRAM_API_ID=12345
 TELEGRAM_API_HASH="your_hash"
-TELEGRAM_PHONE="+123456789"
 
-# LLM Intelligence
-GROQ_API_KEY="your_groq_key"
+# Intelligence (Gemini preferred)
+GEMINI_API_KEY="your_key"
+LLM_PROVIDER="gemini"
 
-# Google OAuth
-GOOGLE_CLIENT_ID="your_google_id"
-GOOGLE_CLIENT_SECRET="your_google_secret"`}</code></pre>
-
-        <h2 id="memory">Cognitive Memory</h2>
-        <p>
-            Gabay now features a <strong
-                >20-message conversational buffer</strong
-            >. This allows for deep context resolution:
-        </p>
-        <pre><code>"Research the history of Rome."
-"Now email it to my boss." (Gabay knows "it" refers to the research)</code></pre>
-
-        <h2 id="docs-quality">Professional Documentation</h2>
-        <p>
-            Gabay doesn't just dump text; it builds professional documents. Our <strong
-                >Formatting Engine</strong
-            > automatically converts raw intelligence into structured Google Docs:
-        </p>
-        <ul>
-            <li>
-                <strong>Typography</strong>: Uses <em>Merriweather</em> and <em
-                    >Montserrat</em
-                > for professional reading.
-            </li>
-            <li>
-                <strong>Structure</strong>: Automatic centered titles, bolded
-                subheadings, and native bullet lists.
-            </li>
-            <li>
-                <strong>Design</strong>: Professional spacing and logical
-                hierarchy.
-            </li>
-        </ul>
-
-        <h2 id="slides">Slides V3: Professional Engine</h2>
-        <p>
-            Our "Professional V3" engine creates cinematic presentations with:
-        </p>
-        <ul>
-            <li>
-                <strong>Cinematic Layouts</strong>: Custom-built <em>BLANK</em> layouts
-                for total design control.
-            </li>
-            <li>
-                <strong>Sleek Dark Mode</strong>: High-contrast, minimalist
-                navy/black aesthetics.
-            </li>
-            <li>
-                <strong>Visual Accents</strong>: Dynamic accent lines and
-                professional font pairings (Montserrat & Roboto).
-            </li>
-            <li>
-                <strong>Native Bullets</strong>: Clean, structured lists for
-                clarity.
-            </li>
-        </ul>
-
-        <h2 id="recurring">Interval Scheduling</h2>
-        <p>Handle high-frequency tasks with precision:</p>
-        <pre><code>"Remind me to check the oven every minute for 5 times."</code></pre>
-        <p>
-            Gabay manages individual counts and seconds-based intervals
-            autonomously.
-        </p>
-
-        <h2 id="research">Autonomous Research</h2>
-        <p>
-            Gabay performs web research and synthesizes findings into structured
-            documents.
-        </p>
-        <pre><code>"Research AI agents and save to a doc"</code></pre>
-
-        <h2 id="sharing">Sharing & Permissions</h2>
-        <ul>
-            <li><strong>Public</strong>: <code>"...make it public"</code></li>
-            <li>
-                <strong>Private Invite</strong>: <code
-                    >"...invite user@gmail.com"</code
-                >
-            </li>
-            <li>
-                <strong>Roles</strong>: Choose <code>reader</code> or <code
-                    >writer</code
-                >.
-            </li>
-        </ul>
-
-        <h2 id="commands">Command Reference</h2>
-        <div class="overflow-x-auto">
-            <table
-                class="w-full text-left border-collapse my-8 transition-colors duration-300 min-w-[500px]"
-            >
-                <thead>
-                    <tr class="border-b border-border-main text-text-main">
-                        <th class="py-3 pr-4">Feature</th>
-                        <th class="py-3">Example Command</th>
-                    </tr>
-                </thead>
-                <tbody class="text-text-muted text-sm">
-                    <tr class="border-b border-border-main/50">
-                        <td class="py-3 pr-4 font-mono text-blue-500">Docs</td>
-                        <td class="py-3">"Create a doc about Q3 strategy"</td>
-                    </tr>
-                    <tr class="border-b border-border-main/50">
-                        <td class="py-3 pr-4 font-mono text-blue-500">Slides</td
-                        >
-                        <td class="py-3"
-                            >"Make a professional deck about space"</td
-                        >
-                    </tr>
-                    <tr class="border-b border-border-main/50">
-                        <td class="py-3 pr-4 font-mono text-blue-500">Sheets</td
-                        >
-                        <td class="py-3"
-                            >"Generate a spreadsheet of crypto trends"</td
-                        >
-                    </tr>
-                    <tr class="border-b border-border-main/50">
-                        <td class="py-3 pr-4 font-mono text-blue-500"
-                            >Research</td
-                        >
-                        <td class="py-3"
-                            >"Research global remote work impact"</td
-                        >
-                    </tr>
-                    <tr class="border-b border-border-main/50">
-                        <td class="py-3 pr-4 font-mono text-blue-500"
-                            >Reminders</td
-                        >
-                        <td class="py-3">"Remind me every 30s for 10 times"</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+# Google
+GOOGLE_CLIENT_ID="your_id"
+GOOGLE_CLIENT_SECRET="your_secret"`}</code></pre>
     </article>
 </DocsLayout>
