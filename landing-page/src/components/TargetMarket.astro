@@ -1,0 +1,97 @@
+---
+// TargetMarket Component
+const markets = [
+    {
+        title: "Students",
+        description:
+            "Ace your studies with instant research, document summaries, and a personal study assistant that never sleeps.",
+        icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm0 0v7" /></svg>`,
+        benefits: [
+            "Quick research from Drive",
+            "Instant paper summaries",
+            "24/7 study support",
+        ],
+    },
+    {
+        title: "Teachers",
+        description:
+            "Reclaim your time. Manage your calendar, draft emails, and organize lesson materials effortlessly.",
+        icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>`,
+        benefits: [
+            "Email & Calendar automation",
+            "Lesson plan organization",
+            "Quick grading assistance",
+        ],
+    },
+    {
+        title: "Researchers",
+        description:
+            "Accelerate your discoveries. Synthesis complex documents and find key insights across your entire workspace.",
+        icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>`,
+        benefits: [
+            "Literature review synthesis",
+            "Cross-doc technical search",
+            "Automated report drafting",
+        ],
+    },
+];
+---
+
+<section
+    id="target-market"
+    class="w-full max-w-[1240px] mx-auto px-6 py-24 scroll-mt-20"
+>
+    <div class="text-center mb-16 space-y-4">
+        <span
+            class="text-brand-primary font-bold tracking-widest text-xs uppercase"
+            >WHO IS GABAY FOR?</span
+        >
+        <h2
+            class="text-3xl lg:text-5xl font-bold tracking-tight text-text-main"
+        >
+            Built for the Brightest Minds
+        </h2>
+        <p class="text-lg text-text-muted max-w-2xl mx-auto">
+            Gabay is more than an assistant; it's a productivity multiplier for
+            those who shape the future.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+            markets.map((market) => (
+                <div class="group p-10 rounded-2xl bg-bg-surface border border-border-main transition-all duration-300 hover:border-brand-primary/30 hover:shadow-xl hover:shadow-brand-primary/5">
+                    <div class="w-14 h-14 rounded-xl bg-brand-primary/5 flex items-center justify-center text-brand-primary mb-8 group-hover:bg-brand-primary group-hover:text-white transition-all duration-500">
+                        <Fragment set:html={market.icon} />
+                    </div>
+                    <h3 class="text-2xl font-bold text-text-main mb-4 tracking-tight">
+                        {market.title}
+                    </h3>
+                    <p class="text-text-muted leading-relaxed mb-8">
+                        {market.description}
+                    </p>
+                    <ul class="space-y-3">
+                        {market.benefits.map((benefit) => (
+                            <li class="flex items-center gap-3 text-sm font-semibold text-text-main">
+                                <svg
+                                    class="w-4 h-4 text-brand-primary"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="3"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M5 13l4 4L19 7"
+                                    />
+                                </svg>
+                                {benefit}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))
+        }
+    </div>
+</section>
